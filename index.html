@@ -105,8 +105,8 @@ const PLAN = {
       detail:"Leg press 3×12 · Seated row 3×10 · DB shoulder press 3×10 · Walking lunges 2×10/leg · Triceps pushdown 3×12 · Cable crunch 3×12", log:["notes"] },
     { date:"2026-05-28", dow:"Thu", type:"run", title:"Easy Run · 4 km",
       detail:"Same easy pace. Relaxed shoulders, short quick steps.", log:["distance","time","notes"] },
-    { date:"2026-05-29", dow:"Fri", type:"rest", title:"Rest / Mobility",
-      detail:"Walk + stretch. Prep legs for tomorrow's long run.", log:["notes"] },
+    { date:"2026-05-29", dow:"Fri", type:"strength", title:"Upper-body / Shape (Lift C)",
+      detail:"BONUS shape day, no heavy legs (keeps legs fresh for tomorrow's long run). Incline DB press 3×10 · Lat pulldown 3×10 · Lateral raises 3×15 · Bicep curl 3×12 · Triceps pushdown 3×12 · Hanging knee raise 3×12", log:["notes"] },
     { date:"2026-05-30", dow:"Sat", type:"run", title:"LONG RUN · 6 km",
       detail:"Slowest run of the week (~8:30/km). Walk breaks fine. Just finish it relaxed.", log:["distance","time","notes"] }
   ],
@@ -115,13 +115,19 @@ const PLAN = {
     sweets:"Max 1/day · post-workout · on a plate · out of sight",
     deficit:"Mild deficit — aim to lose 0.3–0.5 kg/week. Weigh once, mornings."
   },
-  cardio:"Gym days (Mon/Wed): 5–10 min easy cardio to warm up. Optional 10–15 min EASY steady cardio after lifting (incline treadmill walk = low-impact, joint-friendly). Keep it conversational — your runs are your hard cardio, don't compete with them.",
+  cardio:"Gym days (Mon/Wed/Fri): 5–10 min easy cardio to warm up. Optional 10–15 min EASY steady cardio after lifting (incline treadmill walk = low-impact, joint-friendly). Keep it conversational — your runs are your hard cardio, don't compete with them.",
   routines: {
     "🏃 Run · Warm-up (before every run)":["3 min brisk walk","Leg swings front↔back ×10/leg","Leg swings side↔side ×10/leg","High knees 20 sec","Butt kicks 20 sec","10 bodyweight squats","Then run — keep the first km extra easy"],
     "🏃 Run · Cool-down (after every run)":["3 min slow walk to drop heart rate","Standing quad stretch 30s/leg","Hamstring stretch 30s/leg","Calf stretch on wall 30s/leg","Hip-flexor lunge stretch 30s/leg","Glute figure-4 stretch 30s/leg"],
     "🏋️ Gym · Warm-up (before lifting)":["5–10 min easy cardio (treadmill/elliptical/cycle)","Arm circles ×10 each way","Hip circles ×10 each way","10 bodyweight squats","1 light warm-up set of your first exercise (~50% weight)"],
     "🏋️ Gym · Cool-down (after lifting)":["Optional 10–15 min easy cardio (incline walk)","Chest doorway stretch 30s","Lat / side-body stretch 30s/side","Quad stretch 30s/leg","Cross-body shoulder stretch 30s/side"]
-  }
+  },
+  diet: [
+    { time:"🌅 6:00 AM · Morning", items:["Water — min 500 ml","Walking / running","Amla (gooseberry) juice ~8 AM","Dry fruits"] },
+    { time:"🍳 9:00 AM · Breakfast", items:["2 boiled eggs","Sundal — green gram / peas / chickpea / peanut","Mains (pick one): black kavuni rice porridge · kambu or ragi koozh · ragi kali · green-gram dosa · kambu dosa / ragi roti · barnyard-millet (kuthiraivali) pongal"] },
+    { time:"🍛 1:00 PM · Lunch", items:["Very little rice","Curd","Dal","Veg: beetroot/carrot/beans · banana flower/raw banana · potato/taro · cluster/broad beans · ivy gourd/turkey berry","≥3×/week: greens (drumstick / arai / mulai / agathi keerai)"] },
+    { time:"🌙 6:00 PM · Dinner", items:["Fruit","2 boiled eggs","Curd"] }
+  ]
 };
 // ==================== PLAN END ====================
 
@@ -191,6 +197,10 @@ function render(){
 
     <details class="routines"><summary>🤸 Warm-up &amp; Cool-down</summary>
       ${Object.entries(PLAN.routines).map(([k,v])=>`<div class="routine"><h4>${k}</h4><ul>${v.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("")}
+    </details>
+
+    <details class="routines"><summary>🍱 My diet chart</summary>
+      ${PLAN.diet.map(m=>`<div class="routine"><h4>${m.time}</h4><ul>${m.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("")}
     </details>
 
     ${PLAN.days.map(d=>dayCard(d)).join("")}
