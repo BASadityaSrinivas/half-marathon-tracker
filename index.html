@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aditya · Half-Marathon Tracker</title>
+<style>
+  :root{
+    --bg:#0f1115; --card:#181b22; --card2:#1f232c; --line:#2a2f3a;
+    --txt:#e7eaf0; --muted:#9aa3b2; --accent:#c2f000; --accent-dim:#8aac00;
+    --run:#46b1ff; --strength:#ff8a5b; --rest:#7d8696; --good:#4ad17c; --bad:#ff5d6c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.45;padding:18px;max-width:760px;margin:0 auto;-webkit-font-smoothing:antialiased}
+  h1{font-size:1.35rem;letter-spacing:-.02em}
+  .muted{color:var(--muted)}
+  .accent{color:var(--accent)}
+  /* header */
+  header{margin-bottom:18px}
+  .goal{font-size:.92rem;color:var(--muted);margin-top:2px}
+  .meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+  .pill{background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:.8rem}
+  .pill b{color:var(--accent)}
+  .countdown{background:var(--accent);color:#0f1115;font-weight:700}
+  /* paces */
+  .paces{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+  .pace{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:7px 11px;font-size:.78rem}
+  .pace span{color:var(--muted);display:block;font-size:.68rem;text-transform:uppercase;letter-spacing:.04em}
+  /* progress strip */
+  .strip{display:flex;gap:10px;margin:16px 0}
+  .stat{flex:1;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;text-align:center}
+  .stat .n{font-size:1.5rem;font-weight:700}
+  .stat .l{font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+  .bar{height:7px;background:var(--card2);border-radius:99px;overflow:hidden;margin-top:8px}
+  .bar>i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .3s}
+  canvas{display:block;margin:6px auto 0}
+  /* day cards */
+  .day{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:11px;position:relative;transition:border-color .2s,opacity .2s}
+  .day.done{border-color:var(--accent-dim);background:linear-gradient(0deg,rgba(194,240,0,.05),rgba(194,240,0,.05)),var(--card)}
+  .day.rest{opacity:.78}
+  .day-top{display:flex;align-items:flex-start;gap:11px}
+  .dot{flex:none;width:38px;height:38px;border-radius:10px;display:grid;place-items:center;font-size:1.1rem;background:var(--card2)}
+  .t-run .dot{box-shadow:inset 0 0 0 2px var(--run)} .t-strength .dot{box-shadow:inset 0 0 0 2px var(--strength)} .t-rest .dot{box-shadow:inset 0 0 0 2px var(--rest)}
+  .day h3{font-size:1rem}
+  .dow{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .detail{font-size:.85rem;color:var(--muted);margin-top:5px}
+  .chk{margin-left:auto;flex:none}
+  .chk input{width:26px;height:26px;accent-color:var(--accent);cursor:pointer}
+  .logrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
+  .logrow label{font-size:.7rem;color:var(--muted);display:flex;flex-direction:column;gap:3px;flex:1;min-width:90px}
+  .logrow input,.logrow textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:7px 9px;font-size:.85rem;font-family:inherit}
+  .logrow textarea{min-width:100%;resize:vertical;min-height:34px}
+  .daily{display:flex;gap:8px;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
+  .daily label{font-size:.7rem;color:var(--muted);display:flex;flex-direction:column;gap:3px;flex:1}
+  .daily input{background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:6px 9px;font-size:.85rem;width:100%}
+  /* footer */
+  footer{display:flex;gap:10px;margin:20px 0 40px;flex-wrap:wrap}
+  button{font:inherit;font-size:.86rem;font-weight:600;border:none;border-radius:10px;padding:11px 16px;cursor:pointer}
+  .primary{background:var(--accent);color:#0f1115;flex:1}
+  .ghost{background:var(--card);color:var(--muted);border:1px solid var(--line)}
+  .toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--accent);color:#0f1115;
+    font-weight:700;padding:11px 20px;border-radius:99px;opacity:0;transition:.3s;pointer-events:none;font-size:.85rem}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+  .note{font-size:.78rem;color:var(--muted);margin-top:6px}
+  .nutri{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:.82rem;margin-bottom:11px}
+  .nutri b{color:var(--accent)}
+  details.routines{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:2px 14px;margin-bottom:11px}
+  details.routines summary{cursor:pointer;font-weight:600;padding:11px 0;font-size:.9rem;list-style:none}
+  details.routines summary::-webkit-details-marker{display:none}
+  details.routines summary::before{content:"▸ ";color:var(--accent)}
+  details.routines[open] summary::before{content:"▾ "}
+  .routine{margin:4px 0 14px}
+  .routine h4{font-size:.82rem;color:var(--accent);margin-bottom:5px}
+  .routine ul{margin-left:18px;font-size:.83rem;color:var(--muted);line-height:1.75}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== PLAN START (Claude edits this block each week) ====================
+const PLAN = {
+  athlete: "Aditya",
+  goal: "Half Marathon · finish strong 2:15–2:20 · 1:55 is the dream",
+  raceDate: "2026-09-27",
+  phase: "Phase 0 — Base & Habit",
+  week: 1,
+  weekStart: "2026-05-24",
+  weekEnd: "2026-05-30",
+  paces: { easy:"8:15–9:00 /km", long:"8:00–8:30 /km", tempo:"6:45–7:15 /km", intervals:"6:00–6:30 /km" },
+  days: [
+    { date:"2026-05-24", dow:"Sun", type:"run", title:"Easy Run · 5 km",
+      detail:"Gym closed today. Easy 8:15–9:00/km, walk breaks OK. Day-1 win is just getting out the door.", log:["distance","time","notes"] },
+    { date:"2026-05-25", dow:"Mon", type:"strength", title:"Full-body Lift A",
+      detail:"Goblet squat 3×10 · Chest press 3×10 · Lat pulldown 3×10 · DB RDL 3×10 · Bicep curl 3×12 · Plank 3×30s", log:["notes"] },
+    { date:"2026-05-26", dow:"Tue", type:"rest", title:"Rest / Mobility",
+      detail:"Optional 15 min easy walk + light stretch.", log:["notes"] },
+    { date:"2026-05-27", dow:"Wed", type:"strength", title:"Full-body Lift B",
+      detail:"Leg press 3×12 · Seated row 3×10 · DB shoulder press 3×10 · Walking lunges 2×10/leg · Triceps pushdown 3×12 · Cable crunch 3×12", log:["notes"] },
+    { date:"2026-05-28", dow:"Thu", type:"run", title:"Easy Run · 4 km",
+      detail:"Same easy pace. Relaxed shoulders, short quick steps.", log:["distance","time","notes"] },
+    { date:"2026-05-29", dow:"Fri", type:"rest", title:"Rest / Mobility",
+      detail:"Walk + stretch. Prep legs for tomorrow's long run.", log:["notes"] },
+    { date:"2026-05-30", dow:"Sat", type:"run", title:"LONG RUN · 6 km",
+      detail:"Slowest run of the week (~8:30/km). Walk breaks fine. Just finish it relaxed.", log:["distance","time","notes"] }
+  ],
+  nutrition: {
+    protein:"No protein math. Keep eating your usual eggs, dal, curd, sundal (~65–70g already). Optional nudge: 3–4 eggs/day",
+    sweets:"Max 1/day · post-workout · on a plate · out of sight",
+    deficit:"Mild deficit — aim to lose 0.3–0.5 kg/week. Weigh once, mornings."
+  },
+  cardio:"Gym days (Mon/Wed): 5–10 min easy cardio to warm up. Optional 10–15 min EASY steady cardio after lifting (incline treadmill walk = low-impact, joint-friendly). Keep it conversational — your runs are your hard cardio, don't compete with them.",
+  routines: {
+    "🏃 Run · Warm-up (before every run)":["3 min brisk walk","Leg swings front↔back ×10/leg","Leg swings side↔side ×10/leg","High knees 20 sec","Butt kicks 20 sec","10 bodyweight squats","Then run — keep the first km extra easy"],
+    "🏃 Run · Cool-down (after every run)":["3 min slow walk to drop heart rate","Standing quad stretch 30s/leg","Hamstring stretch 30s/leg","Calf stretch on wall 30s/leg","Hip-flexor lunge stretch 30s/leg","Glute figure-4 stretch 30s/leg"],
+    "🏋️ Gym · Warm-up (before lifting)":["5–10 min easy cardio (treadmill/elliptical/cycle)","Arm circles ×10 each way","Hip circles ×10 each way","10 bodyweight squats","1 light warm-up set of your first exercise (~50% weight)"],
+    "🏋️ Gym · Cool-down (after lifting)":["Optional 10–15 min easy cardio (incline walk)","Chest doorway stretch 30s","Lat / side-body stretch 30s/side","Quad stretch 30s/leg","Cross-body shoulder stretch 30s/side"]
+  }
+};
+// ==================== PLAN END ====================
+
+const KEY = "ohana-fit-state";
+const ICON = { run:"🏃", strength:"🏋️", rest:"😌" };
+const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {weeks:{},daily:{}}; } catch { return {weeks:{},daily:{}}; } };
+const save = (s) => localStorage.setItem(KEY, JSON.stringify(s));
+let state = load();
+const wkKey = String(PLAN.week);
+state.weeks[wkKey] = state.weeks[wkKey] || {};
+
+function field(d){ return state.weeks[wkKey][d.date] || {}; }
+function daily(date){ return state.daily[date] || {}; }
+function setField(date, k, v){ const w=state.weeks[wkKey]; w[date]=w[date]||{}; w[date][k]=v; save(state); render(); }
+function setDaily(date, k, v){ state.daily[date]=state.daily[date]||{}; state.daily[date][k]=v; save(state); soft(); }
+
+function daysToRace(){ return Math.max(0, Math.ceil((new Date(PLAN.raceDate) - new Date()) / 86400000)); }
+function fmtRange(){ const o={month:"short",day:"numeric"}; return new Date(PLAN.weekStart).toLocaleDateString("en-GB",o)+" – "+new Date(PLAN.weekEnd).toLocaleDateString("en-GB",o); }
+
+function stats(){
+  const trainable = PLAN.days.filter(d=>d.type!=="rest");
+  const done = trainable.filter(d=>field(d).done).length;
+  const km = PLAN.days.reduce((s,d)=>s+(parseFloat(field(d).distance)||0),0);
+  return { done, total:trainable.length, km };
+}
+function weightSeries(){
+  return Object.entries(state.daily).filter(([_,v])=>v.weight).map(([date,v])=>({date,w:parseFloat(v.weight)}))
+    .sort((a,b)=>new Date(a.date)-new Date(b.date));
+}
+
+function render(){
+  const s = stats();
+  const ws = weightSeries();
+  const latestW = ws.length ? ws[ws.length-1].w : null;
+  const app = document.getElementById("app");
+  app.innerHTML = `
+    <header>
+      <h1>${PLAN.athlete} · <span class="accent">Road to 21K</span></h1>
+      <div class="goal">${PLAN.goal}</div>
+      <div class="meta">
+        <span class="pill countdown">${daysToRace()} days to race</span>
+        <span class="pill">${PLAN.phase}</span>
+        <span class="pill">Week <b>${PLAN.week}</b></span>
+        <span class="pill">${fmtRange()}</span>
+      </div>
+    </header>
+
+    <div class="paces">
+      ${Object.entries(PLAN.paces).map(([k,v])=>`<div class="pace"><span>${k}</span>${v}</div>`).join("")}
+    </div>
+
+    <div class="strip">
+      <div class="stat"><div class="n">${s.done}/${s.total}</div><div class="l">Sessions</div>
+        <div class="bar"><i style="width:${s.total?Math.round(s.done/s.total*100):0}%"></i></div></div>
+      <div class="stat"><div class="n">${s.km.toFixed(1)}</div><div class="l">km this week</div></div>
+      <div class="stat"><div class="n">${latestW?latestW.toFixed(1):"–"}</div><div class="l">kg latest</div>
+        <canvas id="spark" width="120" height="26"></canvas></div>
+    </div>
+
+    <div class="nutri">
+      🍽️ <b>Protein:</b> ${PLAN.nutrition.protein}<br>
+      🍬 <b>Sweets:</b> ${PLAN.nutrition.sweets}<br>
+      ⚖️ <b>Fat loss:</b> ${PLAN.nutrition.deficit}
+    </div>
+
+    <div class="nutri">🚴 <b>Cardio:</b> ${PLAN.cardio}</div>
+
+    <details class="routines"><summary>🤸 Warm-up &amp; Cool-down</summary>
+      ${Object.entries(PLAN.routines).map(([k,v])=>`<div class="routine"><h4>${k}</h4><ul>${v.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("")}
+    </details>
+
+    ${PLAN.days.map(d=>dayCard(d)).join("")}
+
+    <footer>
+      <button class="primary" onclick="copyReport()">📋 Copy report for Claude</button>
+      <button class="ghost" onclick="resetWeek()">Reset week</button>
+    </footer>
+  `;
+  drawSpark();
+}
+
+function dayCard(d){
+  const f = field(d), dy = daily(d.date), done = !!f.done;
+  const labels = { distance:"Distance (km)", time:"Time (mm:ss)", notes:"Notes" };
+  const logInputs = d.log.map(k => k==="notes"
+    ? `<textarea placeholder="Notes…" onchange="setField('${d.date}','notes',this.value)">${f.notes||""}</textarea>`
+    : `<label>${labels[k]}<input type="text" value="${f[k]||""}" placeholder="—"
+        onchange="setField('${d.date}','${k}',this.value)"></label>`).join("");
+  return `
+    <div class="day t-${d.type} ${done?"done":""} ${d.type==="rest"?"rest":""}">
+      <div class="day-top">
+        <div class="dot">${ICON[d.type]}</div>
+        <div>
+          <div class="dow">${d.dow} · ${new Date(d.date).toLocaleDateString("en-GB",{month:"short",day:"numeric"})}</div>
+          <h3>${d.title}</h3>
+          <div class="detail">${d.detail}</div>
+        </div>
+        <div class="chk"><input type="checkbox" ${done?"checked":""} onchange="setField('${d.date}','done',this.checked)" title="Mark done"></div>
+      </div>
+      <div class="logrow">${logInputs}</div>
+      <div class="daily">
+        <label>⚖️ Weight (kg)<input type="text" value="${dy.weight||""}" placeholder="—" onchange="setDaily('${d.date}','weight',this.value)"></label>
+        <label>🍬 Sweets today<input type="text" value="${dy.sweets||""}" placeholder="0" onchange="setDaily('${d.date}','sweets',this.value)"></label>
+      </div>
+    </div>`;
+}
+
+function drawSpark(){
+  const c = document.getElementById("spark"); if(!c) return;
+  const ctx = c.getContext("2d"); ctx.clearRect(0,0,c.width,c.height);
+  const ws = weightSeries(); if(ws.length<2) return;
+  const xs=ws.map(p=>p.w), min=Math.min(...xs), max=Math.max(...xs), rng=(max-min)||1;
+  ctx.strokeStyle="#c2f000"; ctx.lineWidth=2; ctx.beginPath();
+  ws.forEach((p,i)=>{ const x=i/(ws.length-1)*(c.width-4)+2, y=c.height-2-((p.w-min)/rng)*(c.height-4); i?ctx.lineTo(x,y):ctx.moveTo(x,y); });
+  ctx.stroke();
+}
+
+function copyReport(){
+  const s = stats(), ws = weightSeries();
+  const sweets = Object.values(state.daily).map(v=>parseFloat(v.sweets)).filter(n=>!isNaN(n));
+  const avgSweets = sweets.length ? (sweets.reduce((a,b)=>a+b,0)/sweets.length).toFixed(1) : "–";
+  const wTxt = ws.length ? `${ws[0].w.toFixed(1)} → ${ws[ws.length-1].w.toFixed(1)} kg` : "not logged";
+  let out = `## Week ${PLAN.week} report (${PLAN.weekStart} → ${PLAN.weekEnd})\n`;
+  out += `Sessions: ${s.done}/${s.total} · Total run: ${s.km.toFixed(1)} km · Weight: ${wTxt} · Avg sweets/day: ${avgSweets}\n\n`;
+  PLAN.days.forEach(d=>{
+    const f=field(d); const mark = d.type==="rest" ? "—" : (f.done?"✅":"❌ skipped");
+    let extra=[]; if(f.distance) extra.push(f.distance+" km"); if(f.time) extra.push(f.time);
+    out += `- ${d.dow} · ${d.title} — ${mark}${extra.length?" "+extra.join(", "):""}${f.notes?" — "+f.notes:""}\n`;
+  });
+  out += `\n(How did energy / legs / sleep feel? Any pain? → add a line for Claude.)`;
+  navigator.clipboard.writeText(out).then(()=>toast("Report copied — paste it to Claude")).catch(()=>{
+    prompt("Copy this report:", out);
+  });
+}
+function resetWeek(){ if(confirm("Clear all logs for this week? (weight history is kept)")){ state.weeks[wkKey]={}; save(state); render(); toast("Week reset"); } }
+
+let tT;
+function toast(m){ const t=document.getElementById("toast"); t.textContent=m; t.classList.add("show"); clearTimeout(tT); tT=setTimeout(()=>t.classList.remove("show"),2200); }
+function soft(){ drawSpark(); /* lightweight save feedback without full re-render while typing */ }
+
+render();
+</script>
+</body>
+</html>
