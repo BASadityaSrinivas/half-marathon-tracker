@@ -128,7 +128,12 @@ const PLAN = {
     { time:"🍳 9:00 AM · Breakfast", items:["2 boiled eggs","Sundal — green gram / peas / chickpea / peanut","Mains (pick one): black kavuni rice porridge · kambu or ragi koozh · ragi kali · green-gram dosa · kambu dosa / ragi roti · barnyard-millet (kuthiraivali) pongal"] },
     { time:"🍛 1:00 PM · Lunch", items:["Very little rice","Curd","Dal","Veg: beetroot/carrot/beans · banana flower/raw banana · potato/taro · cluster/broad beans · ivy gourd/turkey berry","≥3×/week: greens (drumstick / arai / mulai / agathi keerai)"] },
     { time:"🌙 6:00 PM · Dinner", items:["Fruit","2 boiled eggs","Curd"] }
-  ]
+  ],
+  home: {
+    "🏠 Full-body — sub for Lift A or B · 3 rounds, rest 60s":["15 bodyweight squats","10 push-ups (knees/incline if needed)","12 glute bridges","10 reverse lunges/leg","30s plank","12 supermans"],
+    "🏠 Upper-body / Shape — sub for Lift C · 3 rounds, rest 60s":["12 push-ups (chest)","10 pike push-ups (shoulders)","12 chair/bench dips (triceps)","15 lateral raises w/ water bottles or bags (side delts)","12 backpack rows per side, or supermans (back)","12 lying leg raises (abs)"],
+    "💡 No weights at home?":["Use a loaded backpack, water cans, or filled bottles for the curls, rows and lateral raises."]
+  }
 };
 // ==================== PLAN END ====================
 
@@ -202,6 +207,10 @@ function render(){
 
     <details class="routines"><summary>🍱 My diet chart</summary>
       ${PLAN.diet.map(m=>`<div class="routine"><h4>${m.time}</h4><ul>${m.items.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("")}
+    </details>
+
+    <details class="routines"><summary>🏠 Home workout (no-gym backup)</summary>
+      ${Object.entries(PLAN.home).map(([k,v])=>`<div class="routine"><h4>${k}</h4><ul>${v.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("")}
     </details>
 
     ${PLAN.days.map(d=>dayCard(d)).join("")}
