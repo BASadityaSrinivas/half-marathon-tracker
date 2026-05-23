@@ -48,6 +48,7 @@
   .t-run .dot{box-shadow:inset 0 0 0 2px var(--run)} .t-strength .dot{box-shadow:inset 0 0 0 2px var(--strength)} .t-rest .dot{box-shadow:inset 0 0 0 2px var(--rest)}
   .day h3{font-size:1rem}
   .dow{font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+  .focus{font-size:.74rem;color:var(--accent);font-weight:600;margin-top:4px}
   .detail{font-size:.85rem;color:var(--muted);margin-top:5px}
   .chk{margin-left:auto;flex:none}
   .chk input{width:26px;height:26px;accent-color:var(--accent);cursor:pointer}
@@ -95,19 +96,19 @@ const PLAN = {
   weekEnd: "2026-05-30",
   paces: { easy:"8:15–9:00 /km", long:"8:00–8:30 /km", tempo:"6:45–7:15 /km", intervals:"6:00–6:30 /km" },
   days: [
-    { date:"2026-05-24", dow:"Sun", type:"run", title:"Easy Run · 5 km",
+    { date:"2026-05-24", dow:"Sun", type:"run", title:"Easy Run · 5 km", focus:"🎯 Trains: aerobic base + fat burn",
       detail:"Gym closed today. Easy 8:15–9:00/km, walk breaks OK. Day-1 win is just getting out the door.", log:["distance","time","notes"] },
-    { date:"2026-05-25", dow:"Mon", type:"strength", title:"Full-body Lift A",
+    { date:"2026-05-25", dow:"Mon", type:"strength", title:"Full-body Lift A", focus:"🎯 Trains: quads/glutes, chest, back, biceps, core",
       detail:"Goblet squat 3×10 · Chest press 3×10 · Lat pulldown 3×10 · DB RDL 3×10 · Bicep curl 3×12 · Plank 3×30s", log:["notes"] },
-    { date:"2026-05-26", dow:"Tue", type:"rest", title:"Rest / Mobility",
+    { date:"2026-05-26", dow:"Tue", type:"rest", title:"Rest / Mobility", focus:"🎯 Recovery + mobility (let muscles rebuild)",
       detail:"Optional 15 min easy walk + light stretch.", log:["notes"] },
-    { date:"2026-05-27", dow:"Wed", type:"strength", title:"Full-body Lift B",
+    { date:"2026-05-27", dow:"Wed", type:"strength", title:"Full-body Lift B", focus:"🎯 Trains: legs, back, shoulders, triceps, abs",
       detail:"Leg press 3×12 · Seated row 3×10 · DB shoulder press 3×10 · Walking lunges 2×10/leg · Triceps pushdown 3×12 · Cable crunch 3×12", log:["notes"] },
-    { date:"2026-05-28", dow:"Thu", type:"run", title:"Easy Run · 4 km",
+    { date:"2026-05-28", dow:"Thu", type:"run", title:"Easy Run · 4 km", focus:"🎯 Trains: aerobic base (easy)",
       detail:"Same easy pace. Relaxed shoulders, short quick steps.", log:["distance","time","notes"] },
-    { date:"2026-05-29", dow:"Fri", type:"strength", title:"Upper-body / Shape (Lift C)",
+    { date:"2026-05-29", dow:"Fri", type:"strength", title:"Upper-body / Shape (Lift C)", focus:"🎯 Trains: chest, back, side delts, arms, abs (the 'show' muscles)",
       detail:"BONUS shape day, no heavy legs (keeps legs fresh for tomorrow's long run). Incline DB press 3×10 · Lat pulldown 3×10 · Lateral raises 3×15 · Bicep curl 3×12 · Triceps pushdown 3×12 · Hanging knee raise 3×12", log:["notes"] },
-    { date:"2026-05-30", dow:"Sat", type:"run", title:"LONG RUN · 6 km",
+    { date:"2026-05-30", dow:"Sat", type:"run", title:"LONG RUN · 6 km", focus:"🎯 Trains: endurance — the key race session",
       detail:"Slowest run of the week (~8:30/km). Walk breaks fine. Just finish it relaxed.", log:["distance","time","notes"] }
   ],
   nutrition: {
@@ -227,6 +228,7 @@ function dayCard(d){
         <div>
           <div class="dow">${d.dow} · ${new Date(d.date).toLocaleDateString("en-GB",{month:"short",day:"numeric"})}</div>
           <h3>${d.title}</h3>
+          ${d.focus?`<div class="focus">${d.focus}</div>`:""}
           <div class="detail">${d.detail}</div>
         </div>
         <div class="chk"><input type="checkbox" ${done?"checked":""} onchange="setField('${d.date}','done',this.checked)" title="Mark done"></div>
