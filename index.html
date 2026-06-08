@@ -56,6 +56,15 @@
   .logrow label{font-size:.7rem;color:var(--muted);display:flex;flex-direction:column;gap:3px;flex:1;min-width:90px}
   .logrow input,.logrow textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:7px 9px;font-size:.85rem;font-family:inherit}
   .logrow textarea{min-width:100%;resize:vertical;min-height:34px}
+  /* ── Exercise checklist (gym days) ── */
+  .exlist{margin-top:11px;padding-top:9px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:4px}
+  .exitem{display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;cursor:pointer;font-size:.86rem;background:var(--card2);transition:background .15s,opacity .2s}
+  .exitem:hover{background:rgba(255,255,255,.03)}
+  .exitem.checked{opacity:.5}
+  .exitem.checked .exname{text-decoration:line-through;text-decoration-thickness:1.5px}
+  .exitem input{width:19px;height:19px;accent-color:var(--accent);cursor:pointer;flex:none;margin:0}
+  .exname{flex:1;color:var(--txt);line-height:1.3}
+  .extgt{font-size:.74rem;color:var(--muted);background:var(--bg);padding:3px 9px;border-radius:99px;white-space:nowrap;border:1px solid var(--line)}
   .daily{display:flex;gap:8px;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
   .daily label{font-size:.7rem;color:var(--muted);display:flex;flex-direction:column;gap:3px;flex:1}
   .daily input{background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:6px 9px;font-size:.85rem;width:100%}
@@ -181,13 +190,41 @@ const PLAN = {
     { date:"2026-06-09", dow:"Tue", type:"run", title:"Easy Run · 4 km", focus:"🎯 Trains: aerobic base (gentle restart — test the legs)",
       detail:"Post-travel test run. ~9:00/km, walk breaks fine. If legs feel cooked, slow further or shorten. Just get moving — that's the whole job.", log:["distance","time","notes"] },
     { date:"2026-06-10", dow:"Wed", type:"strength", title:"Full-body Lift A", focus:"🎯 Trains: quads/glutes, chest, back, biceps, core (your 1× ab day this wk)",
-      detail:"5–10 min cardio warm-up (non-negotiable). Goblet squat 4×10–12 · Chest press 4×10–12 · Lat pulldown 4×10–12 · DB RDL 4×10 · Bicep curl 3×12 · Floor crunches or lying leg raises 3×12 (use these, not decline bench). ADD ~2.5–5 kg where last week's last 2 reps were too easy.", log:["notes"] },
+      detail:"ADD ~2.5–5 kg where last week's last 2 reps were too easy. Last 2 reps should be hard but clean form.",
+      exercises: [
+        { name:"Cardio warm-up", target:"5–10 min" },
+        { name:"Goblet squat", target:"4 × 10–12" },
+        { name:"Chest press (or DB bench)", target:"4 × 10–12" },
+        { name:"Lat pulldown", target:"4 × 10–12" },
+        { name:"DB Romanian deadlift", target:"4 × 10" },
+        { name:"Bicep curl", target:"3 × 12" },
+        { name:"Floor crunches or lying leg raises", target:"3 × 12" }
+      ],
+      log:["notes"] },
     { date:"2026-06-11", dow:"Thu", type:"run", title:"Easy Run · 4 km", focus:"🎯 Trains: aerobic base (easy)",
       detail:"Same easy pace ~9:00/km. Conversational. Just stack the brick.", log:["distance","time","notes"] },
     { date:"2026-06-12", dow:"Fri", type:"strength", title:"Full-body Lift B", focus:"🎯 Trains: legs, back, shoulders, triceps · NO direct abs this wk",
-      detail:"5–10 min cardio warm-up. Leg press 4×12 · Seated row 4×10–12 · DB shoulder press 4×10 (don't forget — you missed it Wk1 too!) · Reverse lunges 2×10/leg (or Bulgarian split squat) · Triceps pushdown 3×12.", log:["notes"] },
+      detail:"NO direct abs this week (let them clear). DB shoulder press = don't forget this time! ADD weight where last 2 reps were too easy.",
+      exercises: [
+        { name:"Cardio warm-up", target:"5–10 min" },
+        { name:"Leg press", target:"4 × 12" },
+        { name:"Seated cable row", target:"4 × 10–12" },
+        { name:"DB shoulder press ⭐", target:"4 × 10" },
+        { name:"Reverse lunges (or Bulgarian split squat)", target:"2 × 10/leg" },
+        { name:"Triceps pushdown", target:"3 × 12" }
+      ],
+      log:["notes"] },
     { date:"2026-06-13", dow:"Sat", type:"run", title:"LONG RUN · 7 km + Lift C (PM)", focus:"🎯 Trains: endurance (AM) + chest/back/delts/arms (PM) — THE crown of the week",
-      detail:"AM: Long run 7 km @ ~9:30/km (slower than easy). Walk breaks fine. Run warm-up first. It's been 2 weeks since the last long run — protect this session. ──── 2–4 h gap, refuel + rest. ──── PM: Lift C — Incline DB press 4×10 · Lat pulldown 4×10 · Lateral raises 3×15 · Bicep curl 3×12 · Triceps pushdown 3×12. Lift C is BONUS — skip without guilt if cooked.", log:["distance","time","notes"] },
+      detail:"AM: Long run 7 km @ ~9:30/km (slower than easy, walk breaks fine, Run warm-up first). It's been 2 weeks since the last long run — protect this. → 2–4 h gap, refuel + rest. → PM: Lift C below (bonus — skip without guilt if cooked).",
+      exercises: [
+        { name:"PM · Cardio warm-up", target:"5–10 min" },
+        { name:"Incline DB press", target:"4 × 10" },
+        { name:"Lat pulldown (or assisted pull-up)", target:"4 × 10" },
+        { name:"DB lateral raises", target:"3 × 15" },
+        { name:"Bicep curl", target:"3 × 12" },
+        { name:"Triceps pushdown", target:"3 × 12" }
+      ],
+      log:["distance","time","notes"] },
     { date:"2026-06-14", dow:"Sun", type:"rest", title:"REST (gym closed)", focus:"🎯 Recovery + mobility",
       detail:"Full rest. Optional easy walk or swim if you fancy. Gym closed.", log:["notes"] }
   ],
@@ -235,6 +272,7 @@ state.weeks[wkKey] = state.weeks[wkKey] || {};
 function field(d){ return state.weeks[wkKey][d.date] || {}; }
 function daily(date){ return state.daily[date] || {}; }
 function setField(date, k, v){ const w=state.weeks[wkKey]; w[date]=w[date]||{}; w[date][k]=v; save(state); render(); }
+function setEx(date, idx, checked){ const w=state.weeks[wkKey]; w[date]=w[date]||{}; w[date].exercises=w[date].exercises||[]; w[date].exercises[idx]=checked; save(state); render(); }
 function setDaily(date, k, v){ state.daily[date]=state.daily[date]||{}; state.daily[date][k]=v; save(state); soft(); }
 
 function daysToRace(){ return Math.max(0, Math.ceil((new Date(PLAN.raceDate) - new Date()) / 86400000)); }
@@ -323,18 +361,33 @@ function dayCard(d){
     ? `<textarea placeholder="Notes…" onchange="setField('${d.date}','notes',this.value)">${f.notes||""}</textarea>`
     : `<label>${labels[k]}<input type="text" value="${f[k]||""}" placeholder="—"
         onchange="setField('${d.date}','${k}',this.value)"></label>`).join("");
+  const exState = f.exercises || [];
+  const exDone = exState.filter(Boolean).length;
+  const exTotal = d.exercises ? d.exercises.length : 0;
+  const exList = d.exercises ? `<div class="exlist">${
+    d.exercises.map((ex,i) => {
+      const c = !!exState[i];
+      return `<label class="exitem ${c?"checked":""}">
+        <input type="checkbox" ${c?"checked":""} onchange="setEx('${d.date}',${i},this.checked)">
+        <span class="exname">${ex.name}</span>
+        <span class="extgt">${ex.target}</span>
+      </label>`;
+    }).join("")
+  }</div>` : "";
+  const exProgress = exTotal ? ` <span style="font-size:.72rem;color:var(--accent);font-weight:600">${exDone}/${exTotal}</span>` : "";
   return `
     <div class="day t-${d.type} ${done?"done":""} ${d.type==="rest"?"rest":""}">
       <div class="day-top">
         <div class="dot">${ICON[d.type]}</div>
         <div>
-          <div class="dow">${d.dow} · ${new Date(d.date).toLocaleDateString("en-GB",{month:"short",day:"numeric"})}</div>
+          <div class="dow">${d.dow} · ${new Date(d.date).toLocaleDateString("en-GB",{month:"short",day:"numeric"})}${exProgress}</div>
           <h3>${d.title}</h3>
           ${d.focus?`<div class="focus">${d.focus}</div>`:""}
           <div class="detail">${d.detail}</div>
         </div>
         <div class="chk"><input type="checkbox" ${done?"checked":""} onchange="setField('${d.date}','done',this.checked)" title="Mark done"></div>
       </div>
+      ${exList}
       <div class="logrow">${logInputs}</div>
       <div class="daily">
         <label>⚖️ Weight (kg)<input type="text" value="${dy.weight||""}" placeholder="—" onchange="setDaily('${d.date}','weight',this.value)"></label>
