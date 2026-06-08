@@ -70,6 +70,29 @@
   .note{font-size:.78rem;color:var(--muted);margin-top:6px}
   .nutri{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:.82rem;margin-bottom:11px}
   .nutri b{color:var(--accent)}
+  /* ── Past-weeks history ── */
+  .histweek{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:8px 0}
+  .histweek summary{cursor:pointer;list-style:none;outline:none}
+  .histweek summary::-webkit-details-marker{display:none}
+  .histweek-head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}
+  .histweek-title{font-size:.95rem;font-weight:700}
+  .histweek-dates{font-size:.74rem;color:var(--muted);font-weight:400;margin-left:2px}
+  .histweek-ratio{padding:3px 10px;border-radius:99px;font-size:.72rem;font-weight:700;background:var(--accent);color:#0f1115;white-space:nowrap}
+  .histweek-ratio.partial{background:#ff8a5b}
+  .histweek-ratio.poor{background:var(--bad);color:#fff}
+  .histweek-strip{display:flex;gap:4px;margin-top:9px}
+  .histday{flex:1;min-width:0;padding:5px 2px;border-radius:7px;text-align:center;background:var(--card);border:1px solid transparent}
+  .histday.done{background:rgba(194,240,0,.16);border-color:rgba(194,240,0,.4)}
+  .histday.missed{background:rgba(255,93,108,.13);border-color:rgba(255,93,108,.4)}
+  .histday.rest{background:var(--card)}
+  .histday-dow{font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em}
+  .histday-icon{font-size:.95rem;margin-top:1px}
+  .histweek-stats{font-size:.76rem;color:var(--muted);margin:10px 0 0;display:flex;gap:14px;flex-wrap:wrap}
+  .histweek-stats b{color:var(--txt)}
+  .histweek-blurb{font-size:.83rem;margin-top:8px;line-height:1.5}
+  .histweek-section{margin-top:8px}
+  .histweek-section h5{font-size:.74rem;color:var(--accent);margin-bottom:3px;letter-spacing:.04em}
+  .histweek-section ul{margin-left:18px;font-size:.79rem;color:var(--muted);line-height:1.6}
   details.routines{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:2px 14px;margin-bottom:11px}
   details.routines summary{cursor:pointer;font-weight:600;padding:11px 0;font-size:.9rem;list-style:none}
   details.routines summary::-webkit-details-marker{display:none}
@@ -85,6 +108,63 @@
 <div class="toast" id="toast"></div>
 
 <script>
+// ==================== HISTORY START (Claude appends a snapshot when each week closes) ====================
+const HISTORY = [
+  {
+    week: 1, start: "2026-05-24", end: "2026-05-30", phase: "Phase 0",
+    done: 7, planned: 7, km: 15.04,
+    weightStart: 77.0, weightEnd: 75.5, avgSweets: 1.83,
+    days: [
+      {dow:"Sun", status:"done", icon:"🏃", label:"Easy 5K"},
+      {dow:"Mon", status:"done", icon:"🏋️", label:"Lift A"},
+      {dow:"Tue", status:"rest", icon:"😌", label:"Rest"},
+      {dow:"Wed", status:"done", icon:"🏋️", label:"Lift B (The Save)"},
+      {dow:"Thu", status:"done", icon:"🏃", label:"Easy 4K @9:00/km"},
+      {dow:"Fri", status:"done", icon:"🏋️", label:"Lift C"},
+      {dow:"Sat", status:"done", icon:"🏃", label:"Long 6K @9:31/km"}
+    ],
+    blurb: "Foundation week. 7/7. Slowed easy runs after feedback. HR ↓ at same pace = aerobic engine improving.",
+    wins: [
+      "Never-miss-a-week",
+      "The Save (made it to gym Wed evening after missing AM)",
+      "Easy-pace lesson absorbed (7:24 → 9:00/km Thu, 9:31 Sat)",
+      "Weight 77.0 → 75.5 kg (−1.5)",
+      "HR signal: 159→157 at longer distance = fitness improving"
+    ],
+    learnings: [
+      "Cadence 146–150 (soft cue: quick feet)",
+      "Sweets triggers found: rest-day boredom + visitor sweets",
+      "DOMS lesson — ease into new ab work"
+    ]
+  },
+  {
+    week: 2, start: "2026-05-31", end: "2026-06-06", phase: "Phase 0",
+    done: 3, planned: 6, km: 5.13,
+    weightStart: 75.5, weightEnd: null, avgSweets: null,
+    days: [
+      {dow:"Sun", status:"missed", icon:"❌", label:"Missed 5K (slept off)"},
+      {dow:"Mon", status:"done", icon:"⭐", label:"Solo-battle DOUBLE: 5K + Lift A"},
+      {dow:"Tue", status:"missed", icon:"❌", label:"No gym"},
+      {dow:"Wed", status:"rest", icon:"✈️", label:"Travel"},
+      {dow:"Thu", status:"rest", icon:"✈️", label:"Travel"},
+      {dow:"Fri", status:"missed", icon:"❌", label:"Travel extended"},
+      {dow:"Sat", status:"missed", icon:"❌", label:"Travel extended — long run missed"}
+    ],
+    blurb: "Travel chaos — but Mon's solo-battle was a real psychological breakthrough. Bonus unplanned 5K in Chennai during travel preserved aerobic base.",
+    wins: [
+      "⭐ Solo-battle win (Mon): made up Sun's miss + Lift A in one day, alone",
+      "Heavier weights on Lift A — progressive overload working",
+      "Unplanned 5K in Chennai (HR 155 — base preserved through travel)"
+    ],
+    learnings: [
+      "Solo Sundays = vulnerability window (no friend pull → lower motivation)",
+      "Post-training hunger ≠ willpower — fuel the work (more carbs on training days)",
+      "Travel happens — plan adapts, don't catastrophize"
+    ]
+  }
+];
+// ==================== HISTORY END ====================
+
 // ==================== PLAN START (Claude edits this block each week) ====================
 const PLAN = {
   athlete: "Aditya",
@@ -200,6 +280,8 @@ function render(){
         <canvas id="spark" width="120" height="26"></canvas></div>
     </div>
 
+    ${renderHistory()}
+
     <div class="nutri">
       🍽️ <b>Protein:</b> ${PLAN.nutrition.protein}<br>
       🍬 <b>Sweets:</b> ${PLAN.nutrition.sweets}<br>
@@ -259,6 +341,47 @@ function dayCard(d){
         <label>🍬 Sweets today<input type="text" value="${dy.sweets||""}" placeholder="0" onchange="setDaily('${d.date}','sweets',this.value)"></label>
       </div>
     </div>`;
+}
+
+function renderHistory(){
+  if (!Array.isArray(HISTORY) || !HISTORY.length) return "";
+  return `<details class="routines"><summary>📅 Past weeks (${HISTORY.length})</summary>
+    ${HISTORY.slice().reverse().map(renderHistWeek).join("")}
+  </details>`;
+}
+function renderHistWeek(w){
+  const ratioCls = w.done >= w.planned ? "" : w.done >= w.planned * 0.7 ? "partial" : "poor";
+  const fmt = d => new Date(d).toLocaleDateString("en-GB",{month:"short",day:"numeric"});
+  const dates = `${fmt(w.start)} – ${fmt(w.end)}`;
+  const esc = s => String(s).replace(/"/g,"&quot;");
+  const strip = w.days.map(d =>
+    `<div class="histday ${d.status}" title="${esc(d.label||'')}">
+       <div class="histday-dow">${d.dow}</div><div class="histday-icon">${d.icon}</div>
+     </div>`
+  ).join("");
+  const wt = w.weightStart && w.weightEnd ? `${w.weightStart} → ${w.weightEnd} kg`
+           : w.weightStart ? `start ${w.weightStart} kg` : null;
+  const stats = [
+    `Sessions <b>${w.done}/${w.planned}</b>`,
+    w.km != null ? `Run <b>${w.km} km</b>` : null,
+    wt ? `Weight <b>${wt}</b>` : null,
+    w.avgSweets != null ? `Sweets <b>${w.avgSweets}/day avg</b>` : null
+  ].filter(Boolean).join(" · ");
+  const section = (title, items) => items?.length
+    ? `<div class="histweek-section"><h5>${title}</h5><ul>${items.map(i=>`<li>${i}</li>`).join("")}</ul></div>` : "";
+  return `<details class="histweek">
+    <summary>
+      <div class="histweek-head">
+        <div><span class="histweek-title">Week ${w.week}</span><span class="histweek-dates">· ${dates} · ${w.phase}</span></div>
+        <span class="histweek-ratio ${ratioCls}">${w.done}/${w.planned}</span>
+      </div>
+      <div class="histweek-strip">${strip}</div>
+    </summary>
+    <div class="histweek-stats">${stats}</div>
+    <div class="histweek-blurb">${w.blurb}</div>
+    ${section("⭐ Wins", w.wins)}
+    ${section("📚 Learnings", w.learnings)}
+  </details>`;
 }
 
 function drawSpark(){
