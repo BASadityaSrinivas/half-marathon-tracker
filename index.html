@@ -51,7 +51,10 @@
   .focus{font-size:.74rem;color:var(--accent);font-weight:600;margin-top:4px}
   .detail{font-size:.85rem;color:var(--muted);margin-top:5px}
   .chk{margin-left:auto;flex:none}
-  .chk input{width:26px;height:26px;accent-color:var(--accent);cursor:pointer}
+  .chk input{appearance:none;-webkit-appearance:none;width:24px;height:24px;border:1.5px solid var(--line);border-radius:6px;background:var(--card2);position:relative;cursor:pointer;transition:border-color .15s,background .15s}
+  .chk input:hover{border-color:var(--accent-dim)}
+  .chk input:checked{background:var(--accent);border-color:var(--accent)}
+  .chk input:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#0f1115;font-size:16px;font-weight:900;line-height:1}
   .logrow{display:flex;flex-wrap:wrap;gap:8px;margin-top:11px}
   .logrow label{font-size:.7rem;color:var(--muted);display:flex;flex-direction:column;gap:3px;flex:1;min-width:90px}
   .logrow input,.logrow textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:7px 9px;font-size:.85rem;font-family:inherit}
@@ -62,7 +65,10 @@
   .exitem:hover{background:rgba(255,255,255,.03)}
   .exitem.checked{opacity:.5}
   .exitem.checked .exname{text-decoration:line-through;text-decoration-thickness:1.5px}
-  .exitem input{width:19px;height:19px;accent-color:var(--accent);cursor:pointer;flex:none;margin:0}
+  .exitem input{appearance:none;-webkit-appearance:none;width:20px;height:20px;border:1.5px solid var(--line);border-radius:5px;background:var(--bg);position:relative;cursor:pointer;flex:none;margin:0;transition:border-color .15s,background .15s}
+  .exitem input:hover{border-color:var(--accent-dim)}
+  .exitem input:checked{background:var(--accent);border-color:var(--accent)}
+  .exitem input:checked::after{content:"✓";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#0f1115;font-size:13px;font-weight:900;line-height:1}
   .exname{flex:1;color:var(--txt);line-height:1.3}
   .extgt{font-size:.74rem;color:var(--muted);background:var(--bg);padding:3px 9px;border-radius:99px;white-space:nowrap;border:1px solid var(--line)}
   .daily{display:flex;gap:8px;margin-top:9px;padding-top:9px;border-top:1px dashed var(--line)}
