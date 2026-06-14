@@ -423,8 +423,10 @@ function dayCard(d){
 
 function renderHistory(){
   if (!Array.isArray(HISTORY) || !HISTORY.length) return "";
+  // Always sort by week descending, regardless of array order — defensive against insertion mistakes
+  const sorted = [...HISTORY].sort((a,b) => b.week - a.week);
   return `<details class="routines"><summary>📅 Past weeks (${HISTORY.length})</summary>
-    ${HISTORY.slice().reverse().map(renderHistWeek).join("")}
+    ${sorted.map(renderHistWeek).join("")}
   </details>`;
 }
 function renderHistWeek(w){
