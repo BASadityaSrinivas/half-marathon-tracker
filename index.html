@@ -153,6 +153,33 @@ const HISTORY = [
     ]
   },
   {
+    week: 4, start: "2026-06-15", end: "2026-06-21", phase: "Phase 0 (final)",
+    done: 3, planned: 6, km: 14.01,
+    weightStart: 77.0, weightEnd: null, avgSweets: null,
+    days: [
+      {dow:"Mon", status:"rest", icon:"🚴", label:"Active recovery (20 min cycle + 10 min elliptical)"},
+      {dow:"Tue", status:"missed", icon:"❌", label:"Work"},
+      {dow:"Wed", status:"missed", icon:"❌", label:"Work — Lift A missed"},
+      {dow:"Thu", status:"missed", icon:"❌", label:"Work"},
+      {dow:"Fri", status:"done", icon:"⭐", label:"Easy 4K @8:48, HR 150 (aerobic landmark)"},
+      {dow:"Sat", status:"done", icon:"⚠️", label:"Solo 10K @9:06, HR 168 (+25% over plan, no Lift B/C)"},
+      {dow:"Sun", status:"rest", icon:"😴", label:"True rest (post-10K)"}
+    ],
+    blurb: "3 weekdays lost to work. But Fri's 4K landed at HR 150 (aerobic landmark — Phase 0's 4K HR went 159 → 150) and Sat became a 10K non-stop with negative split. The easy-pace discipline FULLY landed. Lifts: zero this week.",
+    wins: [
+      "⭐ Fri 4K @ HR 150 — 9 bpm lower than Wk1 baseline at same distance",
+      "🏃 First 10K non-stop with negative split (longest run since training began)",
+      "Easy-pace discipline fully landed (Wk1 7:24 hype → Wk4 8:48 textbook)",
+      "Active recovery template established (Mon cross-training)"
+    ],
+    learnings: [
+      "Lift consistency wobbled — zero lifts this week (work crushed Tue–Thu)",
+      "Long-run overshoot pattern: 8K plan → 10K actual (+25%). 10K once ≠ 10K weekly capability",
+      "HR drift at 10K (168 vs 156–157 at 7K same pace) confirmed it was a real stretch",
+      "Decision: extend bridge week (Wk5 = Phase 1 soft entry), hold long run at 8K to consolidate"
+    ]
+  },
+  {
     week: 3, start: "2026-06-08", end: "2026-06-14", phase: "Phase 0 (restart)",
     done: 5, planned: 7, km: 12.34,
     weightStart: 75.5, weightEnd: 77.0, avgSweets: null,
@@ -213,18 +240,27 @@ const PLAN = {
   athlete: "Aditya",
   goal: "Half Marathon · finish strong 2:15–2:20 · 1:55 is the dream",
   raceDate: "2026-09-27",
-  phase: "Phase 0 — Base & Habit (final week)",
-  week: 4,
-  weekStart: "2026-06-15",
-  weekEnd: "2026-06-21",
+  phase: "Phase 1 — Build (entry)",
+  week: 5,
+  weekStart: "2026-06-22",
+  weekEnd: "2026-06-28",
   paces: { easy:"8:15–9:00 /km", long:"8:00–8:30 /km", tempo:"6:45–7:15 /km", intervals:"6:00–6:30 /km" },
   days: [
-    { date:"2026-06-15", dow:"Mon", type:"rest", title:"REST (or optional easy movement)", focus:"🎯 Recovery + optional 20–30 min easy walk/swim/cycle",
-      detail:"Either full rest OR an optional 20–30 min easy walk / swim / gentle cycle for daily movement. NOT a calorie-burn session — talk-test pace only.", log:["notes"] },
-    { date:"2026-06-16", dow:"Tue", type:"run", title:"Easy Run · 4 km", focus:"🎯 Trains: aerobic base (true easy)",
-      detail:"~9:00/km, conversational. **5-min HR check rule:** glance at HR at km 0.5 — if HR>160, slow down NO exceptions. Walk breaks fine.", log:["distance","time","notes"] },
-    { date:"2026-06-17", dow:"Wed", type:"strength", title:"Full-body Lift A — progressive overload", focus:"🎯 Trains: quads/glutes, chest, back, biceps, core (your 1× ab day)",
-      detail:"Wk3 felt 'same or easier' → bump weight. ADD ~2.5–5 kg per big lift where last 2 reps were too easy. Last 2 reps should be hard with clean form. **CARDIO WARM-UP HARD CAP 10 MIN.** Tag the weights you use — I'll add to weights.md.",
+    { date:"2026-06-22", dow:"Mon", type:"strength", title:"Lift C — Upper-body / Shape", focus:"🎯 Trains: chest, back, side delts, arms · moved from Sat PM",
+      detail:"Lift C moved to Mon for cleaner Sat. Upper-body only — legs untouched before Tue's easy run. **CARDIO WARM-UP HARD CAP 10 MIN.** 🆘 Fallback: if you wake up tired, skip & revert to Sat-PM original schedule.",
+      exercises: [
+        { name:"Cardio warm-up", target:"5–10 min MAX" },
+        { name:"Incline DB press", target:"4 × 10 @ 10 kg (try 12.5 kg)" },
+        { name:"Lat pulldown / Assisted pull-up", target:"4 × 10 · reduce assist 1 notch" },
+        { name:"DB lateral raises", target:"3 × 15 @ 5 kg (hold, focus form)" },
+        { name:"Bicep curl", target:"3 × 12 · tag weight" },
+        { name:"Triceps pushdown", target:"3 × 12 @ 25 kg (try 30 kg)" }
+      ],
+      log:["notes"] },
+    { date:"2026-06-23", dow:"Tue", type:"run", title:"Easy Run · 4 km", focus:"🎯 Trains: aerobic base (true easy)",
+      detail:"~9:00/km, conversational. 5-min HR<160 check at km 0.5 — no exceptions. Walk breaks fine.", log:["distance","time","notes"] },
+    { date:"2026-06-24", dow:"Wed", type:"strength", title:"Full-body Lift A — TAG WEIGHTS", focus:"🎯 Trains: quads/glutes, chest, back, biceps, core (1× ab day)",
+      detail:"Same Wk4 menu — please tag the weights you use this session so weights.md is complete. **CARDIO WARM-UP HARD CAP 10 MIN.**",
       exercises: [
         { name:"Cardio warm-up", target:"5–10 min MAX" },
         { name:"Goblet squat", target:"4 × 10–12 · tag weight" },
@@ -235,10 +271,10 @@ const PLAN = {
         { name:"Floor crunches or lying leg raises", target:"3 × 12" }
       ],
       log:["notes"] },
-    { date:"2026-06-18", dow:"Thu", type:"run", title:"Easy Run · 4 km", focus:"🎯 Trains: aerobic base (easy)",
-      detail:"Same ~9:00/km, conversational. 5-min HR check applies. Walk breaks fine.", log:["distance","time","notes"] },
-    { date:"2026-06-19", dow:"Fri", type:"strength", title:"Full-body Lift B — weights pre-loaded", focus:"🎯 Trains: legs, back, shoulders, triceps · NO direct abs",
-      detail:"Weights from last session pre-loaded below. Try the 'next' weight if Wk3's last 2 reps were easy. **CARDIO WARM-UP HARD CAP 10 MIN.** DB shoulder press is the priority.",
+    { date:"2026-06-25", dow:"Thu", type:"run", title:"Easy Run · 4 km", focus:"🎯 Trains: aerobic base (easy)",
+      detail:"Same ~9:00/km, conversational. 5-min HR<160 check applies. Walk breaks fine.", log:["distance","time","notes"] },
+    { date:"2026-06-26", dow:"Fri", type:"strength", title:"Full-body Lift B — weights pre-loaded", focus:"🎯 Trains: legs, back, shoulders, triceps · NO direct abs",
+      detail:"Try the 'next' weight if last 2 reps were easy. **CARDIO WARM-UP HARD CAP 10 MIN.** DB shoulder press is the priority — you've missed it twice!",
       exercises: [
         { name:"Cardio warm-up", target:"5–10 min MAX" },
         { name:"Leg press", target:"4 × 12 · tag weight" },
@@ -248,26 +284,17 @@ const PLAN = {
         { name:"Triceps pushdown", target:"3 × 12 @ 25 kg (try 30 kg)" }
       ],
       log:["notes"] },
-    { date:"2026-06-20", dow:"Sat", type:"run", title:"LONG RUN · 8 km + Lift C (PM)", focus:"🎯 Trains: endurance (AM) + chest/back/delts/arms (PM) — crown of the week",
-      detail:"AM: Long run **8 km** @ ~9:00–9:30/km (slower than easy, walk breaks fine, Run warm-up first). → 2–4 h gap, refuel + rest. → PM: Lift C below (bonus — skip without guilt if cooked).",
-      exercises: [
-        { name:"PM · Cardio warm-up", target:"5–10 min MAX" },
-        { name:"Incline DB press", target:"4 × 10 @ 10 kg (try 12.5 kg)" },
-        { name:"Lat pulldown / Assisted pull-up", target:"4 × 10 · reduce assist 1 notch" },
-        { name:"DB lateral raises", target:"3 × 15 @ 5 kg (hold, focus form)" },
-        { name:"Bicep curl", target:"3 × 12 · tag weight" },
-        { name:"Triceps pushdown", target:"3 × 12 @ 25 kg (try 30 kg)" }
-      ],
-      log:["distance","time","notes"] },
-    { date:"2026-06-21", dow:"Sun", type:"rest", title:"REST (or optional easy movement)", focus:"🎯 Recovery + optional 20–30 min easy walk/swim/cycle · gym closed",
-      detail:"Gym closed. Full rest OR optional 20–30 min easy walk / swim / gentle cycle. Talk-test pace. End-of-Phase-0 wind-down — Phase 1 begins Monday!", log:["notes"] }
+    { date:"2026-06-27", dow:"Sat", type:"run", title:"LONG RUN · 8 km", focus:"🎯 Trains: endurance — crown of the week, NO Lift C today",
+      detail:"AM: Long run **8 km** @ ~9:00–9:30/km (slower than easy, walk breaks fine, Run warm-up first). **8K is the cap, NOT a target.** No Lift C today (it's on Mon). Just the run, full focus, fresh legs.", log:["distance","time","notes"] },
+    { date:"2026-06-28", dow:"Sun", type:"run", title:"🆕 Recovery Run · 3 km (Phase 1 test!)", focus:"🎯 Trains: active recovery — the slower, the better",
+      detail:"🆕 NEW for Phase 1: 4th run/week. **TRUE slow — 9:30–10:00/km.** Almost embarrassingly slow jog. If urge to push hits → walk for 60s. 3 km, that's it. The slower it is, the more it works. **THIS IS THE PHASE 1 TEST** — Wk6's first speed session unlocks only if this stays disciplined.", log:["distance","time","notes"] }
   ],
   nutrition: {
     protein:"No protein math. Keep eating your usual eggs, dal, curd, sundal (~65–70g already). Optional nudge: 3–4 eggs/day",
     sweets:"Max 1/day · post-workout · on a plate · out of sight",
     deficit:"Mild deficit — aim to lose 0.3–0.5 kg/week. Weigh once, mornings."
   },
-  cardio:"Gym days this wk (Wed/Fri/Sat-PM): 5–10 min easy cardio warm-up — treadmill / elliptical / cycle / skipping rope. **HARD CAP: 10 min before lifting (no stealth weight-loss cardio sessions).** Optional 10–15 min EASY steady cardio after lifting (incline treadmill walk = low-impact). 🪢 Skipping = great for ankle stiffness. For daily-movement urge, slot 20–30 min easy on Mon/Sun rest days only.",
+  cardio:"Gym days this wk (Mon/Wed/Fri): 5–10 min easy cardio warm-up — treadmill / elliptical / cycle / skipping rope. **HARD CAP: 10 min before lifting (no stealth weight-loss cardio sessions).** Optional 10–15 min EASY steady cardio after lifting (incline treadmill walk = low-impact). 🪢 Skipping = great for ankle stiffness. For daily-movement urge, slot 20–30 min easy when you fancy — never before a lift.",
   routines: {
     "🏃 Run · Warm-up (before every run)":["3 min brisk walk","Leg swings front↔back ×10/leg","Leg swings side↔side ×10/leg","High knees 20 sec","Butt kicks 20 sec","10 bodyweight squats","Then run — keep the first km extra easy"],
     "🏃 Run · Cool-down (after every run)":["3 min slow walk to drop heart rate","Standing quad stretch 30s/leg","Hamstring stretch 30s/leg","Calf stretch on wall 30s/leg","Hip-flexor lunge stretch 30s/leg","Glute figure-4 stretch 30s/leg"],
