@@ -153,6 +153,33 @@ const HISTORY = [
     ]
   },
   {
+    week: 6, start: "2026-06-29", end: "2026-07-05", phase: "Phase 1 (acceleration)",
+    done: 6, planned: 7, km: 24.96,
+    weightStart: null, weightEnd: null, avgSweets: null,
+    days: [
+      {dow:"Mon", status:"done", icon:"🏋️", label:"Lift C — 4 new moves, dead hang 30s"},
+      {dow:"Tue", status:"done", icon:"⚡", label:"FIRST speed session — loved it, jogged recoveries"},
+      {dow:"Wed", status:"done", icon:"🏋️", label:"Lift A — barbell squat+bench (trainer form-checked)"},
+      {dow:"Thu→Fri", status:"done", icon:"🏃", label:"Easy 4K @ HR 144 (calmest run)"},
+      {dow:"Fri", status:"done", icon:"🏋️", label:"Lift B — leg press PR 90kg + 4 new moves"},
+      {dow:"Sat", status:"done", icon:"⚠️", label:"Long 9K @ 8:07 HR164 — too fast (long-run pace note)"},
+      {dow:"Sun", status:"rest", icon:"😴", label:"Rest — hamstring DOMS (smart pull-back)"}
+    ],
+    blurb: "First real Phase 1 week — huge. First structured speed session (loved it, jogged the recoveries), first barbell lifts (trainer-checked), leg-press PR to 90kg, 4 new moves per lift day. Easy runs held easy (HR 144). Only refinement: 9K long run crept fast → shifted long-run rule to HR<155. Rested Sun for hamstring DOMS = right call.",
+    wins: [
+      "⚡ First structured speed session — executed textbook, jogged recoveries (strong base)",
+      "🏋️ First barbell squat + bench (trainer form-checked ✅)",
+      "Leg press PR 60→90 kg; all new moves tagged in weights.md",
+      "Easy runs genuinely easy (HR down to 144)",
+      "Smart pull-back Sunday for hamstring DOMS instead of grinding"
+    ],
+    learnings: [
+      "Long run crept fast (8:07/km, HR 164) — 'comfortable' ≠ 'easy'; switched to HR<155 rule (effort, not pace)",
+      "New isolation moves (leg curl 35kg) → start LIGHTER; caused hamstring DOMS",
+      "Speed day now the legitimate home for the 'hype' — keeps easy/long runs honest"
+    ]
+  },
+  {
     week: 5, start: "2026-06-22", end: "2026-06-28", phase: "Phase 1 (entry)",
     done: 7, planned: 7, km: 19.55,
     weightStart: null, weightEnd: null, avgSweets: null,
@@ -268,76 +295,71 @@ const PLAN = {
   athlete: "Aditya",
   goal: "Half Marathon · finish strong 2:15–2:20 · 1:55 is the dream",
   raceDate: "2026-09-27",
-  phase: "Phase 1 — Build (acceleration)",
-  week: 6,
-  weekStart: "2026-06-29",
-  weekEnd: "2026-07-05",
+  phase: "Phase 1 — Build",
+  week: 7,
+  weekStart: "2026-07-06",
+  weekEnd: "2026-07-12",
   paces: { easy:"HR <150 (~9:00/km)", long:"HR <155 (pace floats)", tempo:"6:45–7:15 /km", intervals:"~6:30–7:00 /km" },
   days: [
-    { date:"2026-06-29", dow:"Mon", type:"strength", title:"Lift C — Upper / Shape", focus:"🎯 Trains: chest, back, rear delts, arms, grip · 3 new moves",
-      detail:"Legs rest before Tue's speed. **CARDIO WARM-UP 10 MIN CAP.** Start new moves (cable fly, face pull, barbell curl, overhead tri ext) LIGHT.",
+    { date:"2026-07-06", dow:"Mon", type:"strength", title:"Lift C — Upper (fresh variations)", focus:"🎯 Trains: chest, back, rear delts, arms, grip · 2 swaps",
+      detail:"Legs rest before Tue's fartlek. **CARDIO WARM-UP 10 MIN CAP.** New this week: pec deck + preacher curl.",
       exercises: [
         { name:"Cardio warm-up", target:"5–10 min MAX" },
         { name:"Incline DB press", target:"4 × 10 @ 15 kg (try 17.5)" },
-        { name:"🆕 Cable chest fly (or pec deck)", target:"3 × 12 · start light" },
-        { name:"Assisted pull-up", target:"4 × 8–10 · reduce assist 1 notch" },
-        { name:"🆕 Face pull", target:"3 × 15 · light, controlled" },
-        { name:"🆕 Barbell curl", target:"3 × 12 · start light" },
-        { name:"🆕 Overhead tricep extension", target:"3 × 12 · tag" },
-        { name:"🆕 Dead hang (finisher)", target:"2 × max hold" }
+        { name:"🔄 Pec deck (was cable fly)", target:"3 × 12 · tag" },
+        { name:"Assisted pull-up", target:"4 × 8–10 · 10 plates" },
+        { name:"Face pull", target:"3 × 15 @ 20 kg" },
+        { name:"🔄 Preacher curl (was barbell curl)", target:"3 × 12 · start light" },
+        { name:"Overhead tricep extension", target:"3 × 12 @ 15 kg" },
+        { name:"Dead hang (finisher)", target:"2 × max hold (past 30s)" }
       ],
       log:["notes"] },
-    { date:"2026-06-30", dow:"Tue", type:"run", title:"⚡ SPEED Session (first one!)", focus:"🎯 Trains: speed, leg turnover, lactate tolerance",
-      detail:"YOUR FIRST STRUCTURED SPEED RUN. Warm-up 10 min easy + drills (leg swings, high knees, butt kicks). MAIN: 6 × 1 min 'comfortably hard' (~6:30–7:00/km) with 90s EASY jog/walk recovery. Cool-down 5–10 min easy. Intervals = ~7/10 (a few words, NOT a sprint); recovery jogs TRULY easy. This is where your hype belongs!",
+    { date:"2026-07-07", dow:"Tue", type:"run", title:"⚡ FARTLEK — speed play", focus:"🎯 Trains: speed, leg turnover · fun & unstructured",
+      detail:"Warm-up 10 min easy + drills. MAIN: ~20 min FARTLEK — surge comfortably-hard (~7–8/10) to a landmark (pole/tree/corner), jog easy to recover, repeat by FEEL (~8–10 surges of 30–60s). No watch-staring — run on feel! Cool-down 5–10 min. This is where the hype goes.",
       exercises: [
         { name:"Warm-up (easy jog + drills)", target:"10 min" },
-        { name:"Interval 1", target:"1 min hard / 90s easy" },
-        { name:"Interval 2", target:"1 min hard / 90s easy" },
-        { name:"Interval 3", target:"1 min hard / 90s easy" },
-        { name:"Interval 4", target:"1 min hard / 90s easy" },
-        { name:"Interval 5", target:"1 min hard / 90s easy" },
-        { name:"Interval 6", target:"1 min hard / 90s easy" },
+        { name:"Fartlek — surge/recover by feel", target:"~20 min · 8–10 surges" },
         { name:"Cool-down (easy jog)", target:"5–10 min" }
       ],
       log:["distance","time","notes"] },
-    { date:"2026-07-01", dow:"Wed", type:"strength", title:"Lift A — Barbell squat + bench 🆕", focus:"🎯 Trains: legs, chest, back, biceps, core · BARBELL form day",
-      detail:"🚨 START BARBELL SQUAT + BENCH WITH EMPTY BAR (20 kg) OR LIGHTER. Form first. Ask a trainer for a 2-min form check on both. Use a rack/spotter for bench. **CARDIO WARM-UP 10 MIN CAP.**",
+    { date:"2026-07-08", dow:"Wed", type:"strength", title:"Lift A — Barbell squat + bench", focus:"🎯 Trains: legs, chest, back, biceps, core · progressing barbell",
+      detail:"Form cleared — add a little weight to squat + bench. Keep DB RDL MODERATE (hamstring). **CARDIO WARM-UP 10 MIN CAP.** ⚠️ Only if hamstrings pain-free.",
       exercises: [
         { name:"Cardio warm-up", target:"5–10 min MAX" },
-        { name:"🆕 Barbell back squat", target:"4 × 8–10 · EMPTY BAR/light · FORM" },
-        { name:"🆕 Barbell bench press", target:"4 × 8–10 · light · FORM (rack/spotter)" },
-        { name:"Lat pulldown", target:"4 × 10–12 @ ~35 kg" },
-        { name:"DB Romanian deadlift", target:"4 × 10 @ 12.5 kg (try 15)" },
-        { name:"Hammer curl", target:"3 × 12 @ 10 kg" },
+        { name:"Barbell back squat", target:"4 × 8–10 · +5 kg from last" },
+        { name:"Barbell bench press", target:"4 × 8–10 · ~30 kg (progress)" },
+        { name:"Lat pulldown", target:"4 × 10–12 @ 35 kg (40 = ceiling)" },
+        { name:"DB Romanian deadlift", target:"4 × 10 @ 12.5 kg · MODERATE (hamstring)" },
+        { name:"🔄 Concentration curl (was hammer)", target:"3 × 12 · tag" },
         { name:"Floor crunches / lying leg raises", target:"3 × 12" },
-        { name:"Plank", target:"2 × 45 sec" }
+        { name:"Plank", target:"2 × 45–60 sec" }
       ],
       log:["notes"] },
-    { date:"2026-07-02", dow:"Thu", type:"run", title:"Easy Run · 4 km", focus:"🎯 Trains: aerobic base (easy) — recover from Tue speed",
-      detail:"~9:00/km, conversational. 5-min HR<160 check. Keep it genuinely easy after Tue's speed.", log:["distance","time","notes"] },
-    { date:"2026-07-03", dow:"Fri", type:"strength", title:"Lift B — Lower / Pull · 4 new moves", focus:"🎯 Trains: legs, hamstrings, calves, back, shoulders, triceps",
-      detail:"Keep leg work MODERATE (legs worked Wed). Start new moves light. **CARDIO WARM-UP 10 MIN CAP.**",
+    { date:"2026-07-09", dow:"Thu", type:"run", title:"Easy Run · 4 km (HR<150)", focus:"🎯 Trains: aerobic base (easy)",
+      detail:"Run by HR — keep under 150 (pace floats, ~9:00–10:00/km). Conversational. Walk breaks fine.", log:["distance","time","notes"] },
+    { date:"2026-07-10", dow:"Fri", type:"strength", title:"Lift B — Lower/Pull · leg curl LIGHT", focus:"🎯 Trains: legs, hamstrings, calves, back, shoulders, triceps",
+      detail:"⚠️ LEG CURL LIGHT (~20 kg) — last week's 35 kg caused the hamstring DOMS. Rebuild slowly. **CARDIO WARM-UP 10 MIN CAP.**",
       exercises: [
         { name:"Cardio warm-up", target:"5–10 min MAX" },
-        { name:"Leg press", target:"4 × 12 @ 60 kg (try 65–70 fresh)" },
-        { name:"🆕 Leg curl (hamstrings)", target:"3 × 12 · start light" },
-        { name:"🆕 One-arm dumbbell row", target:"4 × 10/arm · tag" },
-        { name:"🆕 Calf raises", target:"3 × 15 · tag" },
-        { name:"🆕 Arnold press", target:"4 × 10 · start ~8–10 kg" },
-        { name:"Triceps pushdown", target:"3 × 12 @ 30 kg" }
+        { name:"Leg press", target:"4 × 12 @ 90 kg (try +10 fresh)" },
+        { name:"⚠️ Leg curl (LIGHT)", target:"3 × 12 @ ~20 kg (down from 35)" },
+        { name:"One-arm dumbbell row", target:"4 × 10/arm @ 10 kg (try 12.5)" },
+        { name:"Calf raises", target:"3 × 15 @ 15 kg (try 20)" },
+        { name:"Arnold press", target:"4 × 10 @ 7.5 kg (try 10)" },
+        { name:"Triceps pushdown", target:"3 × 12 @ 35 kg" }
       ],
       log:["notes"] },
-    { date:"2026-07-04", dow:"Sat", type:"run", title:"LONG RUN · 9 km", focus:"🎯 Trains: endurance — crown of the week",
-      detail:"AM: Long run **9 km** @ ~9:00–9:30/km (slower than easy, walk breaks fine, Run warm-up first). **9K is the cap, NOT a target.** Watch HR doesn't drift like the 10K did — if it climbs, slow down.", log:["distance","time","notes"] },
-    { date:"2026-07-05", dow:"Sun", type:"run", title:"Recovery jog · 3 km (or rest)", focus:"🎯 Trains: active recovery — the slower, the better",
-      detail:"TRUE slow — 9:30–10:00/km. Or take full rest if the week's load caught up. You nailed the slow discipline last week — keep it.", log:["distance","time","notes"] }
+    { date:"2026-07-11", dow:"Sat", type:"run", title:"LONG RUN · 10 km (HR<155)", focus:"🎯 Trains: endurance — crown of the week",
+      detail:"AM: Long run **10 km**, capped by **HR < 155** (run whatever pace that gives — probably ~8:45–9:15). When HR creeps past 155, SLOW DOWN even if it feels easy. Bank the good-feeling energy. Run warm-up first, walk breaks fine.", log:["distance","time","notes"] },
+    { date:"2026-07-12", dow:"Sun", type:"run", title:"🏊 Bonus swim (or jog / rest)", focus:"🎯 Trains: active recovery — low-impact, flushes the legs",
+      detail:"30 min easy swim (you love it, and it's great for the legs). Or a slow recovery jog, or full rest. Your call by feel.", log:["notes"] }
   ],
   nutrition: {
     protein:"No protein math. Keep eating your usual eggs, dal, curd, sundal (~65–70g already). Optional nudge: 3–4 eggs/day",
     sweets:"Max 1/day · post-workout · on a plate · out of sight",
     deficit:"Mild deficit — aim to lose 0.3–0.5 kg/week. Weigh once, mornings."
   },
-  cardio:"Gym days (Mon/Wed/Fri): 5–10 min easy cardio warm-up — treadmill / elliptical / cycle / skipping. **HARD CAP 10 min before lifting.** Tue is your SPEED run (your hard cardio) — don't add more. Optional 10–15 min easy incline walk after lifting. For daily-movement urge: 20–30 min easy when you fancy, never before a lift.",
+  cardio:"Gym days (Mon/Wed/Fri): 5–10 min easy warm-up — treadmill/elliptical/cycle/skipping. **HARD CAP 10 min before lifting.** Tue fartlek = your hard cardio, don't add more. Sun swim = active recovery. For daily-movement urge: 20–30 min easy when you fancy, never before a lift.",
   routines: {
     "🏃 Run · Warm-up (before every run)":["3 min brisk walk","Leg swings front↔back ×10/leg","Leg swings side↔side ×10/leg","High knees 20 sec","Butt kicks 20 sec","10 bodyweight squats","Then run — keep the first km extra easy"],
     "🏃 Run · Cool-down (after every run)":["3 min slow walk to drop heart rate","Standing quad stretch 30s/leg","Hamstring stretch 30s/leg","Calf stretch on wall 30s/leg","Hip-flexor lunge stretch 30s/leg","Glute figure-4 stretch 30s/leg"],
