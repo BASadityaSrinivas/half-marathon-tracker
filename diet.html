@@ -3,203 +3,208 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aditya · Fixed Diet Chart</title>
+<title>Aditya · 7-Day Diet Chart</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f1115'/><text x='50' y='66' font-family='Arial' font-size='30' font-weight='800' text-anchor='middle' fill='%23c2f000'>🍱</text></svg>" />
 <meta name="theme-color" content="#0f1115" />
 <style>
   :root{
     --bg:#0f1115; --card:#181b22; --card2:#1f232c; --line:#2a2f3a;
     --txt:#e7eaf0; --muted:#9aa3b2; --accent:#c2f000; --accent-dim:#8aac00;
-    --warn:#ff8a5b; --good:#4ad17c;
+    --warn:#ff8a5b; --good:#4ad17c; --free:#ffd23f;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
     background:var(--bg);color:var(--txt);line-height:1.5;padding:18px;max-width:760px;margin:0 auto;-webkit-font-smoothing:antialiased}
   a{color:var(--accent);text-decoration:none}
   .back{font-size:.82rem;color:var(--muted);display:inline-block;margin-bottom:14px}
-  h1{font-size:1.4rem;letter-spacing:-.02em}
-  .sub{color:var(--muted);font-size:.9rem;margin-top:3px}
-  .principle{background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:12px 14px;font-size:.85rem;margin:16px 0}
+  h1{font-size:1.35rem;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:.88rem;margin-top:3px}
+  .principle{background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:11px 13px;font-size:.83rem;margin:15px 0}
   .principle b{color:var(--accent)}
-  /* toggle */
-  .toggle{display:flex;gap:8px;margin:18px 0 6px}
-  .toggle button{flex:1;font:inherit;font-size:.9rem;font-weight:700;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;transition:.15s}
-  .toggle button.on{background:var(--accent);color:#0f1115;border-color:var(--accent)}
-  .daynote{font-size:.8rem;color:var(--muted);text-align:center;margin-bottom:14px}
+  /* day selector */
+  .days{display:flex;gap:6px;margin:16px 0 6px;overflow-x:auto;padding-bottom:4px}
+  .days button{flex:1;min-width:44px;font:inherit;font-size:.82rem;font-weight:700;padding:10px 4px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;transition:.15s}
+  .days button.on{background:var(--accent);color:#0f1115;border-color:var(--accent)}
+  .days button .dtype{display:block;font-size:.55rem;font-weight:600;opacity:.7;margin-top:1px}
+  .daytitle{display:flex;align-items:center;gap:8px;margin:14px 0 12px}
+  .daytitle h2{font-size:1.15rem}
+  .badge{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:99px}
+  .badge.training{background:var(--accent);color:#0f1115}
+  .badge.long{background:var(--good);color:#0f1115}
+  .badge.rest{background:var(--card2);color:var(--muted);border:1px solid var(--line)}
   /* meal cards */
-  .meal{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:11px}
-  .meal-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:9px}
-  .meal-time{font-size:1rem;font-weight:700}
-  .meal-time span{font-size:.72rem;color:var(--muted);font-weight:400;margin-left:6px}
-  .meal-kcal{font-size:.72rem;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:3px 9px;white-space:nowrap}
-  .meal ul{list-style:none;display:flex;flex-direction:column;gap:6px}
-  .meal li{display:flex;gap:9px;font-size:.88rem;align-items:flex-start}
+  .meal{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:10px}
+  .meal.free{border-color:var(--free);background:linear-gradient(0deg,rgba(255,210,63,.06),rgba(255,210,63,.06)),var(--card)}
+  .meal-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
+  .meal-time{font-size:.98rem;font-weight:700}
+  .meal-time span{font-size:.7rem;color:var(--muted);font-weight:400;margin-left:5px}
+  .meal-kcal{font-size:.7rem;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:3px 8px;white-space:nowrap}
+  .meal ul{list-style:none;display:flex;flex-direction:column;gap:5px}
+  .meal li{display:flex;gap:8px;font-size:.87rem;align-items:flex-start}
   .meal li::before{content:"•";color:var(--accent);flex:none}
-  .meal li b{color:var(--txt)}
   .meal li .q{color:var(--muted)}
-  .add{color:var(--good)}
-  .add::before{content:"➕" !important;font-size:.7rem}
-  .swap{color:var(--muted);font-size:.78rem;margin-top:6px;padding-left:19px}
-  .total{text-align:right;font-size:.82rem;color:var(--muted);margin:4px 4px 20px}
+  .meal li.add::before{content:"➕";font-size:.66rem}
+  .meal li.free-item::before{content:"🎉"}
+  .total{text-align:right;font-size:.8rem;color:var(--muted);margin:2px 4px 22px}
   .total b{color:var(--accent)}
-  /* rules */
-  .rules{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:8px 0 30px}
-  .rules h3{font-size:.95rem;margin-bottom:9px}
-  .rules ul{list-style:none;display:flex;flex-direction:column;gap:8px}
-  .rules li{font-size:.85rem;display:flex;gap:9px}
-  .rules li::before{content:"✅";flex:none;font-size:.8rem}
-  .rules li.no::before{content:"🚫"}
-  .hidden{display:none}
+  .total.rest b{color:var(--warn)}
+  /* info sections */
+  .info{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:8px 0 14px}
+  .info h3{font-size:.95rem;margin-bottom:9px}
+  .info ul{list-style:none;display:flex;flex-direction:column;gap:7px}
+  .info li{font-size:.84rem;display:flex;gap:8px}
+  .info li::before{content:"✅";flex:none;font-size:.78rem}
+  .info li.no::before{content:"🚫"}
+  .info li.hand::before{content:"✋"}
+  .info .lead{font-size:.83rem;color:var(--muted);margin-bottom:9px}
 </style>
 </head>
 <body>
 <a class="back" href="./">← Back to tracker</a>
-<h1>🍱 Fixed Diet Chart</h1>
-<div class="sub">Same menu every day = no decisions, no leaks, gentle deficit. Built on your foods.</div>
+<h1>🍱 7-Day Diet Chart</h1>
+<div class="sub">Each day is fully decided — no choosing. Tap a day, eat exactly that.</div>
 
 <div class="principle">
-  <b>The deal:</b> eat the portions below, skip random extras, 1 sweet/day. That alone creates the gentle deficit (~0.3–0.5 kg/week). We <b>don't starve</b> — you're training for a half marathon; the food fuels the work. Portions are the instruction; the kcal notes are just for awareness.
+  <b>The deal:</b> eat the portions shown, no random extras, 1 sweet/day. That's the gentle deficit (~0.3–0.5 kg/wk) — <b>we don't starve</b>, the food fuels your training. Portions are the instruction; kcal notes are just for awareness.
 </div>
 
-<div class="toggle">
-  <button id="btn-train" class="on" onclick="show('train')">💪 Training day (Mon–Sat)</button>
-  <button id="btn-rest" onclick="show('rest')">😴 Rest day (Sun)</button>
-</div>
+<div class="days" id="days"></div>
+<div id="day"></div>
 
-<!-- ===== TRAINING DAY ===== -->
-<div id="train">
-  <div class="daynote">For run/gym days — a bit more fuel around workouts.</div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">🌅 6:00 AM <span>Wake / pre-workout</span></div><div class="meal-kcal">~90</div></div>
-    <ul>
-      <li><span>1–2 glasses <b>warm water</b> <span class="q">(start your 3L)</span></span></li>
-      <li><span><b>4–5 almonds + 2 walnuts</b> <span class="q">(soaked overnight)</span></span></li>
-      <li class="q">→ then your run or gym session</li>
-    </ul>
-  </div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">💪 Post-workout <span>within 30 min</span></div><div class="meal-kcal">~100</div></div>
-    <ul>
-      <li class="add"><span><b>1 banana OR 1 glass milk</b> <span class="q">— refuels muscle + kills the sweet craving</span></span></li>
-      <li><span>Amla juice <span class="q">(optional, as you like)</span></span></li>
-    </ul>
-  </div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">🍳 9:00 AM <span>Breakfast</span></div><div class="meal-kcal">~580</div></div>
-    <ul>
-      <li><span><b>3 boiled eggs</b> (whole)</span></li>
-      <li><span><b>1 millet main</b> — pick one: <span class="q">2 ragi/kambu dosa · OR 1 bowl kambu/ragi koozh · OR 1 bowl barnyard pongal</span></span></li>
-      <li><span><b>1 small cup sundal</b> <span class="q">(chickpea / moong / peanut)</span></span></li>
-      <li><span>Coffee/tea — <b>no sugar</b> (½ tsp max)</span></li>
-    </ul>
-  </div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">🥛 1:00 PM <span>Lunch</span></div><div class="meal-kcal">~600</div></div>
-    <ul>
-      <li><span><b>1 level cup rice</b> <span class="q">(not heaped)</span> OR 2 millet rotis</span></li>
-      <li><span><b>1 bowl dal / sambar</b></span></li>
-      <li><span><b>1 cup curd</b></span></li>
-      <li><span><b>1 cup vegetable</b> <span class="q">(beetroot/carrot/beans, cluster beans, ivy gourd, raw banana…)</span></span></li>
-      <li><span><b>Keerai (greens)</b> when available · <b>paneer 100g</b> on 3 days/week</span></li>
-    </ul>
-  </div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">🥤 4:00 PM <span>Afternoon fuel</span></div><div class="meal-kcal">~140</div></div>
-    <ul>
-      <li class="add"><span><b>1 glass buttermilk (moru)</b></span></li>
-      <li class="add"><span><b>Small handful roasted chana / peanuts</b> <span class="q">— your default snack, reach for THIS not sweets</span></span></li>
-    </ul>
-  </div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">🌙 7:00 PM <span>Dinner (lighter, earlier)</span></div><div class="meal-kcal">~420</div></div>
-    <ul>
-      <li><span><b>2 boiled eggs</b> OR egg curry</span></li>
-      <li><span><b>1 vegetable + small carb</b> <span class="q">(2 dosa, or 1 cup veg + curd)</span></span></li>
-      <li><span><b>1 fruit</b></span></li>
-    </ul>
-  </div>
-
-  <div class="total">Training day ≈ <b>~1950–2050 kcal</b> + 1 sweet · protein ~85–90g · gentle deficit ✅</div>
-</div>
-
-<!-- ===== REST DAY ===== -->
-<div id="rest" class="hidden">
-  <div class="daynote">For Sunday / full-rest days — a touch lighter (no workout to fuel).</div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">🌅 6:00 AM <span>Wake</span></div><div class="meal-kcal">~90</div></div>
-    <ul>
-      <li><span>1–2 glasses <b>warm water</b></span></li>
-      <li><span><b>4–5 almonds + 2 walnuts</b></span></li>
-      <li class="q">→ optional easy walk or swim</li>
-    </ul>
-  </div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">🍳 9:00 AM <span>Breakfast</span></div><div class="meal-kcal">~580</div></div>
-    <ul>
-      <li><span><b>3 boiled eggs</b></span></li>
-      <li><span><b>1 millet main</b> <span class="q">(dosa / koozh / pongal)</span></span></li>
-      <li><span><b>1 small cup sundal</b></span></li>
-      <li><span>Coffee/tea — no sugar</span></li>
-    </ul>
-  </div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">🥛 1:00 PM <span>Lunch</span></div><div class="meal-kcal">~500</div></div>
-    <ul>
-      <li><span><b>¾ cup rice</b> OR 2 millet rotis <span class="q">(slightly less than training day)</span></span></li>
-      <li><span><b>1 bowl dal / sambar</b></span></li>
-      <li><span><b>1 cup curd</b></span></li>
-      <li><span><b>1 cup vegetable + keerai</b></span></li>
-    </ul>
-  </div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">🥤 4:00 PM <span>Afternoon</span></div><div class="meal-kcal">~60</div></div>
-    <ul>
-      <li class="add"><span><b>1 glass buttermilk (moru)</b> OR 1 fruit <span class="q">(skip the chana — no workout today)</span></span></li>
-    </ul>
-  </div>
-
-  <div class="meal">
-    <div class="meal-top"><div class="meal-time">🌙 7:00 PM <span>Dinner</span></div><div class="meal-kcal">~340</div></div>
-    <ul>
-      <li><span><b>2 boiled eggs</b> OR egg curry</span></li>
-      <li><span><b>1 cup vegetable + curd</b> <span class="q">(skip the extra carb)</span></span></li>
-      <li><span><b>1 fruit</b></span></li>
-    </ul>
-  </div>
-
-  <div class="total">Rest day ≈ <b>~1550–1650 kcal</b> · gentle deficit ✅ · <span style="color:var(--warn)">watch the sweets — this is your danger day</span></div>
-</div>
-
-<!-- ===== RULES ===== -->
-<div class="rules">
-  <h3>The 6 rules that make it work</h3>
+<div class="info">
+  <h3>✋ How to measure — no scale needed</h3>
+  <div class="lead">You overeat by habit, not hunger — so control volume with your hand + one fixed bowl. Precision isn't the point; consistency is.</div>
   <ul>
-    <li><b>Portions as written</b> — a "cup" is level, not heaped. The portion IS the deficit.</li>
-    <li><b>1 sweet/day max</b> — post-workout, on a plate, rest kept out of sight (Second-Sweet Rule).</li>
-    <li class="no"><b>No random extras</b> between meals — if hungry, reach for the chana/buttermilk/fruit, never the snack box.</li>
-    <li><b>3L water/day</b> — thirst fakes hunger; hydration cuts false cravings + helps runs in the heat.</li>
-    <li><b>Protein every meal</b> — your eggs/dal/curd/sundal already cover it. No counting needed.</li>
-    <li><b>Eat MORE on hard training days if genuinely hungry</b> — extra rice/dosa/fruit, never sweets. Fuel the work.</li>
+    <li class="hand"><b>Carbs (rice/dosa)</b> = 1 fist / 1 level katori</li>
+    <li class="hand"><b>Protein (eggs/dal/paneer)</b> = 1 palm</li>
+    <li class="hand"><b>Veg</b> = 2 fists (eat freely)</li>
+    <li class="hand"><b>Snacks (chana/nuts)</b> = 1 cupped hand</li>
+    <li class="hand"><b>Dry fruits/fats</b> = 1 thumb</li>
   </ul>
 </div>
 
+<div class="info">
+  <h3>🍽️ Beat overeating (matters more than any number)</h3>
+  <ul>
+    <li><b>Serve once, put the pot away</b> — plate it in the kitchen, then sit. No refills in reach. (Biggest lever.)</li>
+    <li><b>Smaller plate</b> — your brain reads a full plate as a full meal.</li>
+    <li><b>Water before every meal</b> + <b>eat slow, wait 15 min before seconds</b> (fullness lags 20 min).</li>
+    <li class="no"><b>Never eat straight from the container.</b></li>
+  </ul>
+</div>
+
+<div class="info">
+  <h3>🎉 Free meal (not "cheat")</h3>
+  <div class="lead">One planned free meal a week — eat whatever you want, zero guilt, then straight back to the chart next meal. It's a tool against bingeing, not a slip. <b>Slot: Saturday lunch</b> (earned after your long run). Plus your 1 sweet/day means nothing's ever forbidden.</div>
+</div>
+
 <script>
-function show(which){
-  document.getElementById('train').classList.toggle('hidden', which!=='train');
-  document.getElementById('rest').classList.toggle('hidden', which!=='rest');
-  document.getElementById('btn-train').classList.toggle('on', which==='train');
-  document.getElementById('btn-rest').classList.toggle('on', which==='rest');
+// ==================== 7-DAY PLAN (Claude edits this) ====================
+// Common every day: 6AM water + 4-5 almonds + 2 walnuts; 9AM 3 boiled eggs + millet + sundal + coffee(no sugar);
+// 1PM dal/sambar + curd + veg (+greens/paneer as marked); 7PM 2 eggs + veg + fruit; 1 sweet/day post-workout.
+const DIET = {
+  Mon: { type:'training', millet:'2 ragi dosa', sundal:'green gram (pachai payaru)', carb:'1 level cup rice', veg:'beetroot + carrot poriyal', greens:true, paneer:false, fruit:'banana' },
+  Tue: { type:'training', millet:'1 bowl kambu koozh (pearl millet)', sundal:'chickpea (kondaikadalai)', carb:'2 millet rotis', veg:'cluster beans (kothavarangai)', greens:false, paneer:false, fruit:'apple' },
+  Wed: { type:'training', millet:'1 bowl barnyard pongal (kuthiraivali)', sundal:'peas (pattani)', carb:'1 level cup rice', veg:'ivy gourd (kovakkai)', greens:false, paneer:true, fruit:'papaya' },
+  Thu: { type:'training', millet:'2 green-gram dosa (pachai payaru)', sundal:'peanut (verkadalai)', carb:'2 millet rotis', veg:'raw banana (vazhakkai)', greens:true, paneer:false, fruit:'guava' },
+  Fri: { type:'training', millet:'1 bowl ragi koozh', sundal:'green gram', carb:'1 level cup rice', veg:'broad beans (avarai)', greens:false, paneer:true, fruit:'orange / mosambi' },
+  Sat: { type:'long', millet:'2 kambu dosa', sundal:'chickpea', carb:'FREE', veg:'', greens:false, paneer:false, fruit:'your choice', freeMeal:true },
+  Sun: { type:'rest', millet:'2 ragi roti', sundal:'green gram (small)', carb:'¾ cup rice', veg:'mixed veg', greens:true, paneer:false, fruit:'watermelon / muskmelon' }
+};
+// ==================== END PLAN ====================
+
+const ORDER = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+const TYPE_LABEL = { training:'Training', long:'Long run', rest:'Rest' };
+
+function render(day){
+  const d = DIET[day];
+  const training = d.type !== 'rest';
+  const cards = [];
+
+  cards.push(meal('🌅 6:00 AM','Wake', training?'~90':'~90', [
+    li('1–2 glasses <b>warm water</b>','(start your 3L)'),
+    li('<b>4–5 almonds + 2 walnuts</b>','(soaked overnight)'),
+    liq(training?'→ then your run / gym':'→ optional easy walk or swim')
+  ]));
+
+  if (training) cards.push(meal('💪 Post-workout','within 30 min','~100', [
+    li('<b>1 banana OR 1 glass milk</b>','refuels muscle + kills sweet craving','add'),
+    li('Amla juice','(optional)')
+  ]));
+
+  cards.push(meal('🍳 9:00 AM','Breakfast','~580', [
+    li('<b>3 boiled eggs</b>'),
+    li('<b>'+d.millet+'</b>'),
+    li('<b>1 small cup sundal</b> — '+d.sundal),
+    li('Coffee/tea','no sugar (½ tsp max)')
+  ]));
+
+  if (d.freeMeal){
+    cards.push(mealFree('🎉 1:00 PM','FREE MEAL — earned after the long run', [
+      li('Eat <b>whatever you want</b> — mom\'s special, a favourite','one meal, zero guilt','free-item'),
+      liq('Then straight back to the chart at dinner.')
+    ]));
+  } else {
+    const lunch = [
+      li('<b>'+d.carb+'</b>'),
+      li('<b>1 bowl dal / sambar</b>'),
+      li('<b>1 cup curd</b>'),
+      li('<b>1 cup vegetable</b> — '+d.veg)
+    ];
+    if (d.greens) lunch.push(li('<b>Keerai (greens)</b> today'));
+    if (d.paneer) lunch.push(li('<b>Paneer 100g</b> today','add'));
+    cards.push(meal('🥛 1:00 PM','Lunch', training?'~600':'~500', lunch));
+  }
+
+  if (training) cards.push(meal('🥤 4:00 PM','Afternoon fuel','~140', [
+    li('<b>1 glass buttermilk (moru)</b>','','add'),
+    li('<b>Small handful roasted chana / peanuts</b>','your default snack — reach for THIS, not sweets','add')
+  ]));
+  else cards.push(meal('🥤 4:00 PM','Afternoon','~60', [
+    li('<b>1 glass buttermilk</b> OR 1 fruit','(skip chana — no workout today)','add')
+  ]));
+
+  const dinner = [ li('<b>2 boiled eggs</b> OR egg curry') ];
+  if (training) dinner.push(li('<b>1 vegetable + small carb</b>','(2 dosa, or 1 cup veg + curd)'));
+  else dinner.push(li('<b>1 cup vegetable + curd</b>','(skip the extra carb)'));
+  dinner.push(li('<b>1 fruit</b> — '+d.fruit));
+  cards.push(meal('🌙 7:00 PM','Dinner (lighter, earlier)', training?'~420':'~340', dinner));
+
+  const totalTxt = d.freeMeal
+    ? 'Free-meal day — enjoy lunch, keep the rest on plan · 1 sweet'
+    : (training ? '≈ <b>~1950–2050 kcal</b> + 1 sweet · gentle deficit ✅'
+                : '≈ <b>~1550–1650 kcal</b> · <span style="color:var(--warn)">rest day = your sweets danger day, stay tight</span>');
+  const totalCls = d.type==='rest' ? 'total rest' : 'total';
+
+  document.getElementById('day').innerHTML =
+    `<div class="daytitle"><h2>${fullDay(day)}</h2><span class="badge ${d.type}">${TYPE_LABEL[d.type]}</span></div>`
+    + cards.join('') + `<div class="${totalCls}">${totalTxt}</div>`;
+
+  ORDER.forEach(x => document.getElementById('b-'+x).classList.toggle('on', x===day));
 }
+
+function meal(time, sub, kcal, items){
+  return `<div class="meal"><div class="meal-top"><div class="meal-time">${time} <span>${sub}</span></div><div class="meal-kcal">${kcal}</div></div><ul>${items.join('')}</ul></div>`;
+}
+function mealFree(time, sub, items){
+  return `<div class="meal free"><div class="meal-top"><div class="meal-time">${time} <span>${sub}</span></div></div><ul>${items.join('')}</ul></div>`;
+}
+function li(main, q, cls){ return `<li class="${cls||''}"><span>${main}${q?' <span class="q">'+q+'</span>':''}</span></li>`; }
+function liq(t){ return `<li class="q">${t}</li>`; }
+function fullDay(d){ return {Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday',Sat:'Saturday',Sun:'Sunday'}[d]; }
+
+// build day buttons
+const jsToKey = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']; // JS getDay 0=Sun
+const daysEl = document.getElementById('days');
+ORDER.forEach(day => {
+  const b = document.createElement('button');
+  b.id = 'b-'+day;
+  b.innerHTML = day + `<span class="dtype">${TYPE_LABEL[DIET[day].type]}</span>`;
+  b.onclick = () => render(day);
+  daysEl.appendChild(b);
+});
+// default to today
+render(jsToKey[new Date().getDay()]);
 </script>
 </body>
 </html>
