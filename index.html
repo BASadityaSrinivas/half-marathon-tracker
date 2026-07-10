@@ -454,6 +454,8 @@ function render(){
 
     <div class="nutri">🚴 <b>Cardio:</b> ${PLAN.cardio}</div>
 
+    <a href="diet.html" style="display:block;text-align:center;background:var(--accent);color:#0f1115;font-weight:700;padding:12px;border-radius:12px;margin-bottom:11px;text-decoration:none">🍱 Open my Fixed Diet Chart →</a>
+
     <details class="routines"><summary>🤸 Warm-up &amp; Cool-down</summary>
       ${Object.entries(PLAN.routines).map(([k,v])=>`<div class="routine"><h4>${k}</h4><ul>${v.map(i=>`<li>${i}</li>`).join("")}</ul></div>`).join("")}
     </details>

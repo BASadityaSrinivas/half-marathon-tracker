@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aditya · Fixed Diet Chart</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f1115'/><text x='50' y='66' font-family='Arial' font-size='30' font-weight='800' text-anchor='middle' fill='%23c2f000'>🍱</text></svg>" />
+<meta name="theme-color" content="#0f1115" />
+<style>
+  :root{
+    --bg:#0f1115; --card:#181b22; --card2:#1f232c; --line:#2a2f3a;
+    --txt:#e7eaf0; --muted:#9aa3b2; --accent:#c2f000; --accent-dim:#8aac00;
+    --warn:#ff8a5b; --good:#4ad17c;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--txt);line-height:1.5;padding:18px;max-width:760px;margin:0 auto;-webkit-font-smoothing:antialiased}
+  a{color:var(--accent);text-decoration:none}
+  .back{font-size:.82rem;color:var(--muted);display:inline-block;margin-bottom:14px}
+  h1{font-size:1.4rem;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:.9rem;margin-top:3px}
+  .principle{background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:12px 14px;font-size:.85rem;margin:16px 0}
+  .principle b{color:var(--accent)}
+  /* toggle */
+  .toggle{display:flex;gap:8px;margin:18px 0 6px}
+  .toggle button{flex:1;font:inherit;font-size:.9rem;font-weight:700;padding:12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;transition:.15s}
+  .toggle button.on{background:var(--accent);color:#0f1115;border-color:var(--accent)}
+  .daynote{font-size:.8rem;color:var(--muted);text-align:center;margin-bottom:14px}
+  /* meal cards */
+  .meal{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:11px}
+  .meal-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:9px}
+  .meal-time{font-size:1rem;font-weight:700}
+  .meal-time span{font-size:.72rem;color:var(--muted);font-weight:400;margin-left:6px}
+  .meal-kcal{font-size:.72rem;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:3px 9px;white-space:nowrap}
+  .meal ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+  .meal li{display:flex;gap:9px;font-size:.88rem;align-items:flex-start}
+  .meal li::before{content:"•";color:var(--accent);flex:none}
+  .meal li b{color:var(--txt)}
+  .meal li .q{color:var(--muted)}
+  .add{color:var(--good)}
+  .add::before{content:"➕" !important;font-size:.7rem}
+  .swap{color:var(--muted);font-size:.78rem;margin-top:6px;padding-left:19px}
+  .total{text-align:right;font-size:.82rem;color:var(--muted);margin:4px 4px 20px}
+  .total b{color:var(--accent)}
+  /* rules */
+  .rules{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:8px 0 30px}
+  .rules h3{font-size:.95rem;margin-bottom:9px}
+  .rules ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+  .rules li{font-size:.85rem;display:flex;gap:9px}
+  .rules li::before{content:"✅";flex:none;font-size:.8rem}
+  .rules li.no::before{content:"🚫"}
+  .hidden{display:none}
+</style>
+</head>
+<body>
+<a class="back" href="./">← Back to tracker</a>
+<h1>🍱 Fixed Diet Chart</h1>
+<div class="sub">Same menu every day = no decisions, no leaks, gentle deficit. Built on your foods.</div>
+
+<div class="principle">
+  <b>The deal:</b> eat the portions below, skip random extras, 1 sweet/day. That alone creates the gentle deficit (~0.3–0.5 kg/week). We <b>don't starve</b> — you're training for a half marathon; the food fuels the work. Portions are the instruction; the kcal notes are just for awareness.
+</div>
+
+<div class="toggle">
+  <button id="btn-train" class="on" onclick="show('train')">💪 Training day (Mon–Sat)</button>
+  <button id="btn-rest" onclick="show('rest')">😴 Rest day (Sun)</button>
+</div>
+
+<!-- ===== TRAINING DAY ===== -->
+<div id="train">
+  <div class="daynote">For run/gym days — a bit more fuel around workouts.</div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">🌅 6:00 AM <span>Wake / pre-workout</span></div><div class="meal-kcal">~90</div></div>
+    <ul>
+      <li><span>1–2 glasses <b>warm water</b> <span class="q">(start your 3L)</span></span></li>
+      <li><span><b>4–5 almonds + 2 walnuts</b> <span class="q">(soaked overnight)</span></span></li>
+      <li class="q">→ then your run or gym session</li>
+    </ul>
+  </div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">💪 Post-workout <span>within 30 min</span></div><div class="meal-kcal">~100</div></div>
+    <ul>
+      <li class="add"><span><b>1 banana OR 1 glass milk</b> <span class="q">— refuels muscle + kills the sweet craving</span></span></li>
+      <li><span>Amla juice <span class="q">(optional, as you like)</span></span></li>
+    </ul>
+  </div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">🍳 9:00 AM <span>Breakfast</span></div><div class="meal-kcal">~580</div></div>
+    <ul>
+      <li><span><b>3 boiled eggs</b> (whole)</span></li>
+      <li><span><b>1 millet main</b> — pick one: <span class="q">2 ragi/kambu dosa · OR 1 bowl kambu/ragi koozh · OR 1 bowl barnyard pongal</span></span></li>
+      <li><span><b>1 small cup sundal</b> <span class="q">(chickpea / moong / peanut)</span></span></li>
+      <li><span>Coffee/tea — <b>no sugar</b> (½ tsp max)</span></li>
+    </ul>
+  </div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">🥛 1:00 PM <span>Lunch</span></div><div class="meal-kcal">~600</div></div>
+    <ul>
+      <li><span><b>1 level cup rice</b> <span class="q">(not heaped)</span> OR 2 millet rotis</span></li>
+      <li><span><b>1 bowl dal / sambar</b></span></li>
+      <li><span><b>1 cup curd</b></span></li>
+      <li><span><b>1 cup vegetable</b> <span class="q">(beetroot/carrot/beans, cluster beans, ivy gourd, raw banana…)</span></span></li>
+      <li><span><b>Keerai (greens)</b> when available · <b>paneer 100g</b> on 3 days/week</span></li>
+    </ul>
+  </div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">🥤 4:00 PM <span>Afternoon fuel</span></div><div class="meal-kcal">~140</div></div>
+    <ul>
+      <li class="add"><span><b>1 glass buttermilk (moru)</b></span></li>
+      <li class="add"><span><b>Small handful roasted chana / peanuts</b> <span class="q">— your default snack, reach for THIS not sweets</span></span></li>
+    </ul>
+  </div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">🌙 7:00 PM <span>Dinner (lighter, earlier)</span></div><div class="meal-kcal">~420</div></div>
+    <ul>
+      <li><span><b>2 boiled eggs</b> OR egg curry</span></li>
+      <li><span><b>1 vegetable + small carb</b> <span class="q">(2 dosa, or 1 cup veg + curd)</span></span></li>
+      <li><span><b>1 fruit</b></span></li>
+    </ul>
+  </div>
+
+  <div class="total">Training day ≈ <b>~1950–2050 kcal</b> + 1 sweet · protein ~85–90g · gentle deficit ✅</div>
+</div>
+
+<!-- ===== REST DAY ===== -->
+<div id="rest" class="hidden">
+  <div class="daynote">For Sunday / full-rest days — a touch lighter (no workout to fuel).</div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">🌅 6:00 AM <span>Wake</span></div><div class="meal-kcal">~90</div></div>
+    <ul>
+      <li><span>1–2 glasses <b>warm water</b></span></li>
+      <li><span><b>4–5 almonds + 2 walnuts</b></span></li>
+      <li class="q">→ optional easy walk or swim</li>
+    </ul>
+  </div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">🍳 9:00 AM <span>Breakfast</span></div><div class="meal-kcal">~580</div></div>
+    <ul>
+      <li><span><b>3 boiled eggs</b></span></li>
+      <li><span><b>1 millet main</b> <span class="q">(dosa / koozh / pongal)</span></span></li>
+      <li><span><b>1 small cup sundal</b></span></li>
+      <li><span>Coffee/tea — no sugar</span></li>
+    </ul>
+  </div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">🥛 1:00 PM <span>Lunch</span></div><div class="meal-kcal">~500</div></div>
+    <ul>
+      <li><span><b>¾ cup rice</b> OR 2 millet rotis <span class="q">(slightly less than training day)</span></span></li>
+      <li><span><b>1 bowl dal / sambar</b></span></li>
+      <li><span><b>1 cup curd</b></span></li>
+      <li><span><b>1 cup vegetable + keerai</b></span></li>
+    </ul>
+  </div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">🥤 4:00 PM <span>Afternoon</span></div><div class="meal-kcal">~60</div></div>
+    <ul>
+      <li class="add"><span><b>1 glass buttermilk (moru)</b> OR 1 fruit <span class="q">(skip the chana — no workout today)</span></span></li>
+    </ul>
+  </div>
+
+  <div class="meal">
+    <div class="meal-top"><div class="meal-time">🌙 7:00 PM <span>Dinner</span></div><div class="meal-kcal">~340</div></div>
+    <ul>
+      <li><span><b>2 boiled eggs</b> OR egg curry</span></li>
+      <li><span><b>1 cup vegetable + curd</b> <span class="q">(skip the extra carb)</span></span></li>
+      <li><span><b>1 fruit</b></span></li>
+    </ul>
+  </div>
+
+  <div class="total">Rest day ≈ <b>~1550–1650 kcal</b> · gentle deficit ✅ · <span style="color:var(--warn)">watch the sweets — this is your danger day</span></div>
+</div>
+
+<!-- ===== RULES ===== -->
+<div class="rules">
+  <h3>The 6 rules that make it work</h3>
+  <ul>
+    <li><b>Portions as written</b> — a "cup" is level, not heaped. The portion IS the deficit.</li>
+    <li><b>1 sweet/day max</b> — post-workout, on a plate, rest kept out of sight (Second-Sweet Rule).</li>
+    <li class="no"><b>No random extras</b> between meals — if hungry, reach for the chana/buttermilk/fruit, never the snack box.</li>
+    <li><b>3L water/day</b> — thirst fakes hunger; hydration cuts false cravings + helps runs in the heat.</li>
+    <li><b>Protein every meal</b> — your eggs/dal/curd/sundal already cover it. No counting needed.</li>
+    <li><b>Eat MORE on hard training days if genuinely hungry</b> — extra rice/dosa/fruit, never sweets. Fuel the work.</li>
+  </ul>
+</div>
+
+<script>
+function show(which){
+  document.getElementById('train').classList.toggle('hidden', which!=='train');
+  document.getElementById('rest').classList.toggle('hidden', which!=='rest');
+  document.getElementById('btn-train').classList.toggle('on', which==='train');
+  document.getElementById('btn-rest').classList.toggle('on', which==='rest');
+}
+</script>
+</body>
+</html>
