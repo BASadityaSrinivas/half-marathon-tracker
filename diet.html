@@ -3,208 +3,148 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Aditya · 7-Day Diet Chart</title>
+<title>Aditya · Today's Food</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230f1115'/><text x='50' y='66' font-family='Arial' font-size='30' font-weight='800' text-anchor='middle' fill='%23c2f000'>🍱</text></svg>" />
 <meta name="theme-color" content="#0f1115" />
 <style>
   :root{
-    --bg:#0f1115; --card:#181b22; --card2:#1f232c; --line:#2a2f3a;
-    --txt:#e7eaf0; --muted:#9aa3b2; --accent:#c2f000; --accent-dim:#8aac00;
-    --warn:#ff8a5b; --good:#4ad17c; --free:#ffd23f;
+    --bg:#0f1115; --card:#181b22; --line:#2a2f3a;
+    --txt:#e7eaf0; --muted:#8b93a3; --accent:#c2f000; --warn:#ff8a5b; --free:#ffd23f;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
-    background:var(--bg);color:var(--txt);line-height:1.5;padding:18px;max-width:760px;margin:0 auto;-webkit-font-smoothing:antialiased}
+    background:var(--bg);color:var(--txt);line-height:1.55;padding:20px 18px 40px;max-width:620px;margin:0 auto;-webkit-font-smoothing:antialiased}
   a{color:var(--accent);text-decoration:none}
-  .back{font-size:.82rem;color:var(--muted);display:inline-block;margin-bottom:14px}
-  h1{font-size:1.35rem;letter-spacing:-.02em}
-  .sub{color:var(--muted);font-size:.88rem;margin-top:3px}
-  .principle{background:var(--card2);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:11px 13px;font-size:.83rem;margin:15px 0}
-  .principle b{color:var(--accent)}
-  /* day selector */
-  .days{display:flex;gap:6px;margin:16px 0 6px;overflow-x:auto;padding-bottom:4px}
-  .days button{flex:1;min-width:44px;font:inherit;font-size:.82rem;font-weight:700;padding:10px 4px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--muted);cursor:pointer;transition:.15s}
-  .days button.on{background:var(--accent);color:#0f1115;border-color:var(--accent)}
-  .days button .dtype{display:block;font-size:.55rem;font-weight:600;opacity:.7;margin-top:1px}
-  .daytitle{display:flex;align-items:center;gap:8px;margin:14px 0 12px}
-  .daytitle h2{font-size:1.15rem}
-  .badge{font-size:.68rem;font-weight:700;padding:3px 9px;border-radius:99px}
-  .badge.training{background:var(--accent);color:#0f1115}
-  .badge.long{background:var(--good);color:#0f1115}
-  .badge.rest{background:var(--card2);color:var(--muted);border:1px solid var(--line)}
-  /* meal cards */
-  .meal{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:13px;margin-bottom:10px}
-  .meal.free{border-color:var(--free);background:linear-gradient(0deg,rgba(255,210,63,.06),rgba(255,210,63,.06)),var(--card)}
-  .meal-top{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:8px}
-  .meal-time{font-size:.98rem;font-weight:700}
-  .meal-time span{font-size:.7rem;color:var(--muted);font-weight:400;margin-left:5px}
-  .meal-kcal{font-size:.7rem;color:var(--muted);background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:3px 8px;white-space:nowrap}
-  .meal ul{list-style:none;display:flex;flex-direction:column;gap:5px}
-  .meal li{display:flex;gap:8px;font-size:.87rem;align-items:flex-start}
-  .meal li::before{content:"•";color:var(--accent);flex:none}
-  .meal li .q{color:var(--muted)}
-  .meal li.add::before{content:"➕";font-size:.66rem}
-  .meal li.free-item::before{content:"🎉"}
-  .total{text-align:right;font-size:.8rem;color:var(--muted);margin:2px 4px 22px}
-  .total b{color:var(--accent)}
-  .total.rest b{color:var(--warn)}
-  /* info sections */
-  .info{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;margin:8px 0 14px}
-  .info h3{font-size:.95rem;margin-bottom:9px}
-  .info ul{list-style:none;display:flex;flex-direction:column;gap:7px}
-  .info li{font-size:.84rem;display:flex;gap:8px}
-  .info li::before{content:"✅";flex:none;font-size:.78rem}
-  .info li.no::before{content:"🚫"}
-  .info li.hand::before{content:"✋"}
-  .info .lead{font-size:.83rem;color:var(--muted);margin-bottom:9px}
+  .back{font-size:.8rem;color:var(--muted);display:inline-block;margin-bottom:16px}
+
+  .head{display:flex;align-items:baseline;gap:9px;margin-bottom:4px}
+  h1{font-size:1.5rem;letter-spacing:-.02em}
+  .badge{font-size:.66rem;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--accent);color:#0f1115}
+  .badge.rest{background:#2a2f3a;color:var(--muted)}
+  .badge.long{background:#4ad17c;color:#0f1115}
+  .sub{color:var(--muted);font-size:.83rem;margin-bottom:20px}
+
+  /* the single list */
+  .row{display:flex;gap:12px;padding:13px 0;border-top:1px solid var(--line)}
+  .row:first-of-type{border-top:none}
+  .when{flex:none;width:74px;font-size:.78rem;font-weight:700;color:var(--muted);padding-top:1px}
+  .when small{display:block;font-weight:400;font-size:.68rem;opacity:.72}
+  .what{flex:1}
+  .what div{font-size:.92rem;padding:1px 0}
+  .what .note{font-size:.75rem;color:var(--muted);margin-top:3px}
+  .what .note.hot{color:var(--warn)}
+
+  /* inline day-dropdown for the changing items */
+  select{
+    font:inherit;font-size:.92rem;font-weight:600;color:var(--accent);
+    background:transparent;border:none;border-bottom:1px dashed #4a5568;
+    padding:0 16px 1px 0;cursor:pointer;-webkit-appearance:none;appearance:none;
+  }
+  .sel{position:relative;display:inline-block}
+  .sel::after{content:"▾";position:absolute;right:2px;top:0;color:#5c677d;font-size:.72rem;pointer-events:none}
+  select:focus{outline:none;border-bottom-color:var(--accent)}
+  select option{background:#181b22;color:var(--txt);font-weight:400}
+  .sel.big select{font-size:1.5rem;font-weight:700;letter-spacing:-.02em;color:var(--txt);padding-right:22px;border-bottom-style:solid;border-bottom-color:var(--accent)}
+  .sel.big::after{font-size:1rem;color:var(--accent);top:4px}
+  .v{color:var(--accent);font-weight:600}
+
+  .free{color:var(--free);font-weight:700}
+  .foot{margin-top:26px;padding-top:16px;border-top:1px solid var(--line);font-size:.78rem;color:var(--muted)}
+  .foot b{color:var(--txt)}
+  .foot .tot{color:var(--accent);font-weight:700}
+  .rules{display:block;text-align:center;margin-top:18px;padding:12px;border:1px solid var(--line);
+    border-radius:12px;font-size:.85rem;font-weight:600;color:var(--muted)}
+  .rules:hover{border-color:var(--accent);color:var(--accent)}
 </style>
 </head>
 <body>
 <a class="back" href="./">← Back to tracker</a>
-<h1>🍱 7-Day Diet Chart</h1>
-<div class="sub">Each day is fully decided — no choosing. Tap a day, eat exactly that.</div>
 
-<div class="principle">
-  <b>The deal:</b> eat the portions shown, no random extras, 1 sweet/day. That's the gentle deficit (~0.3–0.5 kg/wk) — <b>we don't starve</b>, the food fuels your training. Portions are the instruction; kcal notes are just for awareness.
+<div class="head">
+  <span class="sel big"><select id="daysel"></select></span>
+  <span class="badge" id="daytype">Training</span>
 </div>
+<div class="sub" id="sub">Today. Change the day above to look ahead.</div>
 
-<div class="days" id="days"></div>
-<div id="day"></div>
+<div id="list"></div>
 
-<div class="info">
-  <h3>✋ How to measure — no scale needed</h3>
-  <div class="lead">You overeat by habit, not hunger — so control volume with your hand + one fixed bowl. Precision isn't the point; consistency is.</div>
-  <ul>
-    <li class="hand"><b>Carbs (rice/dosa)</b> = 1 fist / 1 level katori</li>
-    <li class="hand"><b>Protein (eggs/dal/paneer)</b> = 1 palm</li>
-    <li class="hand"><b>Veg</b> = 2 fists (eat freely)</li>
-    <li class="hand"><b>Snacks (chana/nuts)</b> = 1 cupped hand</li>
-    <li class="hand"><b>Dry fruits/fats</b> = 1 thumb</li>
-  </ul>
-</div>
+<div class="foot" id="foot"></div>
 
-<div class="info">
-  <h3>🍽️ Beat overeating (matters more than any number)</h3>
-  <ul>
-    <li><b>Serve once, put the pot away</b> — plate it in the kitchen, then sit. No refills in reach. (Biggest lever.)</li>
-    <li><b>Smaller plate</b> — your brain reads a full plate as a full meal.</li>
-    <li><b>Water before every meal</b> + <b>eat slow, wait 15 min before seconds</b> (fullness lags 20 min).</li>
-    <li class="no"><b>Never eat straight from the container.</b></li>
-  </ul>
-</div>
+<a class="rules" href="diet-rules.html">📖 The rules &amp; why →</a>
+<a class="rules" href="diet-print.html">🖨️ Amma's weekly sheet (print) →</a>
 
-<div class="info">
-  <h3>🎉 Free meal (not "cheat")</h3>
-  <div class="lead">One planned free meal a week — eat whatever you want, zero guilt, then straight back to the chart next meal. It's a tool against bingeing, not a slip. <b>Slot: Saturday lunch</b> (earned after your long run). Plus your 1 sweet/day means nothing's ever forbidden.</div>
-</div>
-
+<script src="diet-data.js"></script>
 <script>
-// ==================== 7-DAY PLAN (Claude edits this) ====================
-// Common every day: 6AM water + 4-5 almonds + 2 walnuts; 9AM 3 boiled eggs + millet + sundal + coffee(no sugar);
-// 1PM dal/sambar + curd + veg (+greens/paneer as marked); 7PM 2 eggs + veg + fruit; 1 sweet/day post-workout.
-const DIET = {
-  Mon: { type:'training', millet:'2 ragi dosa', sundal:'green gram (pachai payaru)', carb:'1 level cup rice', veg:'beetroot + carrot poriyal', greens:true, paneer:false, fruit:'banana' },
-  Tue: { type:'training', millet:'1 bowl kambu koozh (pearl millet)', sundal:'chickpea (kondaikadalai)', carb:'2 millet rotis', veg:'cluster beans (kothavarangai)', greens:false, paneer:false, fruit:'apple' },
-  Wed: { type:'training', millet:'1 bowl barnyard pongal (kuthiraivali)', sundal:'peas (pattani)', carb:'1 level cup rice', veg:'ivy gourd (kovakkai)', greens:false, paneer:true, fruit:'papaya' },
-  Thu: { type:'training', millet:'2 green-gram dosa (pachai payaru)', sundal:'peanut (verkadalai)', carb:'2 millet rotis', veg:'raw banana (vazhakkai)', greens:true, paneer:false, fruit:'guava' },
-  Fri: { type:'training', millet:'1 bowl ragi koozh', sundal:'green gram', carb:'1 level cup rice', veg:'broad beans (avarai)', greens:false, paneer:true, fruit:'orange / mosambi' },
-  Sat: { type:'long', millet:'2 kambu dosa', sundal:'chickpea', carb:'FREE', veg:'', greens:false, paneer:false, fruit:'your choice', freeMeal:true },
-  Sun: { type:'rest', millet:'2 ragi roti', sundal:'green gram (small)', carb:'¾ cup rice', veg:'mixed veg', greens:true, paneer:false, fruit:'watermelon / muskmelon' }
-};
-// ==================== END PLAN ====================
-
 const ORDER = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
-const TYPE_LABEL = { training:'Training', long:'Long run', rest:'Rest' };
+const FULL = {Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday',Sat:'Saturday',Sun:'Sunday'};
+const LABEL = {training:'Training',long:'Long run',rest:'Rest'};
+const today = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'][new Date().getDay()];
 
-function render(day){
-  const d = DIET[day];
-  const training = d.type !== 'rest';
-  const cards = [];
+const v = (key,d) => `<span class="v">${V[key][d][0]}</span>`;  // [0] = english
 
-  cards.push(meal('🌅 6:00 AM','Wake', training?'~90':'~90', [
-    li('1–2 glasses <b>warm water</b>','(start your 3L)'),
-    li('<b>4–5 almonds + 2 walnuts</b>','(soaked overnight)'),
-    liq(training?'→ then your run / gym':'→ optional easy walk or swim')
-  ]));
+function render(d){
+  const t = TYPE[d];
+  const rows = [
+    ['6 AM','wake', [
+      'Warm water + lemon + pinch salt',
+      '2 cashew · 2 almonds · 1 walnut'
+    ]],
+    t==='rest' ? null : ['⚡ Workout','any time', [
+      '<b>Before:</b> nothing needed',
+      '<b>After:</b> 1 banana'
+    ]],
+    ['9 AM','breakfast', [
+      '3 boiled eggs',
+      v('millet',d),
+      v('sundal',d) + ' sundal — <b>1 full cup</b>'
+    ]],
+    ['1 PM','lunch', t==='long' ? [
+      v('carb',d),
+      '<span class="note">Eat whatever you want. One meal, zero guilt — straight back on plan at dinner.</span>'
+    ] : [
+      (V.carb[d][2] ? V.carb[d][2] + ' ' : '') + v('carb',d),
+      '<b>1 generous bowl</b> dal',
+      '2 fists ' + v('veg',d),
+      v('extra',d),
+      '1 tsp ghee <span class="note" style="display:inline">— at your plate, not the pot</span>'
+    ]],
+    ['4 PM','snack', [
+      '1 glass buttermilk',
+      t==='rest' ? '<span class="note">no chana — rest day</span>'
+                 : '1 cupped hand chana <i>or</i> 3 cups popcorn'
+    ]],
+    ['6 PM','dinner', [
+      '<b>3 boiled eggs</b>',
+      '<b>1 full cup</b> curd',
+      '1 fruit'
+    ]],
+    ['7 PM','or when the urge hits', [
+      '<b>1 big glass (300 ml)</b> milk + 1 tsp plain cocoa, no sugar',
+      '<span class="note hot">One glass a day. This is what you reach for instead of the sweets box.</span>'
+    ]]
+  ].filter(Boolean);
 
-  if (training) cards.push(meal('💪 Post-workout','within 30 min','~100', [
-    li('<b>1 banana OR 1 glass milk</b>','refuels muscle + kills sweet craving','add'),
-    li('Amla juice','(optional)')
-  ]));
+  const b = document.getElementById('daytype');
+  b.textContent = LABEL[t]; b.className = 'badge ' + t;
 
-  cards.push(meal('🍳 9:00 AM','Breakfast','~580', [
-    li('<b>3 boiled eggs</b>'),
-    li('<b>'+d.millet+'</b>'),
-    li('<b>1 small cup sundal</b> — '+d.sundal),
-    li('Coffee/tea','no sugar (½ tsp max)')
-  ]));
+  document.getElementById('sub').textContent =
+    d === today ? 'Today. Change the day above to look ahead.' : 'Not today — you\'re looking at ' + FULL[d] + '.';
 
-  if (d.freeMeal){
-    cards.push(mealFree('🎉 1:00 PM','FREE MEAL — earned after the long run', [
-      li('Eat <b>whatever you want</b> — mom\'s special, a favourite','one meal, zero guilt','free-item'),
-      liq('Then straight back to the chart at dinner.')
-    ]));
-  } else {
-    const lunch = [
-      li('<b>'+d.carb+'</b>'),
-      li('<b>1 bowl dal / sambar</b>'),
-      li('<b>1 cup curd</b>'),
-      li('<b>1 cup vegetable</b> — '+d.veg)
-    ];
-    if (d.greens) lunch.push(li('<b>Keerai (greens)</b> today'));
-    if (d.paneer) lunch.push(li('<b>Paneer 100g</b> today','add'));
-    cards.push(meal('🥛 1:00 PM','Lunch', training?'~600':'~500', lunch));
-  }
+  document.getElementById('list').innerHTML = rows.map(r =>
+    `<div class="row"><div class="when">${r[0]}<small>${r[1]}</small></div>
+     <div class="what">${r[2].map(x=>`<div>${x}</div>`).join('')}</div></div>`).join('');
 
-  if (training) cards.push(meal('🥤 4:00 PM','Afternoon fuel','~140', [
-    li('<b>1 glass buttermilk (moru)</b>','','add'),
-    li('<b>Small handful roasted chana / peanuts</b>','your default snack — reach for THIS, not sweets','add')
-  ]));
-  else cards.push(meal('🥤 4:00 PM','Afternoon','~60', [
-    li('<b>1 glass buttermilk</b> OR 1 fruit','(skip chana — no workout today)','add')
-  ]));
-
-  const dinner = [ li('<b>2 boiled eggs</b> OR egg curry') ];
-  if (training) dinner.push(li('<b>1 vegetable + small carb</b>','(2 dosa, or 1 cup veg + curd)'));
-  else dinner.push(li('<b>1 cup vegetable + curd</b>','(skip the extra carb)'));
-  dinner.push(li('<b>1 fruit</b> — '+d.fruit));
-  cards.push(meal('🌙 7:00 PM','Dinner (lighter, earlier)', training?'~420':'~340', dinner));
-
-  const totalTxt = d.freeMeal
-    ? 'Free-meal day — enjoy lunch, keep the rest on plan · 1 sweet'
-    : (training ? '≈ <b>~1950–2050 kcal</b> + 1 sweet · gentle deficit ✅'
-                : '≈ <b>~1550–1650 kcal</b> · <span style="color:var(--warn)">rest day = your sweets danger day, stay tight</span>');
-  const totalCls = d.type==='rest' ? 'total rest' : 'total';
-
-  document.getElementById('day').innerHTML =
-    `<div class="daytitle"><h2>${fullDay(day)}</h2><span class="badge ${d.type}">${TYPE_LABEL[d.type]}</span></div>`
-    + cards.join('') + `<div class="${totalCls}">${totalTxt}</div>`;
-
-  ORDER.forEach(x => document.getElementById('b-'+x).classList.toggle('on', x===day));
+  document.getElementById('foot').innerHTML =
+    t === 'long'  ? '🎉 <b>Free meal at lunch</b> — eat what you want, one meal, zero guilt. Back on plan at dinner.'
+  : t === 'rest'  ? '≈ <span class="tot">1700 kcal</span> · ~85g protein · <b>Rest day = your sweets danger day.</b> Raw carrot &amp; cucumber ready in the fridge.'
+  :                 '≈ <span class="tot">1950 kcal</span> · ~90g protein · 1 sweet · <b>Free anytime:</b> raw carrot, cucumber, amla, soup, buttermilk, hibiscus tea.';
 }
 
-function meal(time, sub, kcal, items){
-  return `<div class="meal"><div class="meal-top"><div class="meal-time">${time} <span>${sub}</span></div><div class="meal-kcal">${kcal}</div></div><ul>${items.join('')}</ul></div>`;
-}
-function mealFree(time, sub, items){
-  return `<div class="meal free"><div class="meal-top"><div class="meal-time">${time} <span>${sub}</span></div></div><ul>${items.join('')}</ul></div>`;
-}
-function li(main, q, cls){ return `<li class="${cls||''}"><span>${main}${q?' <span class="q">'+q+'</span>':''}</span></li>`; }
-function liq(t){ return `<li class="q">${t}</li>`; }
-function fullDay(d){ return {Mon:'Monday',Tue:'Tuesday',Wed:'Wednesday',Thu:'Thursday',Fri:'Friday',Sat:'Saturday',Sun:'Sunday'}[d]; }
-
-// build day buttons
-const jsToKey = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']; // JS getDay 0=Sun
-const daysEl = document.getElementById('days');
-ORDER.forEach(day => {
-  const b = document.createElement('button');
-  b.id = 'b-'+day;
-  b.innerHTML = day + `<span class="dtype">${TYPE_LABEL[DIET[day].type]}</span>`;
-  b.onclick = () => render(day);
-  daysEl.appendChild(b);
-});
-// default to today
-render(jsToKey[new Date().getDay()]);
+const dsel = document.getElementById('daysel');
+dsel.innerHTML = ORDER.map(d =>
+  `<option value="${d}" ${d===today?'selected':''}>${FULL[d]}${d===today?' · today':''}</option>`).join('');
+dsel.onchange = e => render(e.target.value);
+render(today);
 </script>
 </body>
 </html>

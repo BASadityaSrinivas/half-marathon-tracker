@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ta">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ஆதித்யா · வார உணவு அட்டவணை</title>
+<style>
+  @page { size: A4 landscape; margin: 12mm; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:"Nirmala UI","Latha","Noto Sans Tamil",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+       background:#fff;color:#111;line-height:1.5;font-size:14px;
+       max-width:273mm;margin:0 auto;padding:14px}
+
+  .noprint{background:#f0f4dd;border:1px solid #c9d98a;border-radius:8px;padding:10px 12px;margin-bottom:16px;font-size:12.5px}
+  .noprint b{color:#4a6100}
+  .btn{font:inherit;font-weight:700;background:#111;color:#fff;border:none;border-radius:6px;padding:8px 15px;cursor:pointer;margin:8px 6px 0 0}
+  .lang{background:#fff;color:#555;border:1px solid #aaa}
+  .lang.on{background:#4a6100;color:#fff;border-color:#4a6100}
+
+  h1{font-size:21px;margin-bottom:12px}
+
+  table{width:100%;border-collapse:collapse;table-layout:fixed}
+  th,td{border:1px solid #999;padding:9px 11px;vertical-align:top;text-align:left}
+  th{background:#eee;font-size:13px;font-weight:700}
+  td.day{background:#f6f6f6;font-weight:700;width:108px}
+  td.day small{display:block;font-weight:400;color:#777;font-size:11.5px}
+  tr.rest td.day{background:#fdeee6}
+  tr.long td.day{background:#fff6d9}
+  .b{font-weight:700}
+  .add{color:#1a6b34;font-weight:700}
+  .free{font-weight:700}
+
+  @media print { .noprint{display:none} body{padding:0} }
+</style>
+</head>
+<body>
+
+<div class="noprint">
+  <b>To print:</b> ⌘P (or Ctrl+P) → paper <b>A4</b>, layout <b>Landscape</b> → turn ON “Background graphics” → Print.
+  <br>
+  <button class="btn lang on" id="bta" onclick="setLang(1)">தமிழ்</button>
+  <button class="btn lang" id="ben" onclick="setLang(0)">English</button>
+  <button class="btn" onclick="window.print()">🖨️ Print</button>
+</div>
+
+<h1 id="title"></h1>
+
+<table>
+  <thead><tr id="head"></tr></thead>
+  <tbody id="rows"></tbody>
+</table>
+
+<script src="diet-data.js"></script>
+<script>
+const ORDER = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun'];
+
+// every fixed string, [ english, tamil ]
+const L = {
+  title:  ['Aditya — Weekly Food Chart',  'ஆதித்யா — வார உணவு அட்டவணை'],
+  hDay:   ['Day',                          'நாள்'],
+  hBf:    ['Breakfast · 9 AM',             'காலை உணவு · 9 மணி'],
+  hLun:   ['Lunch · 1 PM',                 'மதிய உணவு · 1 மணி'],
+  hDin:   ['Dinner · 6 PM',                'இரவு உணவு · 6 மணி'],
+  eggs3:  ['3 boiled eggs',                '3 வேகவைத்த முட்டை'],
+  eggs2:  ['3 boiled eggs',                '3 வேகவைத்த முட்டை'],
+  sundal: ['sundal',                       'சுண்டல்'],
+  dal:    ['Dal (with salt)',              'பருப்பு (உப்பு சேர்த்து)'],
+  curd:   ['Curd',                         'தயிர்'],
+  fruit:  ['1 fruit',                      '1 பழம்'],
+  freeNote:['Anything he likes — one meal only', 'அவனுக்கு பிடித்தது எதுவும் — ஒரு வேளை மட்டும்'],
+  long:   ['long run',                     'நீண்ட ஓட்டம்'],
+  rest:   ['rest day',                     'ஓய்வு நாள்']
+};
+const DAY = {
+  Mon:['Monday','திங்கள்'], Tue:['Tuesday','செவ்வாய்'], Wed:['Wednesday','புதன்'],
+  Thu:['Thursday','வியாழன்'], Fri:['Friday','வெள்ளி'], Sat:['Saturday','சனி'], Sun:['Sunday','ஞாயிறு']
+};
+const NOTE = {training:null, long:'long', rest:'rest'};
+
+function render(i){   // i = 0 english, 1 tamil
+  const L_ = k => L[k][i];
+  const v  = (key,d) => V[key][d][i];
+
+  document.documentElement.lang = i ? 'ta' : 'en';
+  document.getElementById('title').textContent = L_('title');
+  document.getElementById('head').innerHTML =
+    ['hDay','hBf','hLun','hDin'].map(k => `<th>${L_(k)}</th>`).join('');
+
+  document.getElementById('rows').innerHTML = ORDER.map(d => {
+    const t = TYPE[d];
+    const lunch = t === 'long'
+      ? `<span class="free">${v('carb',d)}</span><br>${L_('freeNote')}`
+      : `<span class="b">${v('carb',d)}</span><br>${L_('dal')}<br>${v('veg',d)}`
+        + (v('extra',d).startsWith('+') ? `<br><span class="add">${v('extra',d)}</span>` : '');
+    const note = NOTE[t] ? `<small>${L_(NOTE[t])}</small>` : '';
+    return `<tr class="${t}">
+      <td class="day">${DAY[d][i]}${note}</td>
+      <td>${L_('eggs3')}<br><span class="b">${v('millet',d)}</span><br>${v('sundal',d)} ${L_('sundal')}</td>
+      <td>${lunch}</td>
+      <td>${L_('eggs2')}<br>${L_('curd')}<br>${L_('fruit')}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('bta').classList.toggle('on', i === 1);
+  document.getElementById('ben').classList.toggle('on', i === 0);
+}
+function setLang(i){ render(i); }
+render(1);   // amma's sheet — Tamil by default
+</script>
+</body>
+</html>
