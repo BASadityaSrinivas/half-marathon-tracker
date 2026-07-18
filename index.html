@@ -116,6 +116,11 @@
   .routine{margin:4px 0 14px}
   .routine h4{font-size:.82rem;color:var(--accent);margin-bottom:5px}
   .routine ul{margin-left:18px;font-size:.83rem;color:var(--muted);line-height:1.75}
+  .routine ul.wlist{margin-left:0;list-style:none}
+  .routine ul.wlist li{display:flex;justify-content:space-between;gap:12px;align-items:baseline;padding:3px 0;border-bottom:1px solid var(--line)}
+  .routine ul.wlist li:last-child{border-bottom:none}
+  .routine ul.wlist li span{color:var(--txt)}
+  .routine ul.wlist li b{color:var(--accent);white-space:nowrap;font-size:.82rem}
 </style>
 </head>
 <body>
@@ -414,6 +419,59 @@ const PLAN = {
 };
 // ==================== PLAN END ====================
 
+// ==================== WEIGHTS (by muscle) — mirror of weights.md; Claude updates as Aditya progresses ====================
+const WEIGHTS = {
+  "🦵 Legs (quads / glutes)": [
+    ["Barbell back squat", "~45 kg"],
+    ["Leg press", "120 kg"],
+    ["Hip abduction (optional)", "20 kg"]
+  ],
+  "🍖 Hamstrings": [
+    ["Barbell RDL", "30 kg"],
+    ["Seated leg curl", "50 kg"]
+  ],
+  "🦿 Calves": [
+    ["Calf raises", "15–20 kg"]
+  ],
+  "💥 Chest": [
+    ["Barbell bench press", "~35 kg"],
+    ["Incline DB press", "15 kg"],
+    ["Pec deck", "35 kg"],
+    ["Cable fly", "15 kg"]
+  ],
+  "🔙 Back": [
+    ["Lat pulldown", "35 kg (40 = ceiling)"],
+    ["One-arm DB row", "15 kg/arm"],
+    ["Assisted pull-up", "10 plates assist (↓ = harder)"],
+    ["Chest-supported row", "tag it"]
+  ],
+  "🎽 Shoulders": [
+    ["Arnold press", "10 kg"],
+    ["DB lateral raise", "5 kg"],
+    ["Cable lateral raise", "tag it"],
+    ["Face pull (rear delt)", "20 kg"]
+  ],
+  "💪 Biceps": [
+    ["Preacher curl", "10 kg"],
+    ["Concentration / incline DB curl", "7.5 kg"],
+    ["EZ-bar curl", "+10 kg over bar"],
+    ["Spider curl", "tag it"]
+  ],
+  "🔧 Triceps": [
+    ["Triceps pushdown", "35 kg"],
+    ["Overhead extension", "15 kg"],
+    ["EZ skullcrusher", "tag it"]
+  ],
+  "🧱 Core / grip": [
+    ["Floor crunch / lying leg raise", "bodyweight"],
+    ["Decline-bench abs", "bodyweight ×15"],
+    ["Plank", "bodyweight"],
+    ["Dead hang", "30 sec (build to 45–60)"],
+    ["Pallof press", "tag it"]
+  ]
+};
+// ==================== END WEIGHTS ====================
+
 const KEY = "ohana-fit-state";
 const ICON = { run:"🏃", strength:"🏋️", rest:"😌" };
 const load = () => { try { return JSON.parse(localStorage.getItem(KEY)) || {weeks:{},daily:{}}; } catch { return {weeks:{},daily:{}}; } };
@@ -483,6 +541,10 @@ function render(){
     </footer>
 
     <!-- reference material (rarely opened) — kept at the bottom -->
+    <details class="routines"><summary>🏋️ Weights (by muscle)</summary>
+      ${Object.entries(WEIGHTS).map(([m,list])=>`<div class="routine"><h4>${m}</h4><ul class="wlist">${list.map(([ex,wt])=>`<li><span>${ex}</span><b>${wt}</b></li>`).join("")}</ul></div>`).join("")}
+    </details>
+
     <div class="nutri">
       🍽️ <b>Protein:</b> ${PLAN.nutrition.protein}<br>
       🍬 <b>Sweets:</b> ${PLAN.nutrition.sweets}<br>
