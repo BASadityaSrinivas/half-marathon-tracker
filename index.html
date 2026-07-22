@@ -60,6 +60,14 @@
   .logrow input,.logrow textarea{background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--txt);padding:7px 9px;font-size:.85rem;font-family:inherit}
   .logrow textarea{min-width:100%;resize:vertical;min-height:34px}
   /* ── Exercise checklist (gym days) ── */
+  /* warm-up / cool-down dropdowns inside gym day cards */
+  .wu{background:var(--card2);border:1px solid var(--line);border-radius:10px;margin-top:10px;padding:1px 12px}
+  .wu summary{cursor:pointer;font-size:.83rem;font-weight:700;padding:10px 0;list-style:none;color:var(--accent)}
+  .wu summary::-webkit-details-marker{display:none}
+  .wu summary::before{content:"▸ "}
+  .wu[open] summary::before{content:"▾ "}
+  .wu ul{margin:0 0 11px 18px;font-size:.82rem;color:var(--muted);line-height:1.75}
+  .wu ul li b{color:var(--txt)}
   .exlist{margin-top:11px;padding-top:9px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:4px}
   .exitem{display:flex;align-items:center;gap:10px;padding:8px 9px;border-radius:8px;cursor:pointer;font-size:.86rem;background:var(--card2);transition:background .15s,opacity .2s}
   .exitem:hover{background:rgba(255,255,255,.03)}
@@ -360,9 +368,8 @@ const PLAN = {
   paces: { easy:"HR <150", long:"HR <155", tempo:"6:15–6:35 /km", intervals:"5:30–5:50 /km", "race pace":"6:24–6:38 /km" },
   days: [
     { date:"2026-07-20", dow:"Mon", type:"strength", title:"Lift A — Barbell (squat MODERATE) + fresh moves", focus:"🎯 Trains: legs, chest, back, biceps, core",
-      detail:"⚠️ Keep squat + RDL MODERATE today (not a PR/max) — spares your legs for tomorrow's time-trial. **CARDIO WARM-UP 10 MIN CAP.** New: incline DB curl + Pallof press.",
+      detail:"⚠️ Keep squat + RDL MODERATE today (not a PR/max) — spares your legs for tomorrow's time-trial. New: incline DB curl + Pallof press.",
       exercises: [
-        { name:"Cardio warm-up", target:"5–10 min MAX" },
         { name:"Barbell back squat", target:"4 × 8 @ ~45 kg · MODERATE (TT tmrw)" },
         { name:"Barbell bench press", target:"4 × 8–10 @ ~35 kg (+5 if clean)" },
         { name:"Lat pulldown", target:"4 × 10–12 @ 35 kg" },
@@ -382,9 +389,8 @@ const PLAN = {
       ],
       log:["distance","time","notes"] },
     { date:"2026-07-22", dow:"Wed", type:"strength", title:"Lift B — Lower/Pull + fresh moves", focus:"🎯 Trains: legs, hamstrings, calves, back, side delts, shoulders, triceps",
-      detail:"Last leg day of the week (legs clear the Sat long run). **CARDIO WARM-UP 10 MIN CAP.** New: chest-supported row, DB lateral raise, overhead rope extension.",
+      detail:"Last leg day of the week (legs clear the Sat long run). New: chest-supported row, DB lateral raise, overhead rope extension.",
       exercises: [
-        { name:"Cardio warm-up", target:"5–10 min MAX" },
         { name:"Leg press", target:"4 × 12 @ 120 kg (+10 if fresh)" },
         { name:"Seated leg curl", target:"3 × 12 @ 50 kg" },
         { name:"🔄 Chest-supported row (was 1-arm row)", target:"4 × 10 · tag" },
@@ -397,17 +403,15 @@ const PLAN = {
     { date:"2026-07-23", dow:"Thu", type:"run", title:"Easy Run · 4 km (HR<150)", focus:"🎯 Trains: aerobic base (easy)",
       detail:"Run by HR — keep under 150 (pace floats). Conversational, walk breaks fine.", log:["distance","time","notes"] },
     { date:"2026-07-24", dow:"Fri", type:"strength", title:"Lift C — Upper only + fresh moves", focus:"🎯 Trains: chest, back, side delts, arms, grip · NO legs (long run tmrw)",
-      detail:"Upper only — no legs, so Sat's long run gets fresh legs. **CARDIO WARM-UP 10 MIN CAP.** New: cable fly, cable lateral raise, spider curl, EZ skullcrusher. Incline press: low angle + scapula-set + squeeze chest.",
+      detail:"Upper only — no legs, so Sat's long run gets fresh legs. New: cable fly, cable lateral raise, spider curl, EZ skullcrusher. Incline press: low angle + scapula-set + squeeze chest.",
       exercises: [
-        { name:"Cardio warm-up", target:"5–10 min MAX" },
         { name:"Incline DB press", target:"4 × 10 @ 15 kg (low angle, chest fix)" },
         { name:"🔄 Cable fly (was pec deck)", target:"3 × 12 · tag" },
         { name:"Assisted pull-up", target:"4 × 8–10 · reduce assist" },
         { name:"Face pull", target:"3 × 15 @ 20 kg" },
         { name:"🆕 Cable lateral raise", target:"3 × 12–15 · tag (diff from Wed's DB)" },
         { name:"🔄 Spider curl (was preacher)", target:"3 × 12 · tag" },
-        { name:"🔄 EZ-bar skullcrusher (was overhead)", target:"3 × 12 · tag" },
-        { name:"Dead hang (finisher)", target:"2 × max hold (past 30s)" }
+        { name:"🔄 EZ-bar skullcrusher (was overhead)", target:"3 × 12 · tag" }
       ],
       log:["notes"] },
     { date:"2026-07-25", dow:"Sat", type:"run", title:"LONG RUN · 12 km (HR<155)", focus:"🎯 Trains: endurance — longest yet, legs fresh (3 days from Wed)",
@@ -421,6 +425,26 @@ const PLAN = {
     deficit:"Mild deficit — aim to lose 0.3–0.5 kg/week. Weigh once, mornings."
   },
   cardio:"Gym days (Mon/Wed/Fri): 5–10 min easy warm-up — treadmill/elliptical/cycle/skipping. **HARD CAP 10 min before lifting.** Tue = 2K time-trial (your hard effort), don't add more. New order: legs (Mon+Wed) clear the Sat long run; Fri is upper-only. For daily-movement urge: 20–30 min easy when you fancy, never before a lift.",
+  gymWarmup: [
+    "5 min easy cardio — bike / treadmill / elliptical <i>(your 3.5 km ride to the gym counts!)</i>",
+    "Arm circles ×10 each way",
+    "Shoulder rolls / band pull-aparts ×15",
+    "Hip circles ×10 each way",
+    "Leg swings ×10 per leg (front↔back + side↔side)",
+    "10 bodyweight squats",
+    "<b>10 push-ups</b> — primes chest, shoulders, core",
+    "1 light set (~50% weight) of your first exercise"
+  ],
+  gymCooldown: [
+    "<b>Dead hang — 1–2 × max hold</b> (grip + decompresses the spine)",
+    "Chest doorway stretch — 30 s",
+    "Lat / side-body stretch — 30 s per side",
+    "Quad stretch — 30 s per leg",
+    "Hamstring stretch — 30 s per leg",
+    "Hip-flexor lunge stretch — 30 s per leg",
+    "Cross-body shoulder stretch — 30 s per side",
+    "Optional: 5–10 min easy walk / ride home"
+  ],
   routines: {
     "🏃 Run · Warm-up (before every run)":["3 min brisk walk","Leg swings front↔back ×10/leg","Leg swings side↔side ×10/leg","High knees 20 sec","Butt kicks 20 sec","10 bodyweight squats","Then run — keep the first km extra easy"],
     "🏃 Run · Cool-down (after every run)":["3 min slow walk to drop heart rate","Standing quad stretch 30s/leg","Hamstring stretch 30s/leg","Calf stretch on wall 30s/leg","Hip-flexor lunge stretch 30s/leg","Glute figure-4 stretch 30s/leg"],
@@ -631,7 +655,9 @@ function dayCard(d){
         </div>
         <div class="chk"><input type="checkbox" ${done?"checked":""} onchange="setField('${d.date}','done',this.checked)" title="Mark done"></div>
       </div>
+      ${d.type==="strength" ? `<details class="wu"><summary>🔥 Warm-up — must do</summary><ul>${PLAN.gymWarmup.map(i=>`<li>${i}</li>`).join("")}</ul></details>` : ""}
       ${exList}
+      ${d.type==="strength" ? `<details class="wu"><summary>🧘 Cool-down — must do</summary><ul>${PLAN.gymCooldown.map(i=>`<li>${i}</li>`).join("")}</ul></details>` : ""}
       <div class="logrow">${logInputs}</div>
       <div class="daily">
         <label>⚖️ Weight (kg)<input type="text" value="${dy.weight||""}" placeholder="—" onchange="setDaily('${d.date}','weight',this.value)"></label>
