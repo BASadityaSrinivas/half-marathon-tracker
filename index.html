@@ -166,6 +166,31 @@ const HISTORY = [
     ]
   },
   {
+    week: 11, start: "2026-08-04", end: "2026-08-22", phase: "Phase 1 + travel",
+    done: 4, planned: 5, km: 26.0,
+    weightStart: null, weightEnd: null, avgSweets: null,
+    days: [
+      {dow:"Mon", status:"done", icon:"🏋️", label:"Lift A (partial)"},
+      {dow:"Tue", status:"done", icon:"🎯", label:"FIRST TEMPO — 2×8 @ 6:30, no walk breaks ⭐"},
+      {dow:"Wed", status:"done", icon:"🏋️", label:"Lift C — upper (protected it)"},
+      {dow:"Thu", status:"done", icon:"🏃", label:"Easy 5K @ HR 150"},
+      {dow:"Fri", status:"missed", icon:"✈️", label:"Long run missed → travel"},
+      {dow:"—", status:"done", icon:"🧳", label:"Travel Aug11–22: S&C + 7K run + lifts + badminton"},
+      {dow:"Sat", status:"done", icon:"🏃", label:"Aug22: 5K attempt cut short (bad sleep/headache)"}
+    ],
+    blurb: "Wk11 was strong (4/5 incl. the first real tempo — held 6:30 for 2×8 with no walk breaks). Then ~2 weeks of travel — but he stayed active: a travel S&C session, a 7K long run, lifts, badminton. Old-him would've stopped entirely. Back home now, re-entering the plan ~5 weeks out.",
+    wins: [
+      "⭐ First tempo held race pace (6:30) for 2×8 min, no walk breaks — the sustain skill",
+      "Protected the upper lift (Lift C)",
+      "Stayed active through 3 weeks of travel (S&C, 7K run, lifts, badminton)"
+    ],
+    learnings: [
+      "Long-run progression stalled during travel (longest recent 7K) — now THE priority to race day",
+      "~5 weeks out: build long run 15→17→18-19, then taper",
+      "Smart to stop the Aug-22 run at 5K (bad sleep + headache)"
+    ]
+  },
+  {
     week: 10, start: "2026-07-28", end: "2026-08-03", phase: "Phase 1 (tempo begins)",
     done: 3, planned: 6, km: 17.0,
     weightStart: null, weightEnd: null, avgSweets: null,
@@ -412,39 +437,53 @@ const PLAN = {
   athlete: "Aditya",
   goal: "Half Marathon · finish strong 2:15–2:20 · 1:55 is the dream",
   raceDate: "2026-09-27",
-  phase: "Phase 1 — Build (travel week)",
-  week: 11,
-  weekStart: "2026-08-04",
-  weekEnd: "2026-08-10",
+  phase: "Phase 2 — Peak (re-entry · ~5 wks to race)",
+  week: 12,
+  weekStart: "2026-08-24",
+  weekEnd: "2026-08-30",
   paces: { easy:"HR <150", long:"HR <155", tempo:"6:15–6:35 /km", intervals:"5:30–5:50 /km", "race pace":"6:24–6:38 /km" },
   days: [
-    { date:"2026-08-04", dow:"Mon", type:"strength", title:"Lift A — Barbell + fresh moves", focus:"🎯 Trains: legs, chest, back, biceps, core",
-      detail:"RDL: hold ~50–55 kg, nail form. Tue is tempo (sub-max) so squat can progress.",
+    { date:"2026-08-24", dow:"Mon", type:"strength", title:"Lift A — Barbell", focus:"🎯 Trains: legs, chest, back, biceps, core",
+      detail:"Back on the plan. RDL: hold ~50 kg, nail form. Tue is tempo (sub-max) so squat can progress.",
       exercises: [
-        { name:"Barbell back squat", target:"4 × 8 @ ~50 kg (+5 if clean)" },
-        { name:"Barbell bench press", target:"4 × 8–10 @ ~35 kg (+5 if clean)" },
+        { name:"Barbell back squat", target:"4 × 8 @ ~50 kg" },
+        { name:"Barbell bench press", target:"4 × 8–10 @ ~35–40 kg" },
         { name:"Lat pulldown", target:"4 × 10–12 @ 35 kg" },
-        { name:"Barbell RDL", target:"4 × 10 @ ~50–55 kg · FORM" },
+        { name:"Barbell RDL", target:"4 × 10 @ ~50 kg · FORM" },
         { name:"Incline DB curl", target:"3 × 12 @ ~7.5 kg" },
         { name:"Pallof press (obliques)", target:"3 × 12/side" },
         { name:"Floor crunches / lying leg raises", target:"3 × 12" },
         { name:"Plank", target:"2 × 45–60 sec" }
       ],
       log:["notes"] },
-    { date:"2026-08-05", dow:"Tue", type:"run", title:"🎯 TEMPO — race-pace run (PRIORITY!)", focus:"🎯 Trains: sustaining race pace · the TT-limiter fix",
-      detail:"⭐ THIS WEEK IT HAPPENS — the most race-important run. Warm up 12 min easy + 3–4 strides. MAIN: **2 × 8 min @ RACE PACE (6:24–6:38/km)** with 3 min easy jog between. Cool down 8 min easy. 'Comfortably hard' — short phrases only, sustainable, NOT a sprint. Too fast = #1 mistake → ease to 6:35. Control, not heroics.",
+    { date:"2026-08-25", dow:"Tue", type:"run", title:"🎯 TEMPO — 2 × 10 min @ race pace", focus:"🎯 Trains: sustaining race pace · grown from 2×8",
+      detail:"Grown to 2×10 min. Warm up 12 min easy + 3–4 strides. MAIN: **2 × 10 min @ RACE PACE (6:24–6:38/km)** with 3 min easy jog between. Cool down 8 min. **Start each block AT 6:35 and hold EVEN — don't dive to 6:05 like last time.** Comfortably hard, sustainable, NOT a sprint.",
       exercises: [
         { name:"Warm-up (easy jog + strides)", target:"12 min" },
-        { name:"🎯 Block 1 @ race pace", target:"8 min @ 6:24–6:38" },
+        { name:"🎯 Block 1 @ race pace", target:"10 min @ 6:24–6:38" },
         { name:"Easy jog recovery", target:"3 min" },
-        { name:"🎯 Block 2 @ race pace", target:"8 min @ 6:24–6:38" },
+        { name:"🎯 Block 2 @ race pace", target:"10 min @ 6:24–6:38" },
         { name:"Cool-down (easy jog)", target:"8 min" }
       ],
       log:["distance","time","notes"] },
-    { date:"2026-08-06", dow:"Wed", type:"strength", title:"Lift C — Upper only (PROTECT it!)", focus:"🎯 Trains: chest, back, side delts, arms, grip · your shape work",
-      detail:"Upper only — protect this (badminton's been replacing it). No legs, so Fri's long run stays fresh. TAG the new moves (cable fly, cable lateral, spider curl, EZ skullcrusher).",
+    { date:"2026-08-26", dow:"Wed", type:"strength", title:"Lift B — Lower/Pull", focus:"🎯 Trains: legs, hamstrings, calves, back, side delts, shoulders, triceps",
+      detail:"Last leg day of the week (legs clear the Sat long run).",
       exercises: [
-        { name:"Incline DB press", target:"4 × 10 @ 15 kg (low angle, chest fix)" },
+        { name:"Leg press", target:"4 × 12 @ 120 kg" },
+        { name:"Seated leg curl", target:"3 × 12 @ 50 kg" },
+        { name:"Chest-supported row", target:"4 × 10 @ 12.5 kg" },
+        { name:"DB lateral raise", target:"3 × 12–15 @ 5 kg" },
+        { name:"Calf raises", target:"3 × 15 @ 20 kg" },
+        { name:"Arnold press", target:"4 × 10 @ 10 kg" },
+        { name:"Overhead rope tricep ext", target:"3 × 12 @ 20 kg" }
+      ],
+      log:["notes"] },
+    { date:"2026-08-27", dow:"Thu", type:"run", title:"Easy Run · 5 km (HR<150)", focus:"🎯 Trains: aerobic base (easy)",
+      detail:"Run by HR — keep under 150. Conversational. The hard effort was Tuesday.", log:["distance","time","notes"] },
+    { date:"2026-08-28", dow:"Fri", type:"strength", title:"Lift C — Upper only", focus:"🎯 Trains: chest, back, side delts, arms, grip · NO legs (long run tmrw)",
+      detail:"Upper only — legs fresh for Sat. TAG the new moves (cable fly, cable lateral, spider curl, EZ skullcrusher). Incline press: low angle + squeeze chest.",
+      exercises: [
+        { name:"Incline DB press", target:"4 × 10 @ 15 kg" },
         { name:"Cable fly", target:"3 × 12 · tag" },
         { name:"Assisted pull-up", target:"4 × 8–10 · reduce assist" },
         { name:"Face pull", target:"3 × 15 @ 20 kg" },
@@ -453,14 +492,10 @@ const PLAN = {
         { name:"EZ-bar skullcrusher", target:"3 × 12 · tag" }
       ],
       log:["notes"] },
-    { date:"2026-08-07", dow:"Thu", type:"run", title:"Easy Run · 5 km (HR<150)", focus:"🎯 Trains: aerobic base (easy) — like last week's great one",
-      detail:"Run by HR — keep under 150 (like Thursday last week, HR 146). Conversational. The hard effort was Tuesday.", log:["distance","time","notes"] },
-    { date:"2026-08-08", dow:"Fri", type:"run", title:"LONG RUN · 14 km (HR<155) — AM before travel", focus:"🎯 Trains: endurance — longest yet, EASY (not fast!), no surge",
-      detail:"AM (before evening travel): Long run **14 km** @ **HR < 155** — this is EASY effort (~9:00/km, faster than a recovery jog but NOT tempo pace). Start slow, walk breaks around km 10–11 for heat drift, hold easy through the finish (no surge). 14K is the cap. Then travel = full rest. Run warm-up first.", log:["distance","time","notes"] },
-    { date:"2026-08-09", dow:"Sat", type:"rest", title:"✈️ Travel / out", focus:"🎯 Full rest (no-effort night travel)",
-      detail:"Travelling / out. Full rest — you banked the week's work Mon–Fri. Enjoy. Optional easy jog only if you happen to have time + shoes, zero pressure.", log:["notes"] },
-    { date:"2026-08-10", dow:"Sun", type:"rest", title:"✈️ Travel / out", focus:"🎯 Full rest",
-      detail:"Still out. Rest. Back to normal training next week.", log:["notes"] }
+    { date:"2026-08-29", dow:"Sat", type:"run", title:"👑 LONG RUN · 15 km (HR<155)", focus:"🎯 Trains: endurance — THE priority · EASY, no surge",
+      detail:"AM: Long run **15 km** @ **HR < 155** (EASY ~9:00/km, not tempo pace). Rebuild after travel. Start slow, walk breaks km 10–12 for heat drift, no finish surge. 🆘 If it's rough past 12K, ease off or cut to 13–14K — finish HEALTHY. Fuel: good breakfast 60–90 min before + carry water. Run warm-up first.", log:["distance","time","notes"] },
+    { date:"2026-08-30", dow:"Sun", type:"rest", title:"😴 Rest", focus:"🎯 Recovery — optional easy walk/swim",
+      detail:"Full rest, or an optional 20–30 min easy walk / swim.", log:["notes"] }
   ],
   nutrition: {
     protein:"No protein math. Keep eating your usual eggs, dal, curd, sundal (~65–70g already). Optional nudge: 3–4 eggs/day",
