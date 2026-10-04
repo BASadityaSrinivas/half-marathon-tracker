@@ -139,6 +139,29 @@
 // ==================== HISTORY START (Claude appends a snapshot when each week closes) ====================
 const HISTORY = [
   {
+    week: 12, start: "2026-08-24", end: "2026-09-27", phase: "Peak → typhoid · race day",
+    done: 4, planned: 6, km: null,
+    weightStart: null, weightEnd: null, avgSweets: null,
+    days: [
+      {dow:"—", status:"done", icon:"🏃", label:"Wk12: ~2 runs (unlogged)"},
+      {dow:"—", status:"done", icon:"🏋️", label:"Wk12: ~2 gym sessions (unlogged)"},
+      {dow:"—", status:"missed", icon:"❌", label:"Tempo 2×10 + 15K long run not done"},
+      {dow:"—", status:"missed", icon:"🤒", label:"Typhoid fever — ~4 weeks off (planned Wks 13–16)"},
+      {dow:"Sun", status:"done", icon:"🏁", label:"Race day Sep 27: 11 km @ ~9:50/km (chose 11K)"}
+    ],
+    blurb: "Patchy re-entry week, then typhoid wiped out the peak block, taper and race week. Partly recovered by race day and made the smart call: ran 11 km easy (~9:50/km) instead of forcing 21.1. Season 1 closes at 53/70 sessions, ~193 km, longest run 13K.",
+    wins: [
+      "🏁 Made it to race day and ran 11 km — sensibly, right after typhoid",
+      "Season 1: frequency fixed (76% of sessions), easy-run HR 159 → 144, 2K TT 7:00 → 5:39/km",
+      "Full recovery + doctor sign-off; back in the gym Oct 2 and running Oct 4"
+    ],
+    learnings: [
+      "Illness, not consistency, ended the build — nothing to fix in the habits",
+      "The full 21.1 km is unfinished business",
+      "Season 2 switches to gym-first (Run 35 : Gym 65), no race"
+    ]
+  },
+  {
     week: 1, start: "2026-05-24", end: "2026-05-30", phase: "Phase 0",
     done: 7, planned: 7, km: 15.04,
     weightStart: 77.0, weightEnd: 75.5, avgSweets: 1.83,
@@ -435,74 +458,82 @@ const HISTORY = [
 // ==================== PLAN START (Claude edits this block each week) ====================
 const PLAN = {
   athlete: "Aditya",
-  goal: "Half Marathon · finish strong 2:15–2:20 · 1:55 is the dream",
-  raceDate: "2026-09-27",
-  phase: "Phase 2 — Peak (re-entry · ~5 wks to race)",
-  week: 12,
-  weekStart: "2026-08-24",
-  weekEnd: "2026-08-30",
-  paces: { easy:"HR <150", long:"HR <155", tempo:"6:15–6:35 /km", intervals:"5:30–5:50 /km", "race pace":"6:24–6:38 /km" },
+  title: "Season 2 · Stronger",
+  goal: "Gym-first · Run 35 : Gym 65 · build muscle, lose belly/love-handle fat · no race",
+  raceDate: null,
+  phase: "Season 2 · Wk 1 — Upper/Lower ×4 + 2 runs",
+  week: 13,
+  weekStart: "2026-10-05",
+  weekEnd: "2026-10-11",
+  paces: { easy:"HR <150", long:"HR <155", "tempo / intervals":"reset after Tue's 2K TT" },
   days: [
-    { date:"2026-08-24", dow:"Mon", type:"strength", title:"Lift A — Barbell", focus:"🎯 Trains: legs, chest, back, biceps, core",
-      detail:"Back on the plan. RDL: hold ~50 kg, nail form. Tue is tempo (sub-max) so squat can progress.",
+    { date:"2026-10-05", dow:"Mon", type:"strength", title:"Upper A — Horizontal push/pull", focus:"🎯 Trains: chest, back, shoulders, arms",
+      detail:"Season 2 starts. ~75–80% of pre-illness weights — last 2–3 reps hard but you could do 2 more. Rest 90s big lifts, 60s small. 📏 Measure waist at the navel this morning (relaxed) — your belly/love-handle number.",
       exercises: [
-        { name:"Barbell back squat", target:"4 × 8 @ ~50 kg" },
-        { name:"Barbell bench press", target:"4 × 8–10 @ ~35–40 kg" },
-        { name:"Lat pulldown", target:"4 × 10–12 @ 35 kg" },
-        { name:"Barbell RDL", target:"4 × 10 @ ~50 kg · FORM" },
-        { name:"Incline DB curl", target:"3 × 12 @ ~7.5 kg" },
-        { name:"Pallof press (obliques)", target:"3 × 12/side" },
-        { name:"Floor crunches / lying leg raises", target:"3 × 12" },
-        { name:"Plank", target:"2 × 45–60 sec" }
+        { name:"Barbell bench press", target:"4 × 8 @ 30 kg" },
+        { name:"Chest-supported row", target:"4 × 10 @ 10 kg" },
+        { name:"Arnold press", target:"3 × 10 @ 7.5 kg" },
+        { name:"Lat pulldown", target:"3 × 10 @ 30 kg" },
+        { name:"DB lateral raise", target:"3 × 15 @ 4–5 kg" },
+        { name:"Triceps pushdown", target:"3 × 12 @ 25–30 kg" },
+        { name:"Concentration curl", target:"3 × 12 @ 5–7.5 kg" }
       ],
       log:["notes"] },
-    { date:"2026-08-25", dow:"Tue", type:"run", title:"🎯 TEMPO — 2 × 10 min @ race pace", focus:"🎯 Trains: sustaining race pace · grown from 2×8",
-      detail:"Grown to 2×10 min. Warm up 12 min easy + 3–4 strides. MAIN: **2 × 10 min @ RACE PACE (6:24–6:38/km)** with 3 min easy jog between. Cool down 8 min. **Start each block AT 6:35 and hold EVEN — don't dive to 6:05 like last time.** Comfortably hard, sustainable, NOT a sprint.",
+    { date:"2026-10-06", dow:"Tue", type:"run", title:"🏆 2K TIME-TRIAL", focus:"🎯 Trains: benchmark — where is your running after typhoid?",
+      detail:"Cool morning, fresh legs. Warm up 12–15 min easy + 4 × 20s strides. **2 km hard, even effort — go out ~5:50, NOT 5:15.** Cool down 10 min. Don't chase July's 11:25 — ~12:00–12:45 is normal after illness; this is a baseline. 🆘 Stop if dizzy, chest pain or unusually weak. Send time, per-km splits, avg/max HR.",
       exercises: [
-        { name:"Warm-up (easy jog + strides)", target:"12 min" },
-        { name:"🎯 Block 1 @ race pace", target:"10 min @ 6:24–6:38" },
-        { name:"Easy jog recovery", target:"3 min" },
-        { name:"🎯 Block 2 @ race pace", target:"10 min @ 6:24–6:38" },
-        { name:"Cool-down (easy jog)", target:"8 min" }
+        { name:"Warm-up (easy jog + 4 strides)", target:"12–15 min" },
+        { name:"🏆 2 km time-trial", target:"hard · even · start ~5:50" },
+        { name:"Cool-down (easy jog/walk)", target:"10 min" }
       ],
       log:["distance","time","notes"] },
-    { date:"2026-08-26", dow:"Wed", type:"strength", title:"Lift B — Lower/Pull", focus:"🎯 Trains: legs, hamstrings, calves, back, side delts, shoulders, triceps",
-      detail:"Last leg day of the week (legs clear the Sat long run).",
+    { date:"2026-10-07", dow:"Wed", type:"strength", title:"Lower A — Squat focus", focus:"🎯 Trains: quads, glutes, hamstrings, calves, core",
+      detail:"Legs are back as a real focus in season 2. Squat at ~75% — clean depth over load.",
       exercises: [
-        { name:"Leg press", target:"4 × 12 @ 120 kg" },
-        { name:"Seated leg curl", target:"3 × 12 @ 50 kg" },
-        { name:"Chest-supported row", target:"4 × 10 @ 12.5 kg" },
-        { name:"DB lateral raise", target:"3 × 12–15 @ 5 kg" },
-        { name:"Calf raises", target:"3 × 15 @ 20 kg" },
-        { name:"Arnold press", target:"4 × 10 @ 10 kg" },
-        { name:"Overhead rope tricep ext", target:"3 × 12 @ 20 kg" }
+        { name:"Barbell back squat", target:"4 × 8 @ 40 kg" },
+        { name:"Leg press", target:"3 × 12 @ 90 kg" },
+        { name:"Seated hamstring curl", target:"3 × 12 @ 35–40 kg" },
+        { name:"Calf raises", target:"3 × 15 @ 15 kg" },
+        { name:"Pallof press", target:"3 × 12/side · tag" },
+        { name:"Floor crunches / lying leg raises", target:"3 × 15" },
+        { name:"Plank", target:"2 × 45 sec" }
       ],
       log:["notes"] },
-    { date:"2026-08-27", dow:"Thu", type:"run", title:"Easy Run · 5 km (HR<150)", focus:"🎯 Trains: aerobic base (easy)",
-      detail:"Run by HR — keep under 150. Conversational. The hard effort was Tuesday.", log:["distance","time","notes"] },
-    { date:"2026-08-28", dow:"Fri", type:"strength", title:"Lift C — Upper only", focus:"🎯 Trains: chest, back, side delts, arms, grip · NO legs (long run tmrw)",
-      detail:"Upper only — legs fresh for Sat. TAG the new moves (cable fly, cable lateral, spider curl, EZ skullcrusher). Incline press: low angle + squeeze chest.",
+    { date:"2026-10-08", dow:"Thu", type:"strength", title:"Upper B — Incline / pull-up / arms", focus:"🎯 Trains: upper chest, back width, rear + side delts, arms",
+      detail:"Second upper day — every upper muscle twice this week.",
       exercises: [
-        { name:"Incline DB press", target:"4 × 10 @ 15 kg" },
-        { name:"Cable fly", target:"3 × 12 · tag" },
-        { name:"Assisted pull-up", target:"4 × 8–10 · reduce assist" },
-        { name:"Face pull", target:"3 × 15 @ 20 kg" },
-        { name:"Cable lateral raise", target:"3 × 12–15 · tag" },
-        { name:"Spider curl", target:"3 × 12 · tag" },
-        { name:"EZ-bar skullcrusher", target:"3 × 12 · tag" }
+        { name:"Incline DB press", target:"4 × 10 @ 12.5 kg" },
+        { name:"Assisted pull-up", target:"4 × 8 @ 11–12 plates assist" },
+        { name:"Pec deck", target:"3 × 12 @ 25–30 kg" },
+        { name:"Face pull", target:"3 × 15 @ 15 kg" },
+        { name:"Cable lateral raise", target:"3 × 15 · tag" },
+        { name:"Preacher curl", target:"3 × 10 @ 7.5 kg" },
+        { name:"Overhead rope extension", target:"3 × 12 @ 15 kg" }
       ],
       log:["notes"] },
-    { date:"2026-08-29", dow:"Sat", type:"run", title:"👑 LONG RUN · 15 km (HR<155)", focus:"🎯 Trains: endurance — THE priority · EASY, no surge",
-      detail:"AM: Long run **15 km** @ **HR < 155** (EASY ~9:00/km, not tempo pace). Rebuild after travel. Start slow, walk breaks km 10–12 for heat drift, no finish surge. 🆘 If it's rough past 12K, ease off or cut to 13–14K — finish HEALTHY. Fuel: good breakfast 60–90 min before + carry water. Run warm-up first.", log:["distance","time","notes"] },
-    { date:"2026-08-30", dow:"Sun", type:"rest", title:"😴 Rest", focus:"🎯 Recovery — optional easy walk/swim",
+    { date:"2026-10-09", dow:"Fri", type:"strength", title:"Lower B — Hinge / glutes", focus:"🎯 Trains: hamstrings, glutes, single-leg strength, abs",
+      detail:"RDL at 40 kg — FORM first (flat back, hips back). 🆕 Hip thrust: start bar + 10 kg and tag it. 🆕 Hanging knee raise — your 54s dead hang unlocked it.",
+      exercises: [
+        { name:"Barbell RDL", target:"4 × 8 @ 40 kg · FORM" },
+        { name:"🆕 Barbell hip thrust", target:"3 × 10 @ bar + 10 kg · tag" },
+        { name:"Bulgarian split squat", target:"3 × 10/leg · bodyweight or light DBs" },
+        { name:"Lying hamstring curl", target:"3 × 12 @ 25–30 kg" },
+        { name:"Hip abduction", target:"3 × 15 @ 20 kg" },
+        { name:"🆕 Hanging knee raise", target:"3 × 8–10" },
+        { name:"Decline-bench abs", target:"3 × 15" }
+      ],
+      log:["notes"] },
+    { date:"2026-10-10", dow:"Sat", type:"run", title:"Easy Run · 6 km (HR<150)", focus:"🎯 Trains: aerobic base (easy)",
+      detail:"Conversational, HR under 150. Walk breaks fine if HR creeps up. Legs may feel Friday's session — that's expected, keep it easy.", log:["distance","time","notes"] },
+    { date:"2026-10-11", dow:"Sun", type:"rest", title:"😴 Rest", focus:"🎯 Recovery — gym closed",
       detail:"Full rest, or an optional 20–30 min easy walk / swim.", log:["notes"] }
   ],
   nutrition: {
-    protein:"No protein math. Keep eating your usual eggs, dal, curd, sundal (~65–70g already). Optional nudge: 3–4 eggs/day",
+    protein:"No protein math. Keep eating your usual eggs, dal, curd, sundal. Optional nudge: 3–4 eggs/day",
     sweets:"Max 1/day · post-workout · on a plate · out of sight",
-    deficit:"Mild deficit — aim to lose 0.3–0.5 kg/week. Weigh once, mornings."
+    deficit:"Start 71 kg. EAT ENOUGH — lifting 4×/wk after illness; mild deficit only (~0.25 kg/wk). Scale may stay flat while lost muscle returns — track waist at navel (belly/love handles), it should shrink."
   },
-  cardio:"Gym days (Mon/Wed/Fri): use the 🔥 Warm-up dropdown on each day. Tue = tempo run (your hard effort), don't add more. Legs (Mon+Wed) clear the Sat long run; Fri is upper-only. For daily-movement urge (incl. your 3.5km gym ride): 20–30 min easy when you fancy, never before a lift.",
+  cardio:"Gym-first now. Use the 🔥 Warm-up dropdown on each gym day. Optional 10–15 min easy incline walk AFTER lifting, never before. Tue (TT) and Sat (easy) are the only runs — no hard cardio on lift days.",
   gymWarmup: [
     "5 min easy cardio — bike / treadmill / elliptical <i>(your 3.5 km ride to the gym counts!)</i>",
     "Arm circles ×10 each way",
@@ -639,10 +670,10 @@ function render(){
   const app = document.getElementById("app");
   app.innerHTML = `
     <header>
-      <h1>${PLAN.athlete} · <span class="accent">Road to 21K</span></h1>
+      <h1>${PLAN.athlete} · <span class="accent">${PLAN.title || "Road to 21K"}</span></h1>
       <div class="goal">${PLAN.goal}</div>
       <div class="meta">
-        <span class="pill countdown">${daysToRace()} days to race</span>
+        ${PLAN.raceDate ? `<span class="pill countdown">${daysToRace()} days to race</span>` : ""}
         <span class="pill">${PLAN.phase}</span>
         <span class="pill">Week <b>${PLAN.week}</b></span>
         <span class="pill">${fmtRange()}</span>
