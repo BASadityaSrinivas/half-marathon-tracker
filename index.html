@@ -459,7 +459,7 @@ const HISTORY = [
 const PLAN = {
   athlete: "Aditya",
   title: "Season 2 · Stronger",
-  goal: "Gym-first · Run 35 : Gym 65 · build muscle all over · lose body fat · no race",
+  goal: "Gym-first · Run 35 : Gym 65 · build muscle all over (⭐ chest, shoulders, arms, glutes, thighs) · lose body fat · no race",
   raceDate: null,
   phase: "Season 2 · Wk 1 — Upper/Lower ×4 + 2 runs",
   week: 13,
@@ -468,16 +468,17 @@ const PLAN = {
   weighIns: { "2026-10-04": 71.0 },   // reported in chat (post-typhoid)
   paces: { easy:"HR <150", long:"HR <155", "tempo / intervals":"reset after Tue's 2K TT" },
   days: [
-    { date:"2026-10-05", dow:"Mon", type:"strength", title:"Upper A — Horizontal push/pull", focus:"🎯 Trains: chest, back, shoulders, arms",
-      detail:"Season 2 starts. ~75–80% of pre-illness weights — last 2–3 reps hard but you could do 2 more. Rest 90s big lifts, 60s small. 📏 Measure waist at the navel this morning (relaxed) — your main fat-loss number.",
+    { date:"2026-10-05", dow:"Mon", type:"strength", title:"Upper A — Horizontal push/pull", focus:"🎯 Trains: chest, back, shoulders, biceps, triceps, forearms",
+      detail:"Season 2 starts. ~75–80% of pre-illness weights — last 2–3 reps hard but you could do 2 more. Rest 90s big lifts, 60s small. 💪 Supersets = two moves back to back, then rest 60s. 📏 Measure waist at the navel this morning (relaxed) — your main fat-loss number.",
       exercises: [
         { name:"Barbell bench press", target:"4 × 8 @ 30 kg" },
         { name:"Chest-supported row", target:"4 × 10 @ 10 kg" },
         { name:"Arnold press", target:"3 × 10 @ 7.5 kg" },
         { name:"Lat pulldown", target:"3 × 10 @ 30 kg" },
         { name:"DB lateral raise", target:"3 × 15 @ 4–5 kg" },
-        { name:"Triceps pushdown", target:"3 × 12 @ 25–30 kg" },
-        { name:"Concentration curl", target:"3 × 12 @ 5–7.5 kg" }
+        { name:"💪 Superset: Triceps pushdown + Concentration curl", target:"3 × 12 each @ 25–30 kg · 5–7.5 kg" },
+        { name:"💪 🆕 Reverse-grip EZ curl (forearms)", target:"3 × 12 @ bar + 5 kg · tag" },
+        { name:"💪 🆕 Superset: DB wrist curl + reverse wrist curl", target:"2 × 15 each · light ~5 kg · tag" }
       ],
       log:["notes"] },
     { date:"2026-10-06", dow:"Tue", type:"run", title:"🏆 2K TIME-TRIAL", focus:"🎯 Trains: benchmark — where is your running after typhoid?",
@@ -500,7 +501,7 @@ const PLAN = {
         { name:"Plank", target:"2 × 45 sec" }
       ],
       log:["notes"] },
-    { date:"2026-10-08", dow:"Thu", type:"strength", title:"Upper B — Incline / pull-up / arms", focus:"🎯 Trains: upper chest, back width, rear + side delts, arms",
+    { date:"2026-10-08", dow:"Thu", type:"strength", title:"Upper B — Incline / pull-up / arms", focus:"🎯 Trains: upper chest, back width, rear + side delts, biceps, triceps, grip",
       detail:"Second upper day — every upper muscle twice this week.",
       exercises: [
         { name:"Incline DB press", target:"4 × 10 @ 12.5 kg" },
@@ -508,8 +509,9 @@ const PLAN = {
         { name:"Pec deck", target:"3 × 12 @ 25–30 kg" },
         { name:"Face pull", target:"3 × 15 @ 15 kg" },
         { name:"Cable lateral raise", target:"3 × 15 · tag" },
-        { name:"Preacher curl", target:"3 × 10 @ 7.5 kg" },
-        { name:"Overhead rope extension", target:"3 × 12 @ 15 kg" }
+        { name:"💪 Superset: Preacher curl + Overhead rope ext", target:"3 × 10–12 each @ 7.5 kg · 15 kg" },
+        { name:"💪 🆕 Superset: Hammer curl + Bench dips", target:"3 × 12 each @ 7.5 kg · bodyweight" },
+        { name:"💪 Dead hang (grip)", target:"2 × max hold (PR 54s)" }
       ],
       log:["notes"] },
     { date:"2026-10-09", dow:"Fri", type:"strength", title:"Lower B — Hinge / glutes", focus:"🎯 Trains: hamstrings, glutes, single-leg strength, abs",
@@ -521,6 +523,7 @@ const PLAN = {
         { name:"Lying hamstring curl", target:"3 × 12 @ 25–30 kg" },
         { name:"Hip abduction", target:"3 × 15 @ 20 kg" },
         { name:"Seated calf raise", target:"3 × 15 · tag" },
+        { name:"💪 🆕 Farmer's carry (grip + core)", target:"3 × 30 m @ 15 kg/hand" },
         { name:"🆕 Hanging knee raise", target:"3 × 8–10" },
         { name:"Decline-bench abs", target:"3 × 15" }
       ],
@@ -621,6 +624,12 @@ const WEIGHTS = {
     ["Concentration / incline DB curl", "7.5 kg"],
     ["EZ-bar curl", "+10 kg over bar"],
     ["Spider curl", "tag it"]
+  ],
+  "🦾 Forearms / grip": [
+    ["Reverse-grip EZ curl", "tag it"],
+    ["DB wrist curl / reverse wrist curl", "tag it"],
+    ["Hammer curl", "7.5 kg (start)"],
+    ["Farmer's carry", "15 kg/hand (start)"]
   ],
   "🔧 Triceps": [
     ["Triceps pushdown", "35 kg"],
