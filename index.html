@@ -459,16 +459,17 @@ const HISTORY = [
 const PLAN = {
   athlete: "Aditya",
   title: "Season 2 · Stronger",
-  goal: "Gym-first · Run 35 : Gym 65 · build muscle, lose belly/love-handle fat · no race",
+  goal: "Gym-first · Run 35 : Gym 65 · build muscle all over · lose body fat · no race",
   raceDate: null,
   phase: "Season 2 · Wk 1 — Upper/Lower ×4 + 2 runs",
   week: 13,
   weekStart: "2026-10-05",
   weekEnd: "2026-10-11",
+  weighIns: { "2026-10-04": 71.0 },   // reported in chat (post-typhoid)
   paces: { easy:"HR <150", long:"HR <155", "tempo / intervals":"reset after Tue's 2K TT" },
   days: [
     { date:"2026-10-05", dow:"Mon", type:"strength", title:"Upper A — Horizontal push/pull", focus:"🎯 Trains: chest, back, shoulders, arms",
-      detail:"Season 2 starts. ~75–80% of pre-illness weights — last 2–3 reps hard but you could do 2 more. Rest 90s big lifts, 60s small. 📏 Measure waist at the navel this morning (relaxed) — your belly/love-handle number.",
+      detail:"Season 2 starts. ~75–80% of pre-illness weights — last 2–3 reps hard but you could do 2 more. Rest 90s big lifts, 60s small. 📏 Measure waist at the navel this morning (relaxed) — your main fat-loss number.",
       exercises: [
         { name:"Barbell bench press", target:"4 × 8 @ 30 kg" },
         { name:"Chest-supported row", target:"4 × 10 @ 10 kg" },
@@ -519,6 +520,7 @@ const PLAN = {
         { name:"Bulgarian split squat", target:"3 × 10/leg · bodyweight or light DBs" },
         { name:"Lying hamstring curl", target:"3 × 12 @ 25–30 kg" },
         { name:"Hip abduction", target:"3 × 15 @ 20 kg" },
+        { name:"Seated calf raise", target:"3 × 15 · tag" },
         { name:"🆕 Hanging knee raise", target:"3 × 8–10" },
         { name:"Decline-bench abs", target:"3 × 15" }
       ],
@@ -531,7 +533,7 @@ const PLAN = {
   nutrition: {
     protein:"No protein math. Keep eating your usual eggs, dal, curd, sundal. Optional nudge: 3–4 eggs/day",
     sweets:"Max 1/day · post-workout · on a plate · out of sight",
-    deficit:"Start 71 kg. EAT ENOUGH — lifting 4×/wk after illness; mild deficit only (~0.25 kg/wk). Scale may stay flat while lost muscle returns — track waist at navel (belly/love handles), it should shrink."
+    deficit:"Start 71 kg. EAT ENOUGH — lifting 4×/wk after illness; mild deficit only (~0.25 kg/wk). Scale may stay flat while lost muscle returns — track waist at navel; it should shrink. Fat comes off everywhere (belly, love handles, chest, glutes, thighs), not from one spot."
   },
   cardio:"Gym-first now. Use the 🔥 Warm-up dropdown on each gym day. Optional 10–15 min easy incline walk AFTER lifting, never before. Tue (TT) and Sat (easy) are the only runs — no hard cardio on lift days.",
   gymWarmup: [
@@ -659,7 +661,9 @@ function stats(){
   return { done, total:trainable.length, km };
 }
 function weightSeries(){
-  return Object.entries(state.daily).filter(([_,v])=>v.weight).map(([date,v])=>({date,w:parseFloat(v.weight)}))
+  const byDate = { ...(PLAN.weighIns || {}) };   // Claude-recorded weigh-ins; phone logs win on the same date
+  Object.entries(state.daily).forEach(([date,v]) => { if (v.weight) byDate[date] = v.weight; });
+  return Object.entries(byDate).map(([date,w])=>({date,w:parseFloat(w)}))
     .sort((a,b)=>new Date(a.date)-new Date(b.date));
 }
 
