@@ -466,7 +466,7 @@ const PLAN = {
   weekStart: "2026-10-05",
   weekEnd: "2026-10-11",
   weighIns: { "2026-10-04": 71.0 },   // reported in chat (post-typhoid)
-  paces: { easy:"HR <150", long:"HR <155", "tempo / intervals":"reset after Tue's 2K TT" },
+  paces: { easy:"HR <150", tempo:"~7:00–7:20 /km", intervals:"~6:10–6:30 /km", "2K TT (Oct 6)":"13:00 · 6:26/km" },
   days: [
     { date:"2026-10-05", dow:"Mon", type:"strength", title:"Upper A — Horizontal push/pull", focus:"🎯 Trains: chest, back, shoulders, biceps, triceps, forearms",
       detail:"Season 2 starts. ~75–80% of pre-illness weights — last 2–3 reps hard but you could do 2 more. Rest 90s big lifts, 60s small. 💪 Supersets = two moves back to back, then rest 60s. 📏 Measure waist at the navel this morning (relaxed) — your main fat-loss number.",
@@ -515,17 +515,15 @@ const PLAN = {
       ],
       log:["notes"] },
     { date:"2026-10-09", dow:"Fri", type:"strength", title:"Lower B — Hinge / glutes", focus:"🎯 Trains: hamstrings, glutes, single-leg strength, abs",
-      detail:"RDL at 40 kg — FORM first (flat back, hips back). 🆕 Hip thrust: start bar + 10 kg and tag it. 🆕 Hanging knee raise — your 54s dead hang unlocked it.",
+      detail:"Lying leg curl + 2nd ab move already done Wed → dropped here. RDL at bar + 10–20 — FORM first (flat back, hips back); legs are the slowest to come back. 🆕 Hip thrust: start bar + 10 kg and tag it. 🆕 Hanging knee raise — your 54s dead hang unlocked it.",
       exercises: [
-        { name:"Barbell RDL", target:"4 × 8 @ 40 kg · FORM" },
+        { name:"Barbell RDL", target:"4 × 8 @ bar + 10–20 · FORM" },
         { name:"🆕 Barbell hip thrust", target:"3 × 10 @ bar + 10 kg · tag" },
         { name:"Bulgarian split squat", target:"3 × 10/leg · bodyweight or light DBs" },
-        { name:"Lying hamstring curl", target:"3 × 12 @ 25–30 kg" },
         { name:"Hip abduction", target:"3 × 15 @ 20 kg" },
         { name:"Seated calf raise", target:"3 × 15 · tag" },
         { name:"💪 🆕 Farmer's carry (grip + core)", target:"3 × 30 m @ 15 kg/hand" },
-        { name:"🆕 Hanging knee raise", target:"3 × 8–10" },
-        { name:"Decline-bench abs", target:"3 × 15" }
+        { name:"🆕 Hanging knee raise", target:"3 × 8–10" }
       ],
       log:["notes"] },
     { date:"2026-10-10", dow:"Sat", type:"run", title:"Easy Run · 6 km (HR<150)", focus:"🎯 Trains: aerobic base (easy)",
@@ -589,50 +587,50 @@ const PLAN = {
 // ==================== WEIGHTS (by muscle) — mirror of weights.md; Claude updates as Aditya progresses ====================
 const WEIGHTS = {
   "🦵 Legs (quads / glutes)": [
-    ["Barbell back squat", "~60 kg (5 reps) · work ~50–55"],
-    ["Leg press", "120 kg"],
+    ["Barbell back squat", "now bar + 10 · pre-illness ~50–55"],
+    ["Leg press", "now 50 kg · pre 120"],
     ["Hip abduction (optional)", "20 kg"]
   ],
   "🍖 Hamstrings": [
     ["Barbell RDL", "~60–65 kg ⚠️ hold, nail form"],
-    ["Seated hamstring curl", "50 kg"],
-    ["Lying hamstring curl", "35 kg"]
+    ["Seated hamstring curl", "now 35 kg · pre 50"],
+    ["Lying hamstring curl", "now 30 kg · pre 40"]
   ],
   "🦿 Calves": [
-    ["Calf raises", "20 kg"]
+    ["Calf raises", "now 10 kg · pre 20"]
   ],
   "💥 Chest": [
-    ["Barbell bench press", "~35 kg"],
+    ["Barbell bench press", "now bar + 15 ✅ back"],
     ["Incline DB press", "15 kg"],
     ["Pec deck", "35 kg"],
     ["Cable fly", "15 kg"]
   ],
   "🔙 Back": [
-    ["Lat pulldown", "35–40 kg"],
+    ["Lat pulldown", "now 30 kg · pre 35"],
     ["Chest-supported row", "12.5 kg"],
-    ["One-arm DB row", "15 kg/arm"],
+    ["One-arm DB row", "now 10 kg · pre 15"],
     ["Assisted pull-up", "10 plates assist (↓ = harder)"]
   ],
   "🎽 Shoulders": [
-    ["Arnold press", "10 kg"],
+    ["Arnold press", "now 5 kg · pre 10"],
     ["DB lateral raise", "5 kg"],
     ["Cable lateral raise", "tag it"],
     ["Face pull (rear delt)", "20 kg"]
   ],
   "💪 Biceps": [
     ["Preacher curl", "10 kg"],
-    ["Concentration / incline DB curl", "7.5 kg"],
+    ["Concentration / incline DB curl", "now 7.5 kg ✅ back"],
     ["EZ-bar curl", "+10 kg over bar"],
     ["Spider curl", "tag it"]
   ],
   "🦾 Forearms / grip": [
-    ["Reverse-grip EZ curl", "tag it"],
+    ["Reverse-grip EZ curl", "now bar + 5"],
     ["DB wrist curl / reverse wrist curl", "tag it"],
     ["Hammer curl", "7.5 kg (start)"],
     ["Farmer's carry", "15 kg/hand (start)"]
   ],
   "🔧 Triceps": [
-    ["Triceps pushdown", "35 kg"],
+    ["Triceps pushdown", "now 30 kg · pre 35"],
     ["Overhead rope extension", "20 kg"],
     ["EZ skullcrusher", "tag it"]
   ],
@@ -641,7 +639,7 @@ const WEIGHTS = {
     ["Decline-bench abs", "bodyweight ×15"],
     ["Plank", "bodyweight"],
     ["Dead hang", "54 sec 🏆 (next: hanging leg raises)"],
-    ["Pallof press", "tag it"]
+    ["Pallof press", "now 15"]
   ]
 };
 // ==================== END WEIGHTS ====================
