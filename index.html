@@ -139,6 +139,31 @@
 // ==================== HISTORY START (Claude appends a snapshot when each week closes) ====================
 const HISTORY = [
   {
+    week: 13, start: "2026-10-05", end: "2026-10-11", phase: "Season 2 · Wk 1 (gym-first)",
+    done: 4, planned: 6, km: 2.02,
+    weightStart: 71.0, weightEnd: null, avgSweets: null,
+    days: [
+      {dow:"Mon", status:"done", icon:"🏋️", label:"Upper A — bench back to pre-illness"},
+      {dow:"Tue", status:"done", icon:"🏆", label:"2K TT 13:00 (6:26/km), walk breaks, max HR 197"},
+      {dow:"Wed", status:"done", icon:"🏋️", label:"Lower A — legs genuinely hard (leg press 50)"},
+      {dow:"Thu", status:"done", icon:"🏋️", label:"Upper B — pull-up 8 plates + face pull 25 PRs"},
+      {dow:"Fri", status:"missed", icon:"❌", label:"Lower B skipped (leg fatigue + work)"},
+      {dow:"Sat", status:"missed", icon:"✈️", label:"Easy run — unplanned travel"},
+      {dow:"Sun", status:"rest", icon:"✈️", label:"Travel"}
+    ],
+    blurb: "First gym-first week. Upper body bounced back fast — bench and rope extension at pre-illness, pull-up assist and face pull past it. Legs are the big gap (leg press ~40% of pre-illness) and needed 2+ days to recover, so Lower B got skipped. 2K TT 13:00 with walk breaks sets the running baseline.",
+    wins: [
+      "🏆 Assisted pull-up 8 plates (pre-illness 10) and face pull 25 kg (pre 20)",
+      "Bench, rope extension, concentration curl back to pre-illness in week 1",
+      "Post-illness running baseline set: 2K in 13:00"
+    ],
+    learnings: [
+      "Legs lost the most — ramp slowly (+5–10 kg/wk on leg press)",
+      "Leg days need ~3 days apart → Wk14: Tue + Fri",
+      "Shoulders got the least work (Arnold, cable lateral skipped) → Arnold moves to Thu"
+    ]
+  },
+  {
     week: 12, start: "2026-08-24", end: "2026-09-27", phase: "Peak → typhoid · race day",
     done: 4, planned: 6, km: null,
     weightStart: null, weightEnd: null, avgSweets: null,
@@ -461,82 +486,76 @@ const PLAN = {
   title: "Season 2 · Stronger",
   goal: "Gym-first · Run 35 : Gym 65 · build muscle all over (⭐ chest, shoulders, arms, glutes, thighs) · lose body fat · no race",
   raceDate: null,
-  phase: "Season 2 · Wk 1 — Upper/Lower ×4 + 2 runs",
-  week: 13,
-  weekStart: "2026-10-05",
-  weekEnd: "2026-10-11",
+  phase: "Season 2 · Wk 2 — legs are the project",
+  week: 14,
+  weekStart: "2026-10-12",
+  weekEnd: "2026-10-18",
   weighIns: { "2026-10-04": 71.0 },   // reported in chat (post-typhoid)
-  paces: { easy:"HR <150", tempo:"~7:00–7:20 /km", intervals:"~6:10–6:30 /km", "2K TT (Oct 6)":"13:00 · 6:26/km" },
+  paces: { easy:"HR <150 · run/walk OK", tempo:"~7:00–7:20 /km", intervals:"~6:10–6:30 /km", "2K TT (Oct 6)":"13:00 · 6:26/km" },
   days: [
-    { date:"2026-10-05", dow:"Mon", type:"strength", title:"Upper A — Horizontal push/pull", focus:"🎯 Trains: chest, back, shoulders, biceps, triceps, forearms",
-      detail:"Season 2 starts. ~75–80% of pre-illness weights — last 2–3 reps hard but you could do 2 more. Rest 90s big lifts, 60s small. 💪 Supersets = two moves back to back, then rest 60s. 📏 Measure waist at the navel this morning (relaxed) — your main fat-loss number.",
+    { date:"2026-10-12", dow:"Mon", type:"strength", title:"Upper A — ✅ done", focus:"🎯 Trains: chest, back, shoulders, biceps, triceps, forearms",
+      detail:"Done before this plan went up (logged in chat). Arnold press moved to Thu.",
       exercises: [
-        { name:"Barbell bench press", target:"4 × 8 @ 30 kg" },
-        { name:"Chest-supported row", target:"4 × 10 @ 10 kg" },
-        { name:"Arnold press", target:"3 × 10 @ 7.5 kg" },
-        { name:"Lat pulldown", target:"3 × 10 @ 30 kg" },
-        { name:"DB lateral raise", target:"3 × 15 @ 4–5 kg" },
-        { name:"💪 Superset: Triceps pushdown + Concentration curl", target:"3 × 12 each @ 25–30 kg · 5–7.5 kg" },
-        { name:"💪 🆕 Reverse-grip EZ curl (forearms)", target:"3 × 12 @ bar + 5 kg · tag" },
-        { name:"💪 🆕 Superset: DB wrist curl + reverse wrist curl", target:"2 × 15 each · light ~5 kg · tag" }
+        { name:"Barbell bench press", target:"done · bar+15/20/20" },
+        { name:"Chest-supported row", target:"done · 7.5/10/10" },
+        { name:"DB lateral raise", target:"done · 2.5/5/5" },
+        { name:"Lat pulldown", target:"done · 30/30/35" },
+        { name:"Concentration curl", target:"done · 7.5 ×3" },
+        { name:"Reverse-grip EZ curl", target:"done · bar/+5" },
+        { name:"Triceps pushdown", target:"done · 15/20/25" }
       ],
       log:["notes"] },
-    { date:"2026-10-06", dow:"Tue", type:"run", title:"🏆 2K TIME-TRIAL", focus:"🎯 Trains: benchmark — where is your running after typhoid?",
-      detail:"Cool morning, fresh legs. Warm up 12–15 min easy + 4 × 20s strides. **2 km hard, even effort — go out ~5:50, NOT 5:15.** Cool down 10 min. Don't chase July's 11:25 — ~12:00–12:45 is normal after illness; this is a baseline. 🆘 Stop if dizzy, chest pain or unusually weak. Send time, per-km splits, avg/max HR.",
+    { date:"2026-10-13", dow:"Tue", type:"strength", title:"Lower A — Squat focus", focus:"🎯 Trains: quads, glutes, hamstrings, calves, core",
+      detail:"Legs are the project. Add weight only when ALL sets are clean. Note how legs feel tomorrow. 📏 Measure waist at the navel this week (still no baseline).",
       exercises: [
-        { name:"Warm-up (easy jog + 4 strides)", target:"12–15 min" },
-        { name:"🏆 2 km time-trial", target:"hard · even · start ~5:50" },
-        { name:"Cool-down (easy jog/walk)", target:"10 min" }
-      ],
-      log:["distance","time","notes"] },
-    { date:"2026-10-07", dow:"Wed", type:"strength", title:"Lower A — Squat focus", focus:"🎯 Trains: quads, glutes, hamstrings, calves, core",
-      detail:"Legs are back as a real focus in season 2. Squat at ~75% — clean depth over load.",
-      exercises: [
-        { name:"Barbell back squat", target:"4 × 8 @ 40 kg" },
-        { name:"Leg press", target:"3 × 12 @ 90 kg" },
-        { name:"Seated hamstring curl", target:"3 × 12 @ 35–40 kg" },
-        { name:"Calf raises", target:"3 × 15 @ 15 kg" },
-        { name:"Pallof press", target:"3 × 12/side · tag" },
-        { name:"Floor crunches / lying leg raises", target:"3 × 15" },
+        { name:"Barbell back squat", target:"4 × 8 @ bar + 15" },
+        { name:"Leg press", target:"3 × 12 @ 55–60 kg" },
+        { name:"Seated hamstring curl", target:"3 × 12 @ 35 kg all sets" },
+        { name:"Calf raises", target:"3 × 15 @ 12.5–15 kg" },
+        { name:"Pallof press", target:"3 × 12/side @ 15" },
+        { name:"Decline crunches or lying leg raises", target:"3 × 15" },
         { name:"Plank", target:"2 × 45 sec" }
       ],
       log:["notes"] },
-    { date:"2026-10-08", dow:"Thu", type:"strength", title:"Upper B — Incline / pull-up / arms", focus:"🎯 Trains: upper chest, back width, rear + side delts, biceps, triceps, grip",
-      detail:"Second upper day — every upper muscle twice this week.",
+    { date:"2026-10-14", dow:"Wed", type:"run", title:"Easy Run · 4 km (run/walk, HR<150)", focus:"🎯 Trains: aerobic base — rebuilding non-stop running",
+      detail:"Run/walk is the plan: run until HR ~150, walk until ~130, repeat. Count your walk breaks — that number dropping week by week is the progress signal.", log:["distance","time","notes"] },
+    { date:"2026-10-15", dow:"Thu", type:"strength", title:"Upper B — Incline / pull-up / shoulders / arms", focus:"🎯 Trains: upper chest, back width, side + rear delts, biceps, triceps, grip",
+      detail:"Arnold press moved here (skipped Mon twice). Cable lateral raise paired with face pull so it doesn't get skipped. 💪 Supersets = two moves back to back, then rest 60s.",
       exercises: [
         { name:"Incline DB press", target:"4 × 10 @ 12.5 kg" },
-        { name:"Assisted pull-up", target:"4 × 8 @ 11–12 plates assist" },
+        { name:"Assisted pull-up", target:"4 × 8 @ 8 plates all sets 🏆" },
+        { name:"Arnold press", target:"3 × 10 @ 7.5 kg" },
         { name:"Pec deck", target:"3 × 12 @ 25–30 kg" },
-        { name:"Face pull", target:"3 × 15 @ 15 kg" },
-        { name:"Cable lateral raise", target:"3 × 15 · tag" },
-        { name:"💪 Superset: Preacher curl + Overhead rope ext", target:"3 × 10–12 each @ 7.5 kg · 15 kg" },
-        { name:"💪 🆕 Superset: Hammer curl + Bench dips", target:"3 × 12 each @ 7.5 kg · bodyweight" },
-        { name:"💪 Dead hang (grip)", target:"2 × max hold (PR 54s)" }
+        { name:"💪 Superset: Cable lateral raise + Face pull", target:"3 × 15 each · tag · 20–25 kg" },
+        { name:"💪 Superset: Preacher curl + Overhead rope ext", target:"3 × 10–12 each @ 7.5 kg · 20 kg" },
+        { name:"💪 Superset: Hammer curl + Bench dips", target:"3 × 12 each @ 7.5 kg · bodyweight" },
+        { name:"💪 Dead hang (grip)", target:"2 × max hold" }
       ],
       log:["notes"] },
-    { date:"2026-10-09", dow:"Fri", type:"strength", title:"Lower B — Hinge / glutes", focus:"🎯 Trains: hamstrings, glutes, single-leg strength, abs",
-      detail:"Lying leg curl + 2nd ab move already done Wed → dropped here. RDL at bar + 10–20 — FORM first (flat back, hips back); legs are the slowest to come back. 🆕 Hip thrust: start bar + 10 kg and tag it. 🆕 Hanging knee raise — your 54s dead hang unlocked it.",
+    { date:"2026-10-16", dow:"Fri", type:"strength", title:"Lower B — Hinge / glutes", focus:"🎯 Trains: hamstrings, glutes, single-leg strength, grip, abs",
+      detail:"3 days after Lower A — legs should be ready. 🦵 Still sore? Do it anyway: drop 1 set each and go ~10% lighter. A light Lower B beats no Lower B. RDL: flat back, hips back.",
       exercises: [
         { name:"Barbell RDL", target:"4 × 8 @ bar + 10–20 · FORM" },
-        { name:"🆕 Barbell hip thrust", target:"3 × 10 @ bar + 10 kg · tag" },
-        { name:"Bulgarian split squat", target:"3 × 10/leg · bodyweight or light DBs" },
+        { name:"🆕 Barbell hip thrust", target:"3 × 10 @ bar + 10 · tag" },
+        { name:"Bulgarian split squat", target:"3 × 10/leg · bodyweight" },
+        { name:"Lying hamstring curl", target:"3 × 12 @ 30 kg all sets" },
         { name:"Hip abduction", target:"3 × 15 @ 20 kg" },
         { name:"Seated calf raise", target:"3 × 15 · tag" },
-        { name:"💪 🆕 Farmer's carry (grip + core)", target:"3 × 30 m @ 15 kg/hand" },
-        { name:"🆕 Hanging knee raise", target:"3 × 8–10" }
+        { name:"💪 Farmer's carry (grip + core)", target:"3 × 30 m @ 15 kg/hand" },
+        { name:"Hanging knee raise", target:"3 × 8–10" }
       ],
       log:["notes"] },
-    { date:"2026-10-10", dow:"Sat", type:"run", title:"Easy Run · 6 km (HR<150)", focus:"🎯 Trains: aerobic base (easy)",
-      detail:"Conversational, HR under 150. Walk breaks fine if HR creeps up. Legs may feel Friday's session — that's expected, keep it easy.", log:["distance","time","notes"] },
-    { date:"2026-10-11", dow:"Sun", type:"rest", title:"😴 Rest", focus:"🎯 Recovery — gym closed",
+    { date:"2026-10-17", dow:"Sat", type:"run", title:"Easy Run · 5 km (run/walk, HR<150)", focus:"🎯 Trains: aerobic base — rebuilding non-stop running",
+      detail:"Run/walk is the plan: run until HR ~150, walk until ~130, repeat. Count your walk breaks — that number dropping week by week is the progress signal.", log:["distance","time","notes"] },
+    { date:"2026-10-18", dow:"Sun", type:"rest", title:"😴 Rest", focus:"🎯 Recovery — gym closed",
       detail:"Full rest, or an optional 20–30 min easy walk / swim.", log:["notes"] }
   ],
   nutrition: {
     protein:"No protein math. Keep eating your usual eggs, dal, curd, sundal. Optional nudge: 3–4 eggs/day",
     sweets:"Max 1/day · post-workout · on a plate · out of sight",
-    deficit:"Start 71 kg. EAT ENOUGH — lifting 4×/wk after illness; mild deficit only (~0.25 kg/wk). Scale may stay flat while lost muscle returns — track waist at navel; it should shrink. Fat comes off everywhere (belly, love handles, chest, glutes, thighs), not from one spot."
+    deficit:"📏 Measure waist this week (no baseline yet). Last weight 71 kg. EAT ENOUGH — lifting 4×/wk after illness; mild deficit only (~0.25 kg/wk). Scale may stay flat while lost muscle returns — track waist at navel; it should shrink. Fat comes off everywhere (belly, love handles, chest, glutes, thighs), not from one spot."
   },
-  cardio:"Gym-first now. Use the 🔥 Warm-up dropdown on each gym day. Optional 10–15 min easy incline walk AFTER lifting, never before. Tue (TT) and Sat (easy) are the only runs — no hard cardio on lift days.",
+  cardio:"Gym-first now. Use the 🔥 Warm-up dropdown on each gym day. Optional 10–15 min easy incline walk AFTER lifting, never before. Wed + Sat easy runs (run/walk) are the only runs — no hard cardio on lift days.",
   gymWarmup: [
     "5 min easy cardio — bike / treadmill / elliptical <i>(your 3.5 km ride to the gym counts!)</i>",
     "Arm circles ×10 each way",
@@ -600,25 +619,25 @@ const WEIGHTS = {
     ["Calf raises", "now 10 kg · pre 20"]
   ],
   "💥 Chest": [
-    ["Barbell bench press", "now bar + 15 ✅ back"],
-    ["Incline DB press", "15 kg"],
-    ["Pec deck", "35 kg"],
+    ["Barbell bench press", "now bar + 20 ✅ back"],
+    ["Incline DB press", "now 10 kg · pre 15"],
+    ["Pec deck", "now 25 kg · pre 35"],
     ["Cable fly", "15 kg"]
   ],
   "🔙 Back": [
-    ["Lat pulldown", "now 30 kg · pre 35"],
-    ["Chest-supported row", "12.5 kg"],
+    ["Lat pulldown", "now 35 kg ✅ back"],
+    ["Chest-supported row", "now 10 kg · pre 12.5"],
     ["One-arm DB row", "now 10 kg · pre 15"],
-    ["Assisted pull-up", "10 plates assist (↓ = harder)"]
+    ["Assisted pull-up", "now 8 plates 🏆 (pre 10 · ↓ = harder)"]
   ],
   "🎽 Shoulders": [
     ["Arnold press", "now 5 kg · pre 10"],
     ["DB lateral raise", "5 kg"],
     ["Cable lateral raise", "tag it"],
-    ["Face pull (rear delt)", "20 kg"]
+    ["Face pull (rear delt)", "now 25 kg 🏆 (pre 20)"]
   ],
   "💪 Biceps": [
-    ["Preacher curl", "10 kg"],
+    ["Preacher curl", "now 5 kg · pre 10"],
     ["Concentration / incline DB curl", "now 7.5 kg ✅ back"],
     ["EZ-bar curl", "+10 kg over bar"],
     ["Spider curl", "tag it"]
@@ -626,19 +645,19 @@ const WEIGHTS = {
   "🦾 Forearms / grip": [
     ["Reverse-grip EZ curl", "now bar + 5"],
     ["DB wrist curl / reverse wrist curl", "tag it"],
-    ["Hammer curl", "7.5 kg (start)"],
+    ["Hammer curl", "now 7.5 kg"],
     ["Farmer's carry", "15 kg/hand (start)"]
   ],
   "🔧 Triceps": [
-    ["Triceps pushdown", "now 30 kg · pre 35"],
-    ["Overhead rope extension", "20 kg"],
+    ["Triceps pushdown", "now 25–30 kg · pre 35"],
+    ["Overhead rope extension", "now 20 kg ✅ back"],
     ["EZ skullcrusher", "tag it"]
   ],
   "🧱 Core / grip": [
     ["Floor crunch / lying leg raise", "bodyweight"],
     ["Decline-bench abs", "bodyweight ×15"],
     ["Plank", "bodyweight"],
-    ["Dead hang", "54 sec 🏆 (next: hanging leg raises)"],
+    ["Dead hang", "now 15 s (done last) · PR 54 s"],
     ["Pallof press", "now 15"]
   ]
 };
